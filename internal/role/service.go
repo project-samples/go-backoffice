@@ -8,6 +8,7 @@ type RoleService interface {
 	Update(ctx context.Context, role *Role) (int64, error)
 	Patch(ctx context.Context, role map[string]interface{}) (int64, error)
 	Delete(ctx context.Context, id string) (int64, error)
+	AssignRole(ctx context.Context, roleId string, users []string) (int64, error)
 }
 
 func NewRoleService(repository RoleRepository) RoleService {
@@ -32,4 +33,7 @@ func (s *RoleUseCase) Patch(ctx context.Context, role map[string]interface{}) (i
 }
 func (s *RoleUseCase) Delete(ctx context.Context, id string) (int64, error) {
 	return s.repository.Delete(ctx, id)
+}
+func (s *RoleUseCase) AssignRole(ctx context.Context, roleId string, users []string) (int64, error) {
+	return s.repository.AssignRole(ctx, roleId, users)
 }

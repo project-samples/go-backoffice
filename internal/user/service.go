@@ -8,6 +8,7 @@ type UserService interface {
 	Update(ctx context.Context, user *User) (int64, error)
 	Patch(ctx context.Context, user map[string]interface{}) (int64, error)
 	Delete(ctx context.Context, id string) (int64, error)
+	GetUserByRole(ctx context.Context, roleId string) ([]User, error)
 }
 
 func NewUserService(repository UserRepository) UserService {
@@ -32,4 +33,7 @@ func (s *UserUseCase) Patch(ctx context.Context, user map[string]interface{}) (i
 }
 func (s *UserUseCase) Delete(ctx context.Context, id string) (int64, error) {
 	return s.repository.Delete(ctx, id)
+}
+func (s *UserUseCase) GetUserByRole(ctx context.Context, roleId string) ([]User, error) {
+	return s.repository.GetUserByRole(ctx, roleId)
 }

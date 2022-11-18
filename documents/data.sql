@@ -13,6 +13,21 @@ create table modules (
   updatedat timestamp
 );
 
+create table entities (
+  entityid varchar(40) primary key,
+  entityname varchar(255) not null,
+  email varchar(255) not null,
+  displayname varchar(255) not null,
+  status char(1) not null,
+  phone varchar(20),
+  imageurl varchar(500),
+  createdby varchar(40),
+  createdat timestamp,
+  updatedby varchar(40),
+  updatedat timestamp,
+  lastlogin timestamp
+);
+
 create table users (
   userid varchar(40) primary key,
   username varchar(255) not null,
@@ -41,11 +56,19 @@ create table roles (
   updatedby varchar(40),
   updatedat timestamp
 );
+
+create table entityusers (
+  entityid varchar(40) not null,
+  userid varchar(40) not null,
+  primary key (entityid, userid)
+);
+
 create table userroles (
   userid varchar(40) not null,
   roleid varchar(40) not null,
   primary key (userid, roleid)
 );
+
 create table rolemodules (
   roleid varchar(40) not null,
   moduleid varchar(40) not null,
@@ -63,11 +86,11 @@ create table auditlog (
   status varchar(255),
   remark varchar(255)
 );
+
 insert into modules (moduleid,modulename,status,path,resourcekey,icon,sequence,parent) values ('dashboard','Dashboard','A','/dashboard','dashboard','assignments',1,'');
 insert into modules (moduleid,modulename,status,path,resourcekey,icon,sequence,parent) values ('admin','Admin','A','/admin','admin','contacts',2,'');
 insert into modules (moduleid,modulename,status,path,resourcekey,icon,sequence,parent) values ('setup','Setup','A','/setup','setup','settings',3,'');
 insert into modules (moduleid,modulename,status,path,resourcekey,icon,sequence,parent) values ('report','Report','A','/report','report','pie_chart',4,'');
-
 insert into modules (moduleid,modulename,status,path,resourcekey,icon,sequence,parent) values ('user','User Management','A','/admin/users','user','person',1,'admin');
 insert into modules (moduleid,modulename,status,path,resourcekey,icon,sequence,parent) values ('role','Role Management','A','/admin/roles','role','credit_card',2,'admin');
 insert into modules (moduleid,modulename,status,path,resourcekey,icon,sequence,parent) values ('audit_log','Audit Log','A','/admin/audit-logs','audit_log','zoom_in',4,'admin');
@@ -76,6 +99,12 @@ insert into roles (roleid, rolename, status, remark) values ('admin','Admin','A'
 insert into roles (roleid, rolename, status, remark) values ('call_center','Call Center','A','Call Center');
 insert into roles (roleid, rolename, status, remark) values ('it_support','IT Support','A','IT Support');
 insert into roles (roleid, rolename, status, remark) values ('operator','Operator Group','A','Operator Group');
+
+insert into entities (entityid,entityname,email,displayname,imageurl,status,phone) values ('00001','gareth.bale.corp','gareth.bale@gmail.com','Gareth Bale Corp','https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Liver-RM_%282%29_%28cropped%29.jpg/440px-Liver-RM_%282%29_%28cropped%29.jpg','A','0987654321');
+insert into entities (entityid,entityname,email,displayname,imageurl,status,phone) values ('00002','cristiano.ronaldo.corp','cristiano.ronaldo@gmail.com','Cristiano Ronaldo Corp','https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cristiano_Ronaldo_2018.jpg/400px-Cristiano_Ronaldo_2018.jpg','I','0987654321');
+insert into entities (entityid,entityname,email,displayname,imageurl,status,phone) values ('00003','james.rodriguez.corp','james.rodriguez@gmail.com','James Rodríguez Corp','https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/James_Rodriguez_2018.jpg/440px-James_Rodriguez_2018.jpg','A','0987654321');
+insert into entities (entityid,entityname,email,displayname,imageurl,status,phone) values ('00004','zinedine.zidane.corp','zinedine.zidane@gmail.com','Zinedine Zidane Corp','https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg','A','0987654321');
+insert into entities (entityid,entityname,email,displayname,imageurl,status,phone) values ('00005','kaka.corp','kaka@gmail.com','Kaká Corp','https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Kak%C3%A1_visited_Stadium_St._Petersburg.jpg/500px-Kak%C3%A1_visited_Stadium_St._Petersburg.jpg','A','0987654321');
 
 insert into users (userid,username,email,displayname,imageurl,status,gender,phone,title,position) values ('00001','gareth.bale','gareth.bale@gmail.com','Gareth Bale','https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Liver-RM_%282%29_%28cropped%29.jpg/440px-Liver-RM_%282%29_%28cropped%29.jpg','A','M','0987654321','Mr','M');
 insert into users (userid,username,email,displayname,imageurl,status,gender,phone,title,position) values ('00002','cristiano.ronaldo','cristiano.ronaldo@gmail.com','Cristiano Ronaldo','https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cristiano_Ronaldo_2018.jpg/400px-Cristiano_Ronaldo_2018.jpg','I','M','0987654321','Mr','E');
@@ -118,6 +147,17 @@ insert into users (userid,username,email,displayname,imageurl,status,gender,phon
 insert into users (userid,username,email,displayname,imageurl,status,gender,phone,title,position) values ('00039','marquinhos','marquinhos@gmail.com@gmail.com','Marquinhos','https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Brasil_conquista_primeiro_ouro_ol%C3%ADmpico_nos_penaltis_1039278-20082016-_mg_4916_%28cropped%29.jpg/440px-Brasil_conquista_primeiro_ouro_ol%C3%ADmpico_nos_penaltis_1039278-20082016-_mg_4916_%28cropped%29.jpg','A','M','0987654321','Mr','E');
 insert into users (userid,username,email,displayname,imageurl,status,gender,phone,title,position) values ('00040','marco.verratti','marco.verratti@gmail.com@gmail.com','Marco Verratti','https://upload.wikimedia.org/wikipedia/commons/d/d0/Kiev-PSG_%289%29.jpg','A','M','0987654321','Mr','E');
 
+insert into entityusers(entityid, userid) values ('00001','00001');
+insert into entityusers(entityid, userid) values ('00001','00002');
+insert into entityusers(entityid, userid) values ('00001','00003');
+insert into entityusers(entityid, userid) values ('00001','00004');
+insert into entityusers(entityid, userid) values ('00002','00005');
+insert into entityusers(entityid, userid) values ('00003','00006');
+insert into entityusers(entityid, userid) values ('00004','00007');
+insert into entityusers(entityid, userid) values ('00005','00008');
+insert into entityusers(entityid, userid) values ('00005','00009');
+insert into entityusers(entityid, userid) values ('00005','00010');
+
 insert into userroles(userid, roleid) values ('00001','admin');
 insert into userroles(userid, roleid) values ('00003','admin');
 insert into userroles(userid, roleid) values ('00004','admin');
@@ -143,6 +183,45 @@ insert into rolemodules(roleid, moduleid, permissions) values ('it_support', 'ad
 insert into rolemodules(roleid, moduleid, permissions) values ('it_support', 'user', 7);
 insert into rolemodules(roleid, moduleid, permissions) values ('it_support', 'role', 7);
 insert into rolemodules(roleid, moduleid, permissions) values ('it_support', 'audit_log', 7);
+
+
+create table companies (
+  companyid varchar(40) primary key,
+  companyname varchar(255) not null,
+  email varchar(255) not null,
+  displayname varchar(255) not null,
+  status char(1) not null,
+  phone varchar(20),
+  imageurl varchar(500),
+  createdby varchar(40),
+  createdat timestamp,
+  updatedby varchar(40),
+  updatedat timestamp,
+  lastlogin timestamp
+);
+create table companyusers (
+  companyid varchar(40) not null,
+  userid varchar(40) not null,
+  primary key (companyid, userid)
+);
+
+insert into companies (companyid,companyname,email,displayname,imageurl,status,phone) values ('00001','gareth.bale.corp','gareth.bale@gmail.com','Gareth Bale Corp','https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Liver-RM_%282%29_%28cropped%29.jpg/440px-Liver-RM_%282%29_%28cropped%29.jpg','A','0987654321');
+insert into companies (companyid,companyname,email,displayname,imageurl,status,phone) values ('00002','cristiano.ronaldo.corp','cristiano.ronaldo@gmail.com','Cristiano Ronaldo Corp','https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cristiano_Ronaldo_2018.jpg/400px-Cristiano_Ronaldo_2018.jpg','I','0987654321');
+insert into companies (companyid,companyname,email,displayname,imageurl,status,phone) values ('00003','james.rodriguez.corp','james.rodriguez@gmail.com','James Rodríguez Corp','https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/James_Rodriguez_2018.jpg/440px-James_Rodriguez_2018.jpg','A','0987654321');
+insert into companies (companyid,companyname,email,displayname,imageurl,status,phone) values ('00004','zinedine.zidane.corp','zinedine.zidane@gmail.com','Zinedine Zidane Corp','https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg','A','0987654321');
+insert into companies (companyid,companyname,email,displayname,imageurl,status,phone) values ('00005','kaka.corp','kaka@gmail.com','Kaká Corp','https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Kak%C3%A1_visited_Stadium_St._Petersburg.jpg/500px-Kak%C3%A1_visited_Stadium_St._Petersburg.jpg','A','0987654321');
+
+insert into companyusers(companyid, userid) values ('00001','00001');
+insert into companyusers(companyid, userid) values ('00001','00002');
+insert into companyusers(companyid, userid) values ('00001','00003');
+insert into companyusers(companyid, userid) values ('00001','00004');
+insert into companyusers(companyid, userid) values ('00002','00005');
+insert into companyusers(companyid, userid) values ('00003','00006');
+insert into companyusers(companyid, userid) values ('00004','00007');
+insert into companyusers(companyid, userid) values ('00005','00008');
+insert into companyusers(companyid, userid) values ('00005','00009');
+insert into companyusers(companyid, userid) values ('00005','00010');
+
 /*
 alter table userroles add foreign key (userid) references users (userid);
 alter table userroles add foreign key (roleid) references roles (roleid);

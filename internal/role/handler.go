@@ -17,6 +17,7 @@ type RoleTransport interface {
 	Update(w http.ResponseWriter, r *http.Request)
 	Patch(w http.ResponseWriter, r *http.Request)
 	Delete(w http.ResponseWriter, r *http.Request)
+	AssignRole(w http.ResponseWriter, r *http.Request)
 }
 
 func NewRoleHandler(
@@ -88,5 +89,15 @@ func (h *RoleHandler) Delete(w http.ResponseWriter, r *http.Request) {
 	if len(id) > 0 {
 		result, err := h.service.Delete(r.Context(), id)
 		sv.HandleDelete(w, r, result, err, h.Error, h.Log, h.Resource, h.Action.Delete)
+	}
+}
+
+func (h *RoleHandler) AssignRole(w http.ResponseWriter, r *http.Request) {
+	users := []string{}
+	roleId := sv.GetParam(r, 1)
+	er1 := sv.Decode(w, r, &users)
+	if er1 == nil {
+		result, er3 := h.service.AssignRole(r.Context(), roleId, users)
+		sv.HandleResult(w, r, &users, result, er3, h.Status, h.Error, h.Log, h.Resource, h.Action.Update)
 	}
 }

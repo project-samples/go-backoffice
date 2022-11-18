@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "38e35167-2d32-4508-9d43-1ae677e3ae43",
+		"_postman_id": "82e836a9-cf9e-4645-a1e0-6ec1fd0bb4a4",
 		"name": "Backoffice Admin",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24997703"
 	},
 	"item": [
 		{
@@ -106,12 +107,7 @@
 									"value": "password",
 									"type": "text"
 								}
-							],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/authenticate",
@@ -1118,6 +1114,750 @@
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "entity",
+			"item": [
+				{
+					"name": "search entities",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODM3MjU4OCwiaWF0IjoxNjE4Mjg2MTg4LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.o3Pw1hzNsNnqA9lrAcIjyudNGGlHxb0_IQAkwvK72h8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"limit\": 5,\r\n    \"page\": 1,\r\n    \"sort\": \"entityname\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/entities/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"entities",
+								"search"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "search entities",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODM3MjU4OCwiaWF0IjoxNjE4Mjg2MTg4LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.o3Pw1hzNsNnqA9lrAcIjyudNGGlHxb0_IQAkwvK72h8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"limit\": 5,\r\n    \"page\": 1,\r\n    \"sort\": \"entityname\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/entities/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"entities",
+										"search"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 May 2023 02:13:53 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1474"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"list\": [\n        {\n            \"entityId\": \"00002\",\n            \"entityname\": \"cristiano.ronaldo.corp\",\n            \"email\": \"cristiano.ronaldo@gmail.com\",\n            \"displayName\": \"Cristiano Ronaldo Corp\",\n            \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cristiano_Ronaldo_2018.jpg/400px-Cristiano_Ronaldo_2018.jpg\",\n            \"status\": \"I\",\n            \"phone\": \"0987654321\"\n        },\n        {\n            \"entityId\": \"00001\",\n            \"entityname\": \"gareth.bale.corp\",\n            \"email\": \"gareth.bale@gmail.com\",\n            \"displayName\": \"Gareth Bale Corp\",\n            \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Liver-RM_%282%29_%28cropped%29.jpg/440px-Liver-RM_%282%29_%28cropped%29.jpg\",\n            \"status\": \"A\",\n            \"phone\": \"0987654321\"\n        },\n        {\n            \"entityId\": \"00003\",\n            \"entityname\": \"james.rodriguez.corp\",\n            \"email\": \"james.rodriguez@gmail.com\",\n            \"displayName\": \"James Rodríguez Corp\",\n            \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/James_Rodriguez_2018.jpg/440px-James_Rodriguez_2018.jpg\",\n            \"status\": \"A\",\n            \"phone\": \"0987654321\"\n        },\n        {\n            \"entityId\": \"00005\",\n            \"entityname\": \"kaka.corp\",\n            \"email\": \"kaka@gmail.com\",\n            \"displayName\": \"Kaká Corp\",\n            \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Kak%C3%A1_visited_Stadium_St._Petersburg.jpg/500px-Kak%C3%A1_visited_Stadium_St._Petersburg.jpg\",\n            \"status\": \"A\",\n            \"phone\": \"0987654321\"\n        },\n        {\n            \"entityId\": \"00004\",\n            \"entityname\": \"zinedine.zidane.corp\",\n            \"email\": \"zinedine.zidane@gmail.com\",\n            \"displayName\": \"Zinedine Zidane Corp\",\n            \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg\",\n            \"status\": \"A\",\n            \"phone\": \"0987654321\"\n        }\n    ],\n    \"total\": 5\n}"
+						}
+					]
+				},
+				{
+					"name": "search entities",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYyMzIyMTkyOSwiaWF0IjoxNjIzMTM1NTI5LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.-siElJ-vYYb0J-sbnvVBcryb2ryJAN1ZxzSWpeYkf8s",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/entities/search?pageSize=3&pageIndex=2&sort=-username&fields=userId,username,email,status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"entities",
+								"search"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "3"
+								},
+								{
+									"key": "pageIndex",
+									"value": "2"
+								},
+								{
+									"key": "sort",
+									"value": "-username"
+								},
+								{
+									"key": "fields",
+									"value": "userId,username,email,status"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "search entities",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYyMzIyMTkyOSwiaWF0IjoxNjIzMTM1NTI5LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.-siElJ-vYYb0J-sbnvVBcryb2ryJAN1ZxzSWpeYkf8s",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/entities/search?sort=entityname",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"entities",
+										"search"
+									],
+									"query": [
+										{
+											"key": "pageSize",
+											"value": "3",
+											"disabled": true
+										},
+										{
+											"key": "pageIndex",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "entityname"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 May 2023 02:14:05 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1474"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"list\": [\n        {\n            \"entityId\": \"00002\",\n            \"entityname\": \"cristiano.ronaldo.corp\",\n            \"email\": \"cristiano.ronaldo@gmail.com\",\n            \"displayName\": \"Cristiano Ronaldo Corp\",\n            \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cristiano_Ronaldo_2018.jpg/400px-Cristiano_Ronaldo_2018.jpg\",\n            \"status\": \"I\",\n            \"phone\": \"0987654321\"\n        },\n        {\n            \"entityId\": \"00001\",\n            \"entityname\": \"gareth.bale.corp\",\n            \"email\": \"gareth.bale@gmail.com\",\n            \"displayName\": \"Gareth Bale Corp\",\n            \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Liver-RM_%282%29_%28cropped%29.jpg/440px-Liver-RM_%282%29_%28cropped%29.jpg\",\n            \"status\": \"A\",\n            \"phone\": \"0987654321\"\n        },\n        {\n            \"entityId\": \"00003\",\n            \"entityname\": \"james.rodriguez.corp\",\n            \"email\": \"james.rodriguez@gmail.com\",\n            \"displayName\": \"James Rodríguez Corp\",\n            \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/James_Rodriguez_2018.jpg/440px-James_Rodriguez_2018.jpg\",\n            \"status\": \"A\",\n            \"phone\": \"0987654321\"\n        },\n        {\n            \"entityId\": \"00005\",\n            \"entityname\": \"kaka.corp\",\n            \"email\": \"kaka@gmail.com\",\n            \"displayName\": \"Kaká Corp\",\n            \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Kak%C3%A1_visited_Stadium_St._Petersburg.jpg/500px-Kak%C3%A1_visited_Stadium_St._Petersburg.jpg\",\n            \"status\": \"A\",\n            \"phone\": \"0987654321\"\n        },\n        {\n            \"entityId\": \"00004\",\n            \"entityname\": \"zinedine.zidane.corp\",\n            \"email\": \"zinedine.zidane@gmail.com\",\n            \"displayName\": \"Zinedine Zidane Corp\",\n            \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg\",\n            \"status\": \"A\",\n            \"phone\": \"0987654321\"\n        }\n    ],\n    \"total\": 5\n}"
+						}
+					]
+				},
+				{
+					"name": "get entity by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMDA1IiwidXNlcm5hbWUiOiJrYWthIiwiZW1haWwiOiJrYWthQGdtYWlsLmNvbSIsImlhdCI6MTY0MDgwMDg4OSwiZXhwIjoxNzI3MjAwODg5fQ.pw1SkhzYs7bE8UzJcVyrMeRJTvxzIoM-2dCOiBBvFE8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/entities/00001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"entities",
+								"00001"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get entity by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMDA1IiwidXNlcm5hbWUiOiJrYWthIiwiZW1haWwiOiJrYWthQGdtYWlsLmNvbSIsImlhdCI6MTY0MDgwMDg4OSwiZXhwIjoxNzI3MjAwODg5fQ.pw1SkhzYs7bE8UzJcVyrMeRJTvxzIoM-2dCOiBBvFE8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/entities/00001",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"entities",
+										"00001"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 May 2023 02:14:15 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "341"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"entityId\": \"00001\",\n    \"entityname\": \"gareth.bale.corp\",\n    \"email\": \"gareth.bale@gmail.com\",\n    \"displayName\": \"Gareth Bale Corp\",\n    \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Liver-RM_%282%29_%28cropped%29.jpg/440px-Liver-RM_%282%29_%28cropped%29.jpg\",\n    \"status\": \"A\",\n    \"phone\": \"0987654321\",\n    \"users\": [\n        \"00001\",\n        \"00002\",\n        \"00003\",\n        \"00004\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "insert entity",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODkwNDI4NiwiaWF0IjoxNjE4ODE3ODg2LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.F1TBbfmLJMk8rWTb5UjyxUz0SMQuslan0He8YYtXrUc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"00041\",\r\n    \"username\": \"gareth.bale\",\r\n    \"email\": \"gareth.bale@gmail.com\",\r\n    \"displayName\": \"Gareth Bale\",\r\n    \"status\": \"A\",\r\n    \"gender\": \"M\",\r\n    \"phone\": \"0987654321\",\r\n    \"title\": \"Mr\",\r\n    \"position\": \"M\",\r\n    \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Liver-RM_%282%29_%28cropped%29.jpg/440px-Liver-RM_%282%29_%28cropped%29.jpg\",\r\n    \"roles\": [\r\n        \"admin\",\r\n        \"it_support\",\r\n        \"operator\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/entities",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"entities"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "insert entity",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODkwNDI4NiwiaWF0IjoxNjE4ODE3ODg2LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.F1TBbfmLJMk8rWTb5UjyxUz0SMQuslan0He8YYtXrUc",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"entityId\": \"00041\",\r\n    \"entityname\": \"gareth.bale\",\r\n    \"email\": \"gareth.bale@gmail.com\",\r\n    \"displayName\": \"Gareth Bale\",\r\n    \"status\": \"A\",\r\n    \"phone\": \"0987654321\",\r\n    \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Liver-RM_%282%29_%28cropped%29.jpg/440px-Liver-RM_%282%29_%28cropped%29.jpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/entities",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"entities"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 May 2023 02:14:23 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "436"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"value\": {\n        \"entityId\": \"00041\",\n        \"entityname\": \"gareth.bale\",\n        \"email\": \"gareth.bale@gmail.com\",\n        \"displayName\": \"Gareth Bale\",\n        \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Liver-RM_%282%29_%28cropped%29.jpg/440px-Liver-RM_%282%29_%28cropped%29.jpg\",\n        \"status\": \"A\",\n        \"phone\": \"0987654321\",\n        \"createdBy\": \"\",\n        \"createdAt\": \"2023-05-22T09:14:23.1569661+07:00\",\n        \"updatedBy\": \"\",\n        \"updatedAt\": \"2023-05-22T09:14:23.1569661+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update entity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"entityId\": \"00041\",\r\n    \"entityname\": \"gareth.bale\",\r\n    \"email\": \"gareth.bale@gmail.com\",\r\n    \"displayName\": \"Gareth Bale Corp\",\r\n    \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Liver-RM_%282%29_%28cropped%29.jpg/440px-Liver-RM_%282%29_%28cropped%29.jpg\",\r\n    \"status\": \"A\",\r\n    \"phone\": \"0987654321\",\r\n    \"createdAt\": \"2021-10-29T08:27:25+07:00\",\r\n    \"updatedBy\": \"00005\",\r\n    \"updatedAt\": \"2021-10-29T08:26:59+07:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/entities/00041",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"entities",
+								"00041"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update entity",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"entityId\": \"00041\",\r\n    \"entityname\": \"gareth.bale\",\r\n    \"email\": \"gareth.bale@gmail.com\",\r\n    \"displayName\": \"Gareth Bale Corp\",\r\n    \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Liver-RM_%282%29_%28cropped%29.jpg/440px-Liver-RM_%282%29_%28cropped%29.jpg\",\r\n    \"status\": \"A\",\r\n    \"phone\": \"0987654321\",\r\n    \"createdAt\": \"2021-10-29T08:27:25+07:00\",\r\n    \"updatedBy\": \"00005\",\r\n    \"updatedAt\": \"2021-10-29T08:26:59+07:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/entities/00041",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"entities",
+										"00041"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 May 2023 02:14:32 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "418"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"value\": {\n        \"entityId\": \"00041\",\n        \"entityname\": \"gareth.bale\",\n        \"email\": \"gareth.bale@gmail.com\",\n        \"displayName\": \"Gareth Bale Corp\",\n        \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Liver-RM_%282%29_%28cropped%29.jpg/440px-Liver-RM_%282%29_%28cropped%29.jpg\",\n        \"status\": \"A\",\n        \"phone\": \"0987654321\",\n        \"createdAt\": \"2021-10-29T08:27:25+07:00\",\n        \"updatedBy\": \"\",\n        \"updatedAt\": \"2023-05-22T09:14:31.4744856+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "patch entity",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM"
+							},
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"gareth.bale@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/entities/00041",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"entities",
+								"00041"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete entity",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxNTUzODk4MCwiaWF0IjoxNjE1NDUyNTgwLCJpcCI6Ijo6MSIsInJvbGVJZCI6Iml0X3N1cHBvcnQiLCJ1c2VySWQiOiJLVE0wMDE5MCIsInVzZXJuYW1lIjoia2hhbmgubiJ9.wEN5cR4ROPbqQwX5KX7lH_lUZioq3XR4q1fZyBhlGIc",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/entities/p8kCk5UYM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"entities",
+								"p8kCk5UYM"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "delete entity",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxNTUzODk4MCwiaWF0IjoxNjE1NDUyNTgwLCJpcCI6Ijo6MSIsInJvbGVJZCI6Iml0X3N1cHBvcnQiLCJ1c2VySWQiOiJLVE0wMDE5MCIsInVzZXJuYW1lIjoia2hhbmgubiJ9.wEN5cR4ROPbqQwX5KX7lH_lUZioq3XR4q1fZyBhlGIc",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/entities/00041",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"entities",
+										"00041"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 May 2023 02:13:40 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "1"
+						}
+					]
 				}
 			]
 		},

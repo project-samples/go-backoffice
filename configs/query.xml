@@ -2,6 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mappers">
+  <select id="role">
+    select *
+    from roles
+    where
+    <if test="roleName != null">
+      roleName like #{roleName} and
+    </if>
+    <if test="status != null">
+      status in (#{status}) and
+    </if>
+    <if test="q != null">
+      (roleName like #{q} or roleId like #{q} or remark like #{q}) and
+    </if>
+    1 = 1
+    <if test="sort != null">
+      order by {sort}
+    </if>
+  </select>
+
   <select id="user">
     select *
     from users
@@ -24,19 +43,47 @@
     </if>
   </select>
 
-  <select id="role">
+  <select id="entity">
     select *
-    from roles
+    from entities
     where
-    <if test="roleName != null">
-      roleName like #{roleName} and
+    <if test="entityname != null">
+      entityname like #{entityname} and
+    </if>
+    <if test="displayName != null">
+      displayName like #{displayName} and
     </if>
     <if test="status != null">
       status in (#{status}) and
     </if>
     <if test="q != null">
-      (roleName like #{q} or roleId like #{q} or remark like #{q}) and
+      (entityname like #{q} or displayName like #{q} or email like #{q}) and
     </if>
     1 = 1
+    <if test="sort != null">
+      order by {sort}
+    </if>
+  </select>
+
+  <select id="company">
+    select *
+    from companies
+    where
+    <if test="companyname != null">
+      companyname like #{companyname} and
+    </if>
+    <if test="displayName != null">
+      displayName like #{displayName} and
+    </if>
+    <if test="status != null">
+      status in (#{status}) and
+    </if>
+    <if test="q != null">
+      (companyname like #{q} or displayName like #{q} or email like #{q}) and
+    </if>
+    1 = 1
+    <if test="sort != null">
+      order by {sort}
+    </if>
   </select>
 </mapper>

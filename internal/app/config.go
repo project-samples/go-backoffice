@@ -9,7 +9,7 @@ import (
 	. "github.com/core-go/core/builder"
 	"github.com/core-go/core/cors"
 	mid "github.com/core-go/log/middleware"
-	"github.com/core-go/log/zap"
+	log "github.com/core-go/log/zap"
 	"github.com/core-go/sql"
 )
 
@@ -25,6 +25,8 @@ type Config struct {
 	MiddleWare   mid.LogConfig        `mapstructure:"middleware"`
 	AutoRoleId   *bool                `mapstructure:"auto_role_id"`
 	AutoUserId   *bool                `mapstructure:"auto_user_id"`
+	AutoEntityId *bool                `mapstructure:"auto_entity_id"`
+	AutoCompanyId *bool               `mapstructure:"auto_company_id"`
 	Role         code.Config          `mapstructure:"role"`
 	Code         code.Config          `mapstructure:"code"`
 	AuditLog     sql.ActionLogConf    `mapstructure:"audit_log"`

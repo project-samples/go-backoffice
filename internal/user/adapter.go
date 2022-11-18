@@ -5,9 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 	"reflect"
-	"strings"
 
-	sv "github.com/core-go/core"
 	q "github.com/core-go/sql"
 )
 
@@ -19,9 +17,9 @@ type userRole struct {
 type UserAdapter struct {
 	db             *sql.DB
 	driver         string
-	repository     sv.Repository
 	BuildParam     func(int) string
 	CheckDelete    string
+	MapUser        map[string]int
 	Map            map[string]int
 	modelType      reflect.Type
 	userSchema     *q.Schema
@@ -31,7 +29,7 @@ type UserAdapter struct {
 func NewUserRepository(db *sql.DB) (*UserAdapter, error) {
 	modelType := reflect.TypeOf(User{})
 	buildParam := q.GetBuild(db)
-	repository, err := q.NewRepository(db, "users", modelType)
+	mu, err := q.GetColumnIndexes(modelType)
 	if err != nil {
 		return nil, err
 	}
@@ -44,18 +42,32 @@ func NewUserRepository(db *sql.DB) (*UserAdapter, error) {
 	userSchema := q.CreateSchema(modelType)
 	userRoleSchema := q.CreateSchema(subType)
 	driver := q.GetDriver(db)
-	return &UserAdapter{db: db, driver: driver, repository: repository, BuildParam: buildParam, modelType: modelType, Map: m, userSchema: userSchema, userRoleSchema: userRoleSchema}, nil
+	return &UserAdapter{
+		db:             db,
+		driver:         driver,
+		BuildParam:     buildParam,
+		modelType:      modelType,
+		MapUser:        mu,
+		Map:            m,
+		userSchema:     userSchema,
+		userRoleSchema: userRoleSchema,
+	}, nil
 }
 
 func (s *UserAdapter) Load(ctx context.Context, id string) (*User, error) {
-	var user User
-	ok, err := s.repository.LoadAndDecode(ctx, id, &user)
-	if !ok || err != nil {
-		return nil, err
+	var users []User
+	sql := fmt.Sprintf("select * from users where userId = %s", s.BuildParam(1))
+	er1 := q.Query(ctx, s.db, s.MapUser, &users, sql, id)
+	if er1 != nil {
+		return nil, er1
 	}
-	roles, er3 := getRoles(ctx, s.db, id, s.BuildParam, s.Map)
-	if er3 != nil {
-		return nil, er3
+	if len(users) == 0 {
+		return nil, nil
+	}
+	user := users[0]
+	roles, er2 := getRoles(ctx, s.db, id, s.BuildParam, s.Map)
+	if er2 != nil {
+		return nil, er2
 	}
 	if len(roles) > 0 {
 		user.Roles = roles
@@ -138,18 +150,9 @@ func buildUserModules(userID string, roles []string) ([]userRole, error) {
 	}
 	modules := make([]userRole, 0)
 	for _, p := range roles {
-		m := toUserModules(userID, p)
-		m.UserId = userID
-		m.RoleId = roles[0]
-		modules = append(modules, m)
+		modules = append(modules, userRole{UserId: userID, RoleId: p})
 	}
 	return modules, nil
-}
-
-func toUserModules(UserID string, menu string) userRole {
-	s := strings.Split(menu, " ")
-	p := userRole{UserId: UserID, RoleId: s[0]}
-	return p
 }
 
 func buildUpdateUserStatements(user *User, driver string, buildParam func(int) string, userSchema *q.Schema, userRoleSchema *q.Schema) (q.Statements, error) {
@@ -215,4 +218,18 @@ func buildPatchUserStatements(json map[string]interface{}, buildParam func(int) 
 		}
 	}
 	return sts, nil
+}
+
+func (s *UserAdapter) GetUserByRole(ctx context.Context, roleId string) ([]User, error) {
+	return getUserByRole(ctx, s.db, roleId, s.BuildParam, s.MapUser)
+}
+
+func getUserByRole(ctx context.Context, db *sql.DB, roleId string, buildParam func(int) string, m map[string]int) ([]User, error) {
+	var users []User
+	query := fmt.Sprintf(`select u.* from users u join userroles ur on u.userid = ur.userid where ur.roleid = %s`, buildParam(1))
+	err := q.Query(ctx, db, m, &users, query, roleId)
+	if err != nil {
+		return nil, err
+	}
+	return users, nil
 }

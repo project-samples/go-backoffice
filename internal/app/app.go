@@ -14,7 +14,7 @@ import (
 	"github.com/core-go/core/unique"
 	v10 "github.com/core-go/core/v10"
 	. "github.com/core-go/health"
-	"github.com/core-go/log/zap"
+	log "github.com/core-go/log/zap"
 	"github.com/core-go/search/convert"
 	"github.com/core-go/search/query"
 	"github.com/core-go/search/template"
@@ -24,6 +24,8 @@ import (
 	q "github.com/core-go/sql"
 
 	"go-service/internal/audit-log"
+	c "go-service/internal/company"
+	e "go-service/internal/entity"
 	r "go-service/internal/role"
 	u "go-service/internal/user"
 )
@@ -40,6 +42,8 @@ type ApplicationContext struct {
 	Roles                *code.Handler
 	Role                 r.RoleTransport
 	User                 u.UserTransport
+	Entity               e.EntityTransport
+	Company              c.CompanyTransport
 	AuditLog             *audit.AuditLogHandler
 }
 
@@ -143,6 +147,42 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	generateUserId := shortid.Func(conf.AutoUserId)
 	userHandler := u.NewUserHandler(userSearchBuilder.Search, userService, conf.Writer, logError, generateUserId, userValidator.Validate, conf.Tracking, writeLog)
 
+	entityType := reflect.TypeOf(e.Entity{})
+	queryEntity, err := template.UseQuery(conf.Template, query.UseQuery(db, "entities", entityType, buildParam), "entity", templates, &entityType, convert.ToMap, buildParam)
+	if err != nil {
+		return nil, err
+	}
+	entitySearchBuilder, err := q.NewSearchBuilder(db, entityType, queryEntity)
+	if err != nil {
+		return nil, err
+	}
+	entityValidator := unique.NewUniqueFieldValidator(db, "entities", "entityname", reflect.TypeOf(e.Entity{}), validator.Validate)
+	entityRepository, er7 := e.NewEntityRepository(db)
+	if er7 != nil {
+		return nil, er7
+	}
+	entityService := e.Newentitieservice(entityRepository)
+	generateEntityId := shortid.Func(conf.AutoEntityId)
+	entityHandler := e.NewEntityHandler(entitySearchBuilder.Search, entityService, conf.Writer, logError, generateEntityId, entityValidator.Validate, conf.Tracking, writeLog)
+
+	companyType := reflect.TypeOf(c.Company{})
+	queryCompany, err := template.UseQuery(conf.Template, query.UseQuery(db, "companies", companyType, buildParam), "company", templates, &companyType, convert.ToMap, buildParam)
+	if err != nil {
+		return nil, err
+	}
+	companySearchBuilder, err := q.NewSearchBuilder(db, companyType, queryCompany)
+	if err != nil {
+		return nil, err
+	}
+	companyValidator := unique.NewUniqueFieldValidator(db, "companies", "companyname", reflect.TypeOf(c.Company{}), validator.Validate)
+	companyRepository, er7 := c.NewCompanyRepository(db)
+	if er7 != nil {
+		return nil, er7
+	}
+	companyService := c.NewCompanyService(companyRepository)
+	generateCompanyId := shortid.Func(conf.AutoCompanyId)
+	companyHandler := c.NewCompanyHandler(companySearchBuilder.Search, companyService, conf.Writer, logError, generateCompanyId, companyValidator.Validate, conf.Tracking, writeLog)
+
 	reportDB, er8 := q.Open(conf.AuditLog.DB)
 	if er8 != nil {
 		return nil, er8
@@ -165,6 +205,8 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 		Roles:                rolesHandler,
 		Role:                 roleHandler,
 		User:                 userHandler,
+		Entity:               entityHandler,
+		Company:              companyHandler,
 		AuditLog:             auditLogHandler,
 	}
 	return app, nil

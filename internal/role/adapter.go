@@ -8,11 +8,15 @@ import (
 	"strconv"
 	"strings"
 
-	sv "github.com/core-go/core"
 	q "github.com/core-go/sql"
 )
 
 const ActionNone int32 = 0
+
+type userRole struct {
+	UserId string `json:"userId,omitempty" gorm:"column:userId;primary_key" bson:"_id,omitempty" validate:"required,max=20,code"`
+	RoleId string `json:"roleId,omitempty" gorm:"column:roleId;primary_key" bson:"_id,omitempty" dynamodbav:"roleId,omitempty" firestore:"roleId,omitempty" validate:"max=40"`
+}
 
 type roleModule struct {
 	RoleId      string `json:"roleId,omitempty" gorm:"column:roleId" bson:"roleId,omitempty" dynamodbav:"roleId,omitempty" firestore:"roleId,omitempty" validate:"required"`
@@ -21,8 +25,7 @@ type roleModule struct {
 }
 
 type RoleAdapter struct {
-	db				 *sql.DB
-	repository 		 sv.Repository
+	db               *sql.DB
 	BuildParam       func(int) string
 	CheckDelete      string
 	modelType        reflect.Type
@@ -30,15 +33,14 @@ type RoleAdapter struct {
 	Map              map[string]int
 	roleSchema       *q.Schema
 	roleModuleSchema *q.Schema
+	userRoleSchema   *q.Schema
 }
 
 func NewRoleAdapter(db *sql.DB, checkDelete string) (*RoleAdapter, error) {
 	modelType := reflect.TypeOf(Role{})
 	buildParam := q.GetBuild(db)
-	repository,er1 := q.NewRepository(db, "roles", modelType)
-	if er1 != nil {
-		return nil, er1
-	}
+	var u userRole
+	userRoleSchema := q.CreateSchema(reflect.TypeOf(u))
 	var r roleModule
 	subType := reflect.TypeOf(r)
 	m, err := q.GetColumnIndexes(subType)
@@ -48,17 +50,32 @@ func NewRoleAdapter(db *sql.DB, checkDelete string) (*RoleAdapter, error) {
 	sql := q.ReplaceQueryArgs(q.GetDriver(db), checkDelete)
 	roleSchema := q.CreateSchema(modelType)
 	roleModuleSchema := q.CreateSchema(subType)
+
 	driver := q.GetDriver(db)
-	return &RoleAdapter{db: db, Driver: driver, repository: repository, BuildParam: buildParam, CheckDelete: sql, modelType: modelType, Map: m, roleSchema: roleSchema, roleModuleSchema: roleModuleSchema}, nil
+	return &RoleAdapter{db: db,
+			Driver:           driver,
+			BuildParam:       buildParam,
+			CheckDelete:      sql,
+			modelType:        modelType,
+			Map:              m,
+			roleSchema:       roleSchema,
+			roleModuleSchema: roleModuleSchema,
+			userRoleSchema:   userRoleSchema,
+		},
+		nil
 }
 
 func (s *RoleAdapter) Load(ctx context.Context, roleId string) (*Role, error) {
-	var role Role
-	ok, err := s.repository.LoadAndDecode(ctx, roleId, &role)
-	if !ok || err != nil {
-		return nil, err
+	var roles []Role
+	sql := fmt.Sprintf("select * from roles where roleId = %s", s.BuildParam(1))
+	er1 := q.Query(ctx, s.db, s.Map, &roles, sql, roleId)
+	if er1 != nil {
+		return nil, er1
 	}
-
+	if len(roles) == 0 {
+		return nil, nil
+	}
+	role := roles[0]
 	privileges, er3 := getPrivileges(ctx, s.db, roleId, s.BuildParam, getModules, s.Map)
 	if er3 != nil {
 		return nil, er3
@@ -101,6 +118,14 @@ func (s *RoleAdapter) Patch(ctx context.Context, obj map[string]interface{}) (in
 
 	return sts.Exec(ctx, s.db)
 }
+func (s *RoleAdapter) AssignRole(ctx context.Context, roleId string, users []string) (int64, error) {
+	sts, err := buildAssignRoleStatements(roleId, users, s.Driver, s.BuildParam, s.userRoleSchema)
+	if err != nil {
+		return 0, err
+	}
+	return sts.Exec(ctx, s.db)
+}
+
 func checkExist(db *sql.DB, sql string, args ...interface{}) (bool, error) {
 	rows, err := db.Query(sql, args...)
 	if err != nil {
@@ -228,6 +253,34 @@ func buildPatchRoleStatements(json map[string]interface{}, buildParam func(int) 
 			insertModules := fmt.Sprintf("insert into rolemodules values ('%s','%s','%s');", buildParam(1), buildParam(2), buildParam(3))
 			sts.Add(insertModules, []interface{}{json["roleId"], splitPermission[0], splitPermission[1]})
 		}
+	}
+	return sts, nil
+}
+func buildRoleUser(roleId string, users []string) ([]userRole, error) {
+	if users == nil || len(users) <= 0 {
+		return nil, nil
+	}
+	modules := make([]userRole, 0)
+	for _, u := range users {
+		modules = append(modules, userRole{UserId: u, RoleId: roleId})
+	}
+	return modules, nil
+}
+func buildAssignRoleStatements(roleId string, users []string, driver string, buildParam func(int) string, userRoleSchema *q.Schema) (q.Statements, error) {
+	modules, err := buildRoleUser(roleId, users)
+	if err != nil {
+		return nil, err
+	}
+	sts := q.NewStatements(true)
+
+	deleteModules := fmt.Sprintf("delete from userroles where roleId = %s", buildParam(1))
+	sts.Add(deleteModules, []interface{}{roleId})
+	if modules != nil {
+		query, args, er2 := q.BuildToInsertBatch("userRoles", modules, driver, userRoleSchema)
+		if er2 != nil {
+			return nil, er2
+		}
+		sts.Add(query, args)
 	}
 	return sts, nil
 }

@@ -17,6 +17,7 @@ type UserTransport interface {
 	Update(w http.ResponseWriter, r *http.Request)
 	Patch(w http.ResponseWriter, r *http.Request)
 	Delete(w http.ResponseWriter, r *http.Request)
+	GetUserByRole(w http.ResponseWriter, r *http.Request)
 }
 
 func NewUserHandler(
@@ -78,5 +79,12 @@ func (h *UserHandler) Delete(w http.ResponseWriter, r *http.Request) {
 	if len(id) > 0 {
 		result, err := h.service.Delete(r.Context(), id)
 		sv.HandleDelete(w, r, result, err, h.Error, h.Log, h.Resource, h.Action.Delete)
+	}
+}
+func (h *UserHandler) GetUserByRole(w http.ResponseWriter, r *http.Request) {
+	roleId := r.URL.Query().Get("roleId")
+	if len(roleId) > 0 {
+		result, err := h.service.GetUserByRole(r.Context(), roleId)
+		sv.RespondModel(w, r, result, err, h.Error, nil)
 	}
 }

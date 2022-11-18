@@ -9,9 +9,11 @@ import (
 )
 
 const (
-	role = "role"
-	user = "user"
-	audit_log   = "audit-log"
+	role      = "role"
+	user      = "user"
+	entity    = "entity"
+	company   = "company"
+	audit_log = "audit-log"
 )
 
 func Route(r *mux.Router, ctx context.Context, conf Config) error {
@@ -33,18 +35,37 @@ func Route(r *mux.Router, ctx context.Context, conf Config) error {
 	HandleWithSecurity(sec, roles, "/{roleId}", app.Role.Load, role, ActionRead, GET)
 	HandleWithSecurity(sec, roles, "", app.Role.Create, role, ActionWrite, POST)
 	HandleWithSecurity(sec, roles, "/{roleId}", app.Role.Update, role, ActionWrite, PUT)
+	HandleWithSecurity(sec, roles, "/{roleId}/assign", app.Role.AssignRole, role, ActionWrite, PUT)
 	HandleWithSecurity(sec, roles, "/{userId}", app.Role.Patch, user, ActionWrite, PATCH)
 	HandleWithSecurity(sec, roles, "/{roleId}", app.Role.Delete, role, ActionWrite, DELETE)
 
 	HandleWithSecurity(sec, r, "/roles", app.Roles.Load, user, ActionRead, GET)
 	users := r.PathPrefix("/users").Subrouter()
-	HandleWithSecurity(sec, users, "", app.User.Search, user, ActionRead, GET)
+	HandleWithSecurity(sec, users, "", app.User.GetUserByRole, user, ActionRead, GET)
 	HandleWithSecurity(sec, users, "/search", app.User.Search, user, ActionRead, GET, POST)
 	HandleWithSecurity(sec, users, "/{userId}", app.User.Load, user, ActionRead, GET)
 	HandleWithSecurity(sec, users, "", app.User.Create, user, ActionWrite, POST)
 	HandleWithSecurity(sec, users, "/{userId}", app.User.Update, user, ActionWrite, PUT)
 	HandleWithSecurity(sec, users, "/{userId}", app.User.Patch, user, ActionWrite, PATCH)
 	HandleWithSecurity(sec, users, "/{userId}", app.User.Delete, user, ActionWrite, DELETE)
+
+	entities := r.PathPrefix("/entities").Subrouter()
+	HandleWithSecurity(sec, entities, "", app.Entity.Search, entity, ActionRead, GET)
+	HandleWithSecurity(sec, entities, "/search", app.Entity.Search, entity, ActionRead, GET, POST)
+	HandleWithSecurity(sec, entities, "/{entityId}", app.Entity.Load, entity, ActionRead, GET)
+	HandleWithSecurity(sec, entities, "", app.Entity.Create, entity, ActionWrite, POST)
+	HandleWithSecurity(sec, entities, "/{entityId}", app.Entity.Update, entity, ActionWrite, PUT)
+	HandleWithSecurity(sec, entities, "/{entityId}", app.Entity.Patch, entity, ActionWrite, PATCH)
+	HandleWithSecurity(sec, entities, "/{entityId}", app.Entity.Delete, entity, ActionWrite, DELETE)
+
+	companies := r.PathPrefix("/companies").Subrouter()
+	HandleWithSecurity(sec, companies, "", app.Company.Search, company, ActionRead, GET)
+	HandleWithSecurity(sec, companies, "/search", app.Company.Search, company, ActionRead, GET, POST)
+	HandleWithSecurity(sec, companies, "/{companyId}", app.Company.Load, company, ActionRead, GET)
+	HandleWithSecurity(sec, companies, "", app.Company.Create, company, ActionWrite, POST)
+	HandleWithSecurity(sec, companies, "/{companyId}", app.Company.Update, company, ActionWrite, PUT)
+	HandleWithSecurity(sec, companies, "/{companyId}", app.Company.Patch, company, ActionWrite, PATCH)
+	HandleWithSecurity(sec, companies, "/{companyId}", app.Company.Delete, company, ActionWrite, DELETE)
 
 	HandleWithSecurity(sec, r, "/audit-logs", app.AuditLog.Search, audit_log, ActionRead, GET, POST)
 	HandleWithSecurity(sec, r, "/audit-logs/search", app.AuditLog.Search, audit_log, ActionRead, GET, POST)
