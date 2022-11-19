@@ -14,6 +14,8 @@ const (
 	entity    = "entity"
 	company   = "company"
 	article   = "article"
+	question  = "question"
+	test      = "test"
 	audit_log = "audit-log"
 )
 
@@ -76,6 +78,24 @@ func Route(r *mux.Router, ctx context.Context, conf Config) error {
 	HandleWithSecurity(sec, articles, "/{id}", app.Article.Update, article, ActionWrite, PUT)
 	HandleWithSecurity(sec, articles, "/{id}", app.Article.Patch, article, ActionWrite, PATCH)
 	HandleWithSecurity(sec, articles, "/{id}", app.Article.Delete, article, ActionWrite, DELETE)
+
+	questions := r.PathPrefix("/questions").Subrouter()
+	HandleWithSecurity(sec, questions, "", app.Question.Search, question, ActionRead, GET)
+	HandleWithSecurity(sec, questions, "/search", app.Question.Search, question, ActionRead, GET, POST)
+	HandleWithSecurity(sec, questions, "/{id}", app.Question.Load, question, ActionRead, GET)
+	HandleWithSecurity(sec, questions, "", app.Question.Create, question, ActionWrite, POST)
+	HandleWithSecurity(sec, questions, "/{id}", app.Question.Update, question, ActionWrite, PUT)
+	HandleWithSecurity(sec, questions, "/{id}", app.Question.Patch, question, ActionWrite, PATCH)
+	HandleWithSecurity(sec, questions, "/{id}", app.Question.Delete, question, ActionWrite, DELETE)
+
+	tests := r.PathPrefix("/tests").Subrouter()
+	HandleWithSecurity(sec, tests, "", app.Test.Search, test, ActionRead, GET)
+	HandleWithSecurity(sec, tests, "/search", app.Test.Search, test, ActionRead, GET, POST)
+	HandleWithSecurity(sec, tests, "/{id}", app.Test.Load, test, ActionRead, GET)
+	HandleWithSecurity(sec, tests, "", app.Test.Create, test, ActionWrite, POST)
+	HandleWithSecurity(sec, tests, "/{id}", app.Test.Update, test, ActionWrite, PUT)
+	HandleWithSecurity(sec, tests, "/{id}", app.Test.Patch, test, ActionWrite, PATCH)
+	HandleWithSecurity(sec, tests, "/{id}", app.Test.Delete, test, ActionWrite, DELETE)
 
 	HandleWithSecurity(sec, r, "/audit-logs", app.AuditLog.Search, audit_log, ActionRead, GET, POST)
 	HandleWithSecurity(sec, r, "/audit-logs/search", app.AuditLog.Search, audit_log, ActionRead, GET, POST)

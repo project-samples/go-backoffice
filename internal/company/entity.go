@@ -4,7 +4,7 @@ import "time"
 
 type Company struct {
 	CompanyId   string     `json:"companyId,omitempty" gorm:"column:companyId;primary_key" bson:"_id,omitempty" validate:"required,max=20,code"`
-	Companyname string     `json:"companyname,omitempty" gorm:"column:companyname" bson:"companyname,omitempty" dynamodbav:"companyname,omitempty" firestore:"companyname,omitempty" validate:"required,max=80"`
+	CompanyName string     `json:"companyName,omitempty" gorm:"column:companyname" bson:"companyName,omitempty" dynamodbav:"companyName,omitempty" firestore:"companyName,omitempty" validate:"required,max=80"`
 	Email       string     `json:"email,omitempty" gorm:"column:email" bson:"email,omitempty" dynamodbav:"email,omitempty" firestore:"email,omitempty" validate:"email,max=100"`
 	DisplayName *string    `json:"displayName,omitempty" gorm:"column:displayname" bson:"displayName,omitempty" dynamodbav:"displayName,omitempty" firestore:"displayName,omitempty" validate:"omitempty,max=255"`
 	ImageURL    string     `json:"imageURL,omitempty" gorm:"column:imageurl" bson:"imageURL,omitempty" dynamodbav:"imageURL,omitempty" firestore:"imageURL,omitempty" match:"equal"`

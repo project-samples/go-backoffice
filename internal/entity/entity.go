@@ -4,7 +4,7 @@ import "time"
 
 type Entity struct {
 	EntityId    string     `json:"entityId,omitempty" gorm:"column:entityId;primary_key" bson:"_id,omitempty" validate:"required,max=20,code"`
-	Entityname  string     `json:"entityname,omitempty" gorm:"column:entityname" bson:"entityname,omitempty" dynamodbav:"entityname,omitempty" firestore:"entityname,omitempty" validate:"required,max=80"`
+	EntityName  string     `json:"entityName,omitempty" gorm:"column:entityname" bson:"entityName,omitempty" dynamodbav:"entityName,omitempty" firestore:"entityName,omitempty" validate:"required,max=80"`
 	Email       string     `json:"email,omitempty" gorm:"column:email" bson:"email,omitempty" dynamodbav:"email,omitempty" firestore:"email,omitempty" validate:"email,max=100"`
 	DisplayName *string    `json:"displayName,omitempty" gorm:"column:displayname" bson:"displayName,omitempty" dynamodbav:"displayName,omitempty" firestore:"displayName,omitempty" validate:"omitempty,max=255"`
 	ImageURL    string     `json:"imageURL,omitempty" gorm:"column:imageurl" bson:"imageURL,omitempty" dynamodbav:"imageURL,omitempty" firestore:"imageURL,omitempty" match:"equal"`

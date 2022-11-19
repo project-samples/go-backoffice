@@ -29,7 +29,9 @@ import (
 	"go-service/internal/audit-log"
 	c "go-service/internal/company"
 	e "go-service/internal/entity"
+	qu "go-service/internal/question"
 	r "go-service/internal/role"
+	t "go-service/internal/test"
 	u "go-service/internal/user"
 )
 
@@ -48,6 +50,8 @@ type ApplicationContext struct {
 	Entity               e.EntityTransport
 	Company              c.CompanyTransport
 	Article              a.ArticleTransport
+	Question             qu.QuestionTransport
+	Test                 t.TestTransport
 	AuditLog             *audit.AuditLogHandler
 }
 
@@ -203,6 +207,32 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	generateArticleId := shortid.Func(conf.AutoCompanyId)
 	articleHandler := a.NewArticleHandler(articleSearchBuilder.Search, articleService, generateArticleId, modelStatus, logError, validator.Validate, conf.Tracking, &action, writeLog)
 
+	questionType := reflect.TypeOf(qu.Question{})
+	questionQuery := query.UseQuery(db, "questions", questionType)
+	questionSearchBuilder, err := q.NewSearchBuilder(db, questionType, questionQuery)
+	if err != nil {
+		return nil, err
+	}
+	questionRepository, err := q.NewRepository(db, "questions", questionType)
+	if err != nil {
+		return nil, err
+	}
+	questionService := qu.NewQuestionService(questionRepository)
+	questionHandler := qu.NewQuestionHandler(questionSearchBuilder.Search, questionService, modelStatus, logError, validator.Validate, &action)
+
+	testType := reflect.TypeOf(t.Test{})
+	testQuery := query.UseQuery(db, "tests", testType)
+	testSearchBuilder, err := q.NewSearchBuilder(db, testType, testQuery)
+	if err != nil {
+		return nil, err
+	}
+	testRepository, err := q.NewRepository(db, "tests", testType)
+	if err != nil {
+		return nil, err
+	}
+	testService := t.NewTestService(testRepository)
+	testHandler := t.NewTestHandler(testSearchBuilder.Search, testService, modelStatus, logError, validator.Validate, &action)
+
 	reportDB, er8 := q.Open(conf.AuditLog.DB)
 	if er8 != nil {
 		return nil, er8
@@ -228,6 +258,8 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 		Entity:               entityHandler,
 		Company:              companyHandler,
 		Article:              articleHandler,
+		Question:             questionHandler,
+		Test:                 testHandler,
 		AuditLog:             auditLogHandler,
 	}
 	return app, nil
