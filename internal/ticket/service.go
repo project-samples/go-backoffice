@@ -2,7 +2,6 @@ package ticket
 
 import (
 	"context"
-	sv "github.com/core-go/core"
 )
 
 type TicketService interface {
@@ -13,25 +12,19 @@ type TicketService interface {
 	Delete(ctx context.Context, id string) (int64, error)
 }
 
-func NewTicketService(repository sv.Repository) TicketService {
+func NewTicketService(repository TicketRepository) TicketService {
 	return &TicketUseCase{repository: repository}
 }
 
 type TicketUseCase struct {
-	repository sv.Repository
+	repository TicketRepository
 }
 
 func (s *TicketUseCase) Load(ctx context.Context, id string) (*Ticket, error) {
-	var ticket Ticket
-	ok, err := s.repository.LoadAndDecode(ctx, id, &ticket)
-	if !ok {
-		return nil, err
-	} else {
-		return &ticket, err
-	}
+	return s.repository.Load(ctx, id)
 }
 func (s *TicketUseCase) Create(ctx context.Context, ticket *Ticket) (int64, error) {
-	return s.repository.Insert(ctx, ticket)
+	return s.repository.Create(ctx, ticket)
 }
 func (s *TicketUseCase) Update(ctx context.Context, ticket *Ticket) (int64, error) {
 	return s.repository.Update(ctx, ticket)

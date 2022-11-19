@@ -215,10 +215,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if err != nil {
 		return nil, err
 	}
-	questionRepository, err := q.NewRepository(db, "questions", questionType)
-	if err != nil {
-		return nil, err
-	}
+	questionRepository := qu.NewQuestionRepository(db)
 	questionService := qu.NewQuestionService(questionRepository)
 	questionHandler := qu.NewQuestionHandler(questionSearchBuilder.Search, questionService, modelStatus, logError, validator.Validate, &action)
 
@@ -228,10 +225,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if err != nil {
 		return nil, err
 	}
-	testRepository, err := q.NewRepository(db, "tests", testType)
-	if err != nil {
-		return nil, err
-	}
+	testRepository := t.NewTestRepository(db)
 	testService := t.NewTestService(testRepository)
 	testHandler := t.NewTestHandler(testSearchBuilder.Search, testService, modelStatus, logError, validator.Validate, &action)
 
@@ -241,10 +235,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if err != nil {
 		return nil, err
 	}
-	ticketRepository, err := q.NewRepository(db, "tickets", ticketType)
-	if err != nil {
-		return nil, err
-	}
+	ticketRepository := tk.NewTicketRepository(db)
 	ticketService := tk.NewTicketService(ticketRepository)
 	ticketHandler := tk.NewTicketHandler(ticketSearchBuilder.Search, ticketService, modelStatus, logError, validator.Validate, &action)
 

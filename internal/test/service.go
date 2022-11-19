@@ -1,9 +1,6 @@
 package test
 
-import (
-	"context"
-	sv "github.com/core-go/core"
-)
+import "context"
 
 type TestService interface {
 	Load(ctx context.Context, id string) (*Test, error)
@@ -13,25 +10,19 @@ type TestService interface {
 	Delete(ctx context.Context, id string) (int64, error)
 }
 
-func NewTestService(repository sv.Repository) TestService {
+func NewTestService(repository TestRepository) TestService {
 	return &TestUseCase{repository: repository}
 }
 
 type TestUseCase struct {
-	repository sv.Repository
+	repository TestRepository
 }
 
 func (s *TestUseCase) Load(ctx context.Context, id string) (*Test, error) {
-	var test Test
-	ok, err := s.repository.LoadAndDecode(ctx, id, &test)
-	if !ok {
-		return nil, err
-	} else {
-		return &test, err
-	}
+	return s.repository.Load(ctx, id)
 }
 func (s *TestUseCase) Create(ctx context.Context, test *Test) (int64, error) {
-	return s.repository.Insert(ctx, test)
+	return s.repository.Create(ctx, test)
 }
 func (s *TestUseCase) Update(ctx context.Context, test *Test) (int64, error) {
 	return s.repository.Update(ctx, test)

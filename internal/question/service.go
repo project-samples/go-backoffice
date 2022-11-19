@@ -1,9 +1,6 @@
 package question
 
-import (
-	"context"
-	sv "github.com/core-go/core"
-)
+import "context"
 
 type QuestionService interface {
 	Load(ctx context.Context, id string) (*Question, error)
@@ -13,25 +10,19 @@ type QuestionService interface {
 	Delete(ctx context.Context, id string) (int64, error)
 }
 
-func NewQuestionService(repository sv.Repository) QuestionService {
+func NewQuestionService(repository QuestionRepository) QuestionService {
 	return &QuestionUseCase{repository: repository}
 }
 
 type QuestionUseCase struct {
-	repository sv.Repository
+	repository QuestionRepository
 }
 
 func (s *QuestionUseCase) Load(ctx context.Context, id string) (*Question, error) {
-	var question Question
-	ok, err := s.repository.LoadAndDecode(ctx, id, &question)
-	if !ok {
-		return nil, err
-	} else {
-		return &question, err
-	}
+	return s.repository.Load(ctx, id)
 }
 func (s *QuestionUseCase) Create(ctx context.Context, question *Question) (int64, error) {
-	return s.repository.Insert(ctx, question)
+	return s.repository.Create(ctx, question)
 }
 func (s *QuestionUseCase) Update(ctx context.Context, question *Question) (int64, error) {
 	return s.repository.Update(ctx, question)
