@@ -222,6 +222,98 @@ insert into companyusers(companyid, userid) values ('00005','00008');
 insert into companyusers(companyid, userid) values ('00005','00009');
 insert into companyusers(companyid, userid) values ('00005','00010');
 
+-- ----------------------------
+-- Table structure for questions
+-- ----------------------------
+CREATE TABLE questions (
+   id varchar(50) NULL,
+   title varchar(255) NULL,
+   body varchar(2000) NULL,
+   mixed bool NULL,
+   answers _int8 NULL,
+   tags _varchar NULL,
+   categoryid varchar NULL,
+   "options" _varchar NULL
+);
+-- ----------------------------
+-- Records of questions
+-- ----------------------------
+INSERT INTO "questions" VALUES ('f4Z9KQ_aM', '', 'What will happen after the brunch?', 'f', '{3}', NULL, 'TEST_02', '{"The people will be served drinks.","An artist will show his drawings.","The guests will introduce themselves.","A poet will read a poem."}');
+INSERT INTO "questions" VALUES ('Io2cK1Vtp', '', 'What do guests get to take home?', 'f', '{2}', NULL, 'TEST_02', '{Lunch,"A book of mythology","A collection of poems","A painting"}');
+INSERT INTO "questions" VALUES ('QTjMlQ_ap', 'test2', 'You want to identify which tasks in the planned learning activity incorporate the use of the computer lab.
+Which task should you identify?
+This item is part of a case study. To view the case study information, click on the Case Study button below.', 'f', '{3}', NULL, 'TEST_01', '{"The students must hang the posters in the entrance hall of the school.","The students must assemble the images on a wall poster.","The students must select and edit  digital images that illustrate the theme or the event.","The students must split into small groups and each group must identify a theme or a historical event."}');
+INSERT INTO "questions" VALUES ('gJL-XQVaM', '', 'As an extension activity to the planned learning activity, you ask some of the students to contact external experts to gather additional information about the historical events.
+You want to ensure that the students use an appropriate means of communication when they contact the experts.
+What should you advise the students to use?
+This item is part of a case study. To view the case study information, click on the Case Study button below.', 'f', '{2}', NULL, 'TEST_01', '{"their personal mobile phone","an anonymous online forum"," a generic email account of the school"," their social network account"}');
+INSERT INTO "questions" VALUES ('VFfZX1_ap', '', 'You teach a class of 20 students. Your classroom contains six computers.
+You run an activity that is carried out mostly on paper.
+Before the end of the activity, the students will require access to the computers.
+Which lesson structure should provide the best learning experience for the students?', 'f', '{3}', NULL, 'TEST_01', '{"Create several different activities that require the computers at different stages during the lesson."," Execute the computer-based portion of the activity as a class demonstration.","Modify the tasks of the lesson so that only some of the students require access to the computers.","Have all of the students perform the same activity and instruct the students to take turns using the computers."}');
+INSERT INTO "questions" VALUES ('tP8GXQVaM', '', 'What are the man and woman mainly discussing?', 'f', '{3}', NULL, 'TEST_02', '{"A vacation","A budget","A company policy","A conference"}');
+INSERT INTO "questions" VALUES ('NQL_XQ_tp', '', 'How is the woman traveling?', 'f', '{1}', NULL, 'TEST_02', '{"By plane","By bus","By taxi","By car"}');
+INSERT INTO "questions" VALUES ('9i-QvQ_tp', '', 'Why aren''t the man and woman going together?', 'f', '{2}', NULL, 'TEST_02', '{"The woman needs to arrive earlier.","The man has to work overtime.","The woman dislikes air travel.","The man has to go to the bank first."}');
+INSERT INTO "questions" VALUES ('VzkRv1Vtp', '', 'What does the man have to do today?', 'f', '{2}', NULL, 'TEST_02', '{"Visit his lawyer","Get a massage","Go to the doctor.","Make an appointment."}');
+INSERT INTO "questions" VALUES ('T_xCX1_ap', '', 'What can be inferred from the conversation?', 'f', '{2}', NULL, 'TEST_02', '{"The woman is the man''s receptionist.","The lawyer works in the same building.","The woman has no deadlines today.","The man and woman have a meeting this afternoon."}');
+INSERT INTO "questions" VALUES ('VWuoK1_tM', '', 'What does the woman offer to do for the man?', 'f', '{0}', NULL, 'TEST_02', '{"Answer his phone","Call his lawyer","Pick up the newspaper","Take notes at the meeting"}');
+INSERT INTO "questions" VALUES ('aZOHd1Vtp', '', 'What should the passengers do before exiting the ship?', 'f', '{2}', NULL, 'TEST_02', '{"Welcome the visitors","Check the time","Collect their personal items","Take a picture"}');
+INSERT INTO "questions" VALUES ('S6J0KQVaM', '', 'What does the speaker imply?', 'f', '{1}', NULL, 'TEST_02', '{"The water was rough.","The weather was poor yesterday.","The tour went faster than usual.","There is only one way to exit."}');
+INSERT INTO "questions" VALUES ('cJWfK1_ap', '', 'What will happen in five minutes?', 'f', '{0}', NULL, 'TEST_02', '{"The ship will arrive at the dock.","The passengers will go shopping.","The passengers will take photos of the ship.","The market will open."}');
+INSERT INTO "questions" VALUES ('f_XaK1VtM', '', 'How often does this event take place?', 'f', '{2}', NULL, 'TEST_02', '{Monthly,"Four times a year","Once a year","Every four years"}');
+INSERT INTO "questions" VALUES ('UkkSd1_tM', '', 'Where would you hear this type of talk?', 'f', '{2}', NULL, 'TEST_02', '{"In an airport","At a bus station","On a telephone","On television"}');
+INSERT INTO "questions" VALUES ('cDiEdQ_tp', '', 'Who should visit the website?', 'f', '{1}', NULL, 'TEST_02', '{"Staff members of Speedy Reservations","Callers looking for special schedules","Callers looking for staff members","People looking for fight times"}');
+INSERT INTO "questions" VALUES ('hs2iK1VtM', '', 'What is the quickest way to get connected to a representative?', 'f', '{1}', NULL, 'TEST_02', '{"Hang up and call again","Call back later"," Wait patiently","Call a different number"}');
+INSERT INTO "questions" VALUES ('IzqAd1Vap', '', 'Do you think the boss will take us out for lunch today?', 'f', '{1}', '{part2}', 'TEST_02', '{"I had a hamburger and fries.","He''s probably too busy today.","I didn''t take the bus."}');
+INSERT INTO "questions" VALUES ('owb_KQ_tM', '', 'Did you fax the letter to the client?', 'f', '{1}', '{part2}', 'TEST_02', '{"I''ll type it after lunch.","No, I sent it by email.","I collected some important facts."}');
+INSERT INTO "questions" VALUES ('Lk7LKQ_tp', '', 'Did you have to wait very long?', 'f', '{0}', '{part2}', 'TEST_02', '{"No more than an hour.","I hate long line-ups.","I''ve gained twenty pounds."}');
+INSERT INTO "questions" VALUES ('7t9IrRVap', '', 'What is the last step to be followed to determine whether a person is a RFI and thus has reporting obligations', 'f', '{2}', NULL, 'FATCA_Mock_Test', '{"Is the Entity a Financial Institution?","Is it an Entity?","Is the Financial Institution in India?","Is the Financial Institution a Non-Reporting Financial Institution?"}');
+INSERT INTO "questions" VALUES ('dlbV9RVtp', '', 'An Active NFE should have', 'f', '{2}', NULL, 'FATCA_Mock_Test', '{"if the entity during the last year: More than (or equal to) 25% of the entity’s gross income consisted of Active Income","if the entity during the last year: More than (or equal to) 50% of the entity’s gross income consisted of Active Income","if the entity during the last year: More than (or equal to) 50% of the entity’s gross income consisted of Active Income","if the entity during the last year: More than (or equal to) 75% of the entity’s gross income consisted of Active Income"}');
+INSERT INTO "questions" VALUES ('_1RQ9RVap', '', 'An listed entity under FATCA, is technically classified as', 'f', '{2}', NULL, 'FATCA_Mock_Test', '{"Active NFE","Account Holder","Active NFFE",nominee}');
+INSERT INTO "questions" VALUES ('OZdm9R_aM', '', 'Under FATCA, each country entered into a separate bilateral intergovernmental agreement with the United States and what objective was achieved', 'f', '{2}', NULL, 'FATCA_Mock_Test', '{"The local financial institutions complies with FATCA reporting standards  and will not breach local data protection laws ","Financial institutions in complying with FATCA, will not breach local data protection laws only","None of these","The local financial institutions complies with FATCA reporting standards only"}');
+INSERT INTO "questions" VALUES ('csVonL_tp', '', 'Which of the following is an exempt beneficial owner', 'f', '{2}', NULL, 'FATCA_Mock_Test', '{"All of these","Any International Organisation or any wholly owned agency or instrumentality thereof","Any Foreign Central Bank of Issue","Any Foreign Government, any political subdivision of a Foreign Government, or any wholly owned agency or instrumentality of any one or more of the foregoing"}');
+
+-- ----------------------------
+-- Table structure for tests
+-- ----------------------------
+CREATE TABLE "tests" (
+  "testid" varchar ,
+  "title" varchar ,
+  "effectivedate" timestamp(6),
+  "questions" _varchar ,
+  "tags" _varchar ,
+  "categoryid" varchar 
+);
+
+-- ----------------------------
+-- Records of tests
+-- ----------------------------
+INSERT INTO "tests" VALUES ('2E1cy1_tp', 'Q1', '2023-06-04 00:00:00', '{aZOHd1Vtp}', NULL, 'FA_01');
+INSERT INTO "tests" VALUES ('f6MRyQ_tM', 'Q1', '2023-06-04 00:00:00', '{aZOHd1Vtp}', NULL, 'FA_01');
+INSERT INTO "tests" VALUES ('vEMky1_tp', 'Q2', '2023-06-04 00:00:00', '{S6J0KQVaM}', NULL, 'FA_01');
+-- ----------------------------
+-- Table structure for tickets
+-- ----------------------------
+DROP TABLE IF EXISTS "tickets";
+CREATE TABLE "tickets" (
+   "id" varchar(40) ,
+   "title" varchar(100) ,
+   "body" text ,
+   "categoryid" varchar(40) ,
+   "requestor" varchar(20) ,
+   "requested_at" timestamp(6),
+   "approver" varchar(20) ,
+   "approved_at" timestamp(6),
+   "assignee" varchar(40) ,
+   "completed_at" timestamp(6),
+   "status" varchar(1) 
+);
+-- ----------------------------
+-- Records of tickets
+-- ----------------------------
+INSERT INTO "tickets" VALUES ('s319KmVtM', 'Sample Title', 'Sample body text.', 'sampleCategoryId', 'sampleRequestor', '2023-06-14 10:30:00', 'sampleApprover', '2023-06-14 11:00:00', 'sampleAssignee', '2023-06-14 12:00:00', 'S');
+INSERT INTO "tickets" VALUES ('iTJWdm_aM', 'Sample Ticket', 'This is a sample ticket description.', 'category456', 'john', '2023-06-14 10:30:00', 'approver123', '2023-06-14 11:00:00', 'assignee456', '2023-06-14 12:00:00', 'S');
+
 /*
 alter table userroles add foreign key (userid) references users (userid);
 alter table userroles add foreign key (roleid) references roles (roleid);

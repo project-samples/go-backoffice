@@ -27,6 +27,7 @@ type Config struct {
 	AutoUserId    *bool                `mapstructure:"auto_user_id"`
 	AutoEntityId  *bool                `mapstructure:"auto_entity_id"`
 	AutoCompanyId *bool                `mapstructure:"auto_company_id"`
+	AutoArticleId *bool                `mapstructure:"auto_article_id"`
 	Role          code.Config          `mapstructure:"role"`
 	Code          code.Config          `mapstructure:"code"`
 	AuditLog      sql.ActionLogConf    `mapstructure:"audit_log"`

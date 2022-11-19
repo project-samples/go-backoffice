@@ -14,6 +14,7 @@ const (
 	entity    = "entity"
 	company   = "company"
 	article   = "article"
+	term      = "term"
 	question  = "question"
 	test      = "test"
 	ticket    = "ticket"
@@ -79,6 +80,15 @@ func Route(r *mux.Router, ctx context.Context, conf Config) error {
 	HandleWithSecurity(sec, articles, "/{id}", app.Article.Update, article, ActionWrite, PUT)
 	HandleWithSecurity(sec, articles, "/{id}", app.Article.Patch, article, ActionWrite, PATCH)
 	HandleWithSecurity(sec, articles, "/{id}", app.Article.Delete, article, ActionWrite, DELETE)
+
+	terms := r.PathPrefix("/terms").Subrouter()
+	HandleWithSecurity(sec, terms, "", app.Term.Search, term, ActionRead, GET)
+	HandleWithSecurity(sec, terms, "/search", app.Term.Search, term, ActionRead, GET, POST)
+	HandleWithSecurity(sec, terms, "/{id}", app.Term.Load, term, ActionRead, GET)
+	HandleWithSecurity(sec, terms, "", app.Term.Create, term, ActionWrite, POST)
+	HandleWithSecurity(sec, terms, "/{id}", app.Term.Update, term, ActionWrite, PUT)
+	HandleWithSecurity(sec, terms, "/{id}", app.Term.Patch, term, ActionWrite, PATCH)
+	HandleWithSecurity(sec, terms, "/{id}", app.Term.Delete, term, ActionWrite, DELETE)
 
 	questions := r.PathPrefix("/questions").Subrouter()
 	HandleWithSecurity(sec, questions, "", app.Question.Search, question, ActionRead, GET)

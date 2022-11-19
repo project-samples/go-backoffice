@@ -102,4 +102,20 @@
       order by {sort}
     </if>
   </select>
+
+  <select id="term">
+    select *
+    from terms
+    where
+    <if test="title != null">
+      title like #{title} and
+    </if>
+    <if test="q != null">
+      (title like #{q} or content like #{q}) and
+    </if>
+    1 = 1
+    <if test="sort != null">
+      order by {sort}
+    </if>
+  </select>
 </mapper>

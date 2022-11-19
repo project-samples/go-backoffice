@@ -31,6 +31,7 @@ import (
 	e "go-service/internal/entity"
 	qu "go-service/internal/question"
 	r "go-service/internal/role"
+	tm "go-service/internal/term"
 	t "go-service/internal/test"
 	tk "go-service/internal/ticket"
 	u "go-service/internal/user"
@@ -51,6 +52,7 @@ type ApplicationContext struct {
 	Entity               e.EntityTransport
 	Company              c.CompanyTransport
 	Article              a.ArticleTransport
+	Term                 tm.TermTransport
 	Question             qu.QuestionTransport
 	Test                 t.TestTransport
 	Ticket               tk.TicketTransport
@@ -204,19 +206,32 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if err != nil {
 		return nil, err
 	}
-	articlesRepository, err := q.NewRepositoryWithArray(db, "article", articleType, pq.Array)
-	articleService := a.NewArticleService(articlesRepository)
-	generateArticleId := shortid.Func(conf.AutoCompanyId)
+	articlesRepository := a.NewArticleRepository(db, pq.Array)
+	articleService := a.NewArticleService(articlesRepository, generateId)
+	generateArticleId := shortid.Func(conf.AutoArticleId)
 	articleHandler := a.NewArticleHandler(articleSearchBuilder.Search, articleService, generateArticleId, modelStatus, logError, validator.Validate, conf.Tracking, &action, writeLog)
 
-	questionType := reflect.TypeOf(qu.Question{})
-	questionQuery := query.UseQuery(db, "questions", questionType)
-	questionSearchBuilder, err := q.NewSearchBuilder(db, questionType, questionQuery)
+	termType := reflect.TypeOf(tm.Term{})
+	queryTerm, err := template.UseQuery(conf.Template, query.UseQuery(db, "term", companyType, buildParam), "term", templates, &termType, convert.ToMap, buildParam)
 	if err != nil {
 		return nil, err
 	}
-	questionRepository := qu.NewQuestionRepository(db)
-	questionService := qu.NewQuestionService(questionRepository)
+	termSearchBuilder, err := q.NewSearchBuilder(db, termType, queryTerm)
+	if err != nil {
+		return nil, err
+	}
+	termsRepository := tm.NewTermRepository(db, pq.Array)
+	termService := tm.NewTermService(termsRepository, generateId)
+	termHandler := tm.NewTermHandler(termSearchBuilder.Search, termService, nil, modelStatus, logError, validator.Validate, conf.Tracking, &action, writeLog)
+
+	questionType := reflect.TypeOf(qu.Question{})
+	questionQuery := query.UseQuery(db, "questions", questionType)
+	questionSearchBuilder, err := q.NewSearchBuilderWithArray(db, questionType, questionQuery, pq.Array)
+	if err != nil {
+		return nil, err
+	}
+	questionRepository := qu.NewQuestionRepository(db, pq.Array)
+	questionService := qu.NewQuestionService(questionRepository, generateId)
 	questionHandler := qu.NewQuestionHandler(questionSearchBuilder.Search, questionService, modelStatus, logError, validator.Validate, &action)
 
 	testType := reflect.TypeOf(t.Test{})
@@ -225,8 +240,8 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if err != nil {
 		return nil, err
 	}
-	testRepository := t.NewTestRepository(db)
-	testService := t.NewTestService(testRepository)
+	testRepository := t.NewTestRepository(db, pq.Array)
+	testService := t.NewTestService(testRepository, generateId)
 	testHandler := t.NewTestHandler(testSearchBuilder.Search, testService, modelStatus, logError, validator.Validate, &action)
 
 	ticketType := reflect.TypeOf(tk.Ticket{})
@@ -235,8 +250,8 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if err != nil {
 		return nil, err
 	}
-	ticketRepository := tk.NewTicketRepository(db)
-	ticketService := tk.NewTicketService(ticketRepository)
+	ticketRepository := tk.NewTicketRepository(db, pq.Array)
+	ticketService := tk.NewTicketService(ticketRepository, generateId)
 	ticketHandler := tk.NewTicketHandler(ticketSearchBuilder.Search, ticketService, modelStatus, logError, validator.Validate, &action)
 
 	reportDB, er8 := q.Open(conf.AuditLog.DB)
@@ -264,6 +279,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 		Entity:               entityHandler,
 		Company:              companyHandler,
 		Article:              articleHandler,
+		Term:                 termHandler,
 		Question:             questionHandler,
 		Test:                 testHandler,
 		Ticket:               ticketHandler,
