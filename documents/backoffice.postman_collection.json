@@ -632,7 +632,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjI5NzM3MTkwLCJpYXQiOjE2Mjk2NTA3OTAsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.C3DI28z8I-2OXqXmWd9x1_ISNLA4q-Y3CfJ6RVgnT7U",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhcmV0aC5iYWxlQGdtYWlsLmNvbSIsImV4cCI6MTY4Njg4OTcwNCwiaWF0IjoxNjg2ODAzMzA0LCJpcCI6Ijo6MSIsInVzZXJJZCI6IjAwMDAxIiwidXNlcm5hbWUiOiJnYXJldGguYmFsZSJ9.lh_3pylx0X6fChbv_au5_WHmM00DSBoq9kTX4l88jhg",
 								"type": "text"
 							}
 						],
@@ -947,13 +947,13 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODkwNDI4NiwiaWF0IjoxNjE4ODE3ODg2LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.F1TBbfmLJMk8rWTb5UjyxUz0SMQuslan0He8YYtXrUc",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhcmV0aC5iYWxlQGdtYWlsLmNvbSIsImV4cCI6MTY4Njg4OTcwNCwiaWF0IjoxNjg2ODAzMzA0LCJpcCI6Ijo6MSIsInVzZXJJZCI6IjAwMDAxIiwidXNlcm5hbWUiOiJnYXJldGguYmFsZSJ9.lh_3pylx0X6fChbv_au5_WHmM00DSBoq9kTX4l88jhg",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": \"00041\",\r\n    \"username\": \"gareth.bale\",\r\n    \"email\": \"gareth.bale@gmail.com\",\r\n    \"displayName\": \"Gareth Bale\",\r\n    \"status\": \"A\",\r\n    \"gender\": \"M\",\r\n    \"phone\": \"0987654321\",\r\n    \"title\": \"Mr\",\r\n    \"position\": \"M\",\r\n    \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Liver-RM_%282%29_%28cropped%29.jpg/440px-Liver-RM_%282%29_%28cropped%29.jpg\",\r\n    \"roles\": [\r\n        \"admin\",\r\n        \"it_support\",\r\n        \"operator\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"userId\": \"00042\",\r\n    \"username\": \"gareth.bale42\",\r\n    \"email\": \"gareth.bale@gmail.com\",\r\n    \"displayName\": \"Gareth Bale\",\r\n    \"status\": \"A\",\r\n    \"gender\": \"M\",\r\n    \"phone\": \"0987654321\",\r\n    \"title\": \"Mr\",\r\n    \"position\": \"M\",\r\n    \"imageURL\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Liver-RM_%282%29_%28cropped%29.jpg/440px-Liver-RM_%282%29_%28cropped%29.jpg\",\r\n    \"roles\": [\r\n        \"admin\",\r\n        \"it_support\",\r\n        \"operator\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1303,15 +1303,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "http://localhost:8080/entities/search?sort=entityname",
 									"protocol": "http",
@@ -1427,15 +1418,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "http://localhost:8080/entities/00001",
 									"protocol": "http",
@@ -1862,6 +1844,3458 @@
 			]
 		},
 		{
+			"name": "question",
+			"item": [
+				{
+					"name": "search question",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODM3MjU4OCwiaWF0IjoxNjE4Mjg2MTg4LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.o3Pw1hzNsNnqA9lrAcIjyudNGGlHxb0_IQAkwvK72h8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"limit\": 5,\r\n    \"page\": 1,\r\n    \"sort\": \"id\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/questions/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"questions",
+								"search"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "search question",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODM3MjU4OCwiaWF0IjoxNjE4Mjg2MTg4LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.o3Pw1hzNsNnqA9lrAcIjyudNGGlHxb0_IQAkwvK72h8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"limit\": 5,\r\n    \"page\": 1,\r\n    \"sort\": \"id\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/questions/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"questions",
+										"search"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Jun 2023 07:56:34 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "691"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"list\": [\n        {\n            \"id\": \"QTjMlQ_ap\",\n            \"title\": \"test2\",\n            \"body\": \"You want to identify which tasks in the planned learning activity incorporate the use of the computer lab.\\nWhich task should you identify?\\nThis item is part of a case study. To view the case study information, click on the Case Study button below.\",\n            \"options\": [\n                \"The students must hang the posters in the entrance hall of the school.\",\n                \"The students must assemble the images on a wall poster.\",\n                \"The students must select and edit  digital images that illustrate the theme or the event.\",\n                \"The students must split into small groups and each group must identify a theme or a historical event.\"\n            ],\n            \"answers\": [\n                3\n            ],\n            \"categoryId\": \"TEST_01\"\n        }\n    ],\n    \"total\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "search questions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYyMzIyMTkyOSwiaWF0IjoxNjIzMTM1NTI5LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.-siElJ-vYYb0J-sbnvVBcryb2ryJAN1ZxzSWpeYkf8s",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/questions/search?pageSize=3&pageIndex=1&sort=-id&fields=id,title,body,options,categoryId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"questions",
+								"search"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "3"
+								},
+								{
+									"key": "pageIndex",
+									"value": "1"
+								},
+								{
+									"key": "sort",
+									"value": "-id"
+								},
+								{
+									"key": "fields",
+									"value": "id,title,body,options,categoryId"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMDA1IiwidXNlcm5hbWUiOiJrYWthIiwiZW1haWwiOiJrYWthQGdtYWlsLmNvbSIsImlhdCI6MTY0MDgwMDg4OSwiZXhwIjoxNzI3MjAwODg5fQ.pw1SkhzYs7bE8UzJcVyrMeRJTvxzIoM-2dCOiBBvFE8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/questions/QTjMlQ_ap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"questions",
+								"QTjMlQ_ap"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMDA1IiwidXNlcm5hbWUiOiJrYWthIiwiZW1haWwiOiJrYWthQGdtYWlsLmNvbSIsImlhdCI6MTY0MDgwMDg4OSwiZXhwIjoxNzI3MjAwODg5fQ.pw1SkhzYs7bE8UzJcVyrMeRJTvxzIoM-2dCOiBBvFE8",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/questions/QTjMlQ_ap",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"questions",
+										"QTjMlQ_ap"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Jun 2023 07:22:38 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "670"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"QTjMlQ_ap\",\n    \"title\": \"test\",\n    \"body\": \"You want to identify which tasks in the planned learning activity incorporate the use of the computer lab.\\nWhich task should you identify?\\nThis item is part of a case study. To view the case study information, click on the Case Study button below.\",\n    \"options\": [\n        \"The students must hang the posters in the entrance hall of the school.\",\n        \"The students must assemble the images on a wall poster.\",\n        \"The students must select and edit  digital images that illustrate the theme or the event.\",\n        \" The students must split into small groups and each group must identify a theme or a historical event.\"\n    ],\n    \"answers\": [\n        2\n    ],\n    \"categoryId\": \"TEST_01\"\n}"
+						}
+					]
+				},
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODkwNDI4NiwiaWF0IjoxNjE4ODE3ODg2LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.F1TBbfmLJMk8rWTb5UjyxUz0SMQuslan0He8YYtXrUc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"test2\",\r\n    \"body\": \"You want to identify which tasks in the planned learning activity incorporate the use of the computer lab.\\nWhich task should you identify?\\nThis item is part of a case study. To view the case study information, click on the Case Study button below.\",\r\n    \"options\": [\"The students must hang the posters in the entrance hall of the school.\", \"The students must assemble the images on a wall poster.\",\r\n    \"The students must select and edit  digital images that illustrate the theme or the event.\", \" The students must split into small groups and each group must identify a theme or a historical event.\"],\r\n    \"answers\" : [2],\r\n    \"categoryId\": \"TEST_01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"questions"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "insert",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODkwNDI4NiwiaWF0IjoxNjE4ODE3ODg2LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.F1TBbfmLJMk8rWTb5UjyxUz0SMQuslan0He8YYtXrUc",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"test2\",\r\n    \"body\": \"You want to identify which tasks in the planned learning activity incorporate the use of the computer lab.\\nWhich task should you identify?\\nThis item is part of a case study. To view the case study information, click on the Case Study button below.\",\r\n    \"options\": [\"The students must hang the posters in the entrance hall of the school.\", \"The students must assemble the images on a wall poster.\",\r\n    \"The students must select and edit  digital images that illustrate the theme or the event.\", \" The students must split into small groups and each group must identify a theme or a historical event.\"],\r\n    \"answers\" : [2],\r\n    \"categoryId\": \"TEST_01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/questions",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"questions"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Jun 2023 07:48:48 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "692"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"value\": {\n        \"id\": \"pJxL71VtM\",\n        \"title\": \"test2\",\n        \"body\": \"You want to identify which tasks in the planned learning activity incorporate the use of the computer lab.\\nWhich task should you identify?\\nThis item is part of a case study. To view the case study information, click on the Case Study button below.\",\n        \"options\": [\n            \"The students must hang the posters in the entrance hall of the school.\",\n            \"The students must assemble the images on a wall poster.\",\n            \"The students must select and edit  digital images that illustrate the theme or the event.\",\n            \" The students must split into small groups and each group must identify a theme or a historical event.\"\n        ],\n        \"answers\": [\n            2\n        ],\n        \"categoryId\": \"TEST_01\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"test\",\r\n    \"body\": \"You want to identify which tasks in the planned learning activity incorporate the use of the computer lab.\\nWhich task should you identify?\\nThis item is part of a case study. To view the case study information, click on the Case Study button below.\",\r\n    \"options\": [\"The students must hang the posters in the entrance hall of the school.\", \"The students must assemble the images on a wall poster.\",\r\n    \"The students must select and edit  digital images that illustrate the theme or the event.\", \"The students must split into small groups and each group must identify a theme or a historical event.\"],\r\n    \"answers\" : [2],\r\n    \"categoryId\": \"TEST_01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/questions/QTjMlQ_ap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"questions",
+								"QTjMlQ_ap"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"test\",\r\n    \"body\": \"You want to identify which tasks in the planned learning activity incorporate the use of the computer lab.\\nWhich task should you identify?\\nThis item is part of a case study. To view the case study information, click on the Case Study button below.\",\r\n    \"options\": [\"The students must hang the posters in the entrance hall of the school.\", \"The students must assemble the images on a wall poster.\",\r\n    \"The students must select and edit  digital images that illustrate the theme or the event.\", \"The students must split into small groups and each group must identify a theme or a historical event.\"],\r\n    \"answers\" : [2],\r\n    \"categoryId\": \"TEST_01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/questions/QTjMlQ_ap",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"questions",
+										"QTjMlQ_ap"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Jun 2023 07:32:32 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "690"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"value\": {\n        \"id\": \"QTjMlQ_ap\",\n        \"title\": \"test\",\n        \"body\": \"You want to identify which tasks in the planned learning activity incorporate the use of the computer lab.\\nWhich task should you identify?\\nThis item is part of a case study. To view the case study information, click on the Case Study button below.\",\n        \"options\": [\n            \"The students must hang the posters in the entrance hall of the school.\",\n            \"The students must assemble the images on a wall poster.\",\n            \"The students must select and edit  digital images that illustrate the theme or the event.\",\n            \"The students must split into small groups and each group must identify a theme or a historical event.\"\n        ],\n        \"answers\": [\n            2\n        ],\n        \"categoryId\": \"TEST_01\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "patch",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM"
+							},
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"test2\",\r\n    \"answers\" : [3],\r\n    \"categoryId\": \"TEST_01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/questions/QTjMlQ_ap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"questions",
+								"QTjMlQ_ap"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "patch",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM"
+									},
+									{
+										"key": "",
+										"type": "text",
+										"value": "",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"test2\",\r\n    \"answers\" : [3],\r\n    \"categoryId\": \"TEST_01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/questions/QTjMlQ_ap",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"questions",
+										"QTjMlQ_ap"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Jun 2023 07:44:26 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "93"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"value\": {\n        \"answers\": [\n            3\n        ],\n        \"categoryId\": \"TEST_01\",\n        \"id\": \"QTjMlQ_ap\",\n        \"title\": \"test2\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxNTUzODk4MCwiaWF0IjoxNjE1NDUyNTgwLCJpcCI6Ijo6MSIsInJvbGVJZCI6Iml0X3N1cHBvcnQiLCJ1c2VySWQiOiJLVE0wMDE5MCIsInVzZXJuYW1lIjoia2hhbmgubiJ9.wEN5cR4ROPbqQwX5KX7lH_lUZioq3XR4q1fZyBhlGIc",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/questions/pJxL71VtM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"questions",
+								"pJxL71VtM"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "delete",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxNTUzODk4MCwiaWF0IjoxNjE1NDUyNTgwLCJpcCI6Ijo6MSIsInJvbGVJZCI6Iml0X3N1cHBvcnQiLCJ1c2VySWQiOiJLVE0wMDE5MCIsInVzZXJuYW1lIjoia2hhbmgubiJ9.wEN5cR4ROPbqQwX5KX7lH_lUZioq3XR4q1fZyBhlGIc",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/questions/pJxL71VtM",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"questions",
+										"pJxL71VtM"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Jun 2023 07:49:00 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "1"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "article",
+			"item": [
+				{
+					"name": "search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODM3MjU4OCwiaWF0IjoxNjE4Mjg2MTg4LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.o3Pw1hzNsNnqA9lrAcIjyudNGGlHxb0_IQAkwvK72h8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"limit\": 5,\r\n    \"page\": 1,\r\n    \"sort\": \"id\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/articles/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"articles",
+								"search"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "search",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODM3MjU4OCwiaWF0IjoxNjE4Mjg2MTg4LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.o3Pw1hzNsNnqA9lrAcIjyudNGGlHxb0_IQAkwvK72h8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"limit\": 5,\r\n    \"page\": 1,\r\n    \"sort\": \"id\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/articles/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"articles",
+										"search"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 03:21:31 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "817"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"list\": [\n        {\n            \"id\": \"1w0ncp6aM\",\n            \"title\": \"Sample Article\",\n            \"authorId\": \"987654321\",\n            \"name\": \"John Doe\",\n            \"description\": \"This is a sample article\",\n            \"publishedAt\": \"2023-06-15T10:00:00Z\",\n            \"type\": \"news\",\n            \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\n            \"tags\": [\n                \"sample\",\n                \"article\"\n            ],\n            \"status\": \"P\",\n            \"createdBy\": \"\",\n            \"createdAt\": \"2023-06-15T10:19:09.948447Z\",\n            \"updatedBy\": \"\",\n            \"updatedAt\": \"2023-06-15T10:19:09.948447Z\"\n        },\n        {\n            \"id\": \"Oqltcp6ap\",\n            \"title\": \"Sample Article\",\n            \"authorId\": \"987654321\",\n            \"name\": \"John Doe\",\n            \"description\": \"This is a sample article\",\n            \"publishedAt\": \"2023-06-15T10:00:00Z\",\n            \"type\": \"news\",\n            \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\n            \"tags\": [\n                \"sample\",\n                \"article\"\n            ],\n            \"status\": \"P\",\n            \"createdBy\": \"\",\n            \"createdAt\": \"2023-06-15T10:17:45.743619Z\",\n            \"updatedBy\": \"\",\n            \"updatedAt\": \"2023-06-15T10:17:45.743619Z\"\n        }\n    ],\n    \"total\": 2\n}"
+						}
+					]
+				},
+				{
+					"name": "search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYyMzIyMTkyOSwiaWF0IjoxNjIzMTM1NTI5LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.-siElJ-vYYb0J-sbnvVBcryb2ryJAN1ZxzSWpeYkf8s",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/articles/search?pageSize=3&pageIndex=1&sort=-id&fields=id,title",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"articles",
+								"search"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "3"
+								},
+								{
+									"key": "pageIndex",
+									"value": "1"
+								},
+								{
+									"key": "sort",
+									"value": "-id"
+								},
+								{
+									"key": "fields",
+									"value": "id,title"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "search",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYyMzIyMTkyOSwiaWF0IjoxNjIzMTM1NTI5LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.-siElJ-vYYb0J-sbnvVBcryb2ryJAN1ZxzSWpeYkf8s",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/articles/search?pageSize=3&pageIndex=1&sort=-id&fields=id,title",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"articles",
+										"search"
+									],
+									"query": [
+										{
+											"key": "pageSize",
+											"value": "3"
+										},
+										{
+											"key": "pageIndex",
+											"value": "1"
+										},
+										{
+											"key": "sort",
+											"value": "-id"
+										},
+										{
+											"key": "fields",
+											"value": "id,title"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 03:22:41 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								}
+							],
+							"cookie": [],
+							"body": "\"2,\\nOqltcp6ap,Sample Article\\n1w0ncp6aM,Sample Article\""
+						}
+					]
+				},
+				{
+					"name": "get by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMDA1IiwidXNlcm5hbWUiOiJrYWthIiwiZW1haWwiOiJrYWthQGdtYWlsLmNvbSIsImlhdCI6MTY0MDgwMDg4OSwiZXhwIjoxNzI3MjAwODg5fQ.pw1SkhzYs7bE8UzJcVyrMeRJTvxzIoM-2dCOiBBvFE8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/articles/G42FWMwap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"articles",
+								"G42FWMwap"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMDA1IiwidXNlcm5hbWUiOiJrYWthIiwiZW1haWwiOiJrYWthQGdtYWlsLmNvbSIsImlhdCI6MTY0MDgwMDg4OSwiZXhwIjoxNzI3MjAwODg5fQ.pw1SkhzYs7bE8UzJcVyrMeRJTvxzIoM-2dCOiBBvFE8",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/articles/1w0ncp6aM",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"articles",
+										"1w0ncp6aM"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 03:22:58 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "398"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"1w0ncp6aM\",\n    \"title\": \"Sample Article\",\n    \"authorId\": \"987654321\",\n    \"name\": \"John Doe\",\n    \"description\": \"This is a sample article\",\n    \"publishedAt\": \"2023-06-15T10:00:00Z\",\n    \"type\": \"news\",\n    \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\n    \"tags\": [\n        \"sample\",\n        \"article\"\n    ],\n    \"status\": \"P\",\n    \"createdBy\": \"\",\n    \"createdAt\": \"2023-06-15T10:19:09.948447Z\",\n    \"updatedBy\": \"\",\n    \"updatedAt\": \"2023-06-15T10:19:09.948447Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjg2ODg5MDM0LCJpYXQiOjE2ODY4MDI2MzQsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.-OMKCWBXV0E-RRTs_IEKWP-00XJ1oZ07K9g_Id9HLYQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"123456789\",\r\n  \"title\": \"Sample Article\",\r\n  \"authorId\": \"987654321\",\r\n  \"name\": \"John Doe\",\r\n  \"description\": \"This is a sample article\",\r\n  \"publishedAt\": \"2023-06-15T10:00:00Z\",\r\n  \"type\": \"news\",\r\n  \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\r\n  \"tags\": [\"sample\", \"article\"],\r\n  \"status\": \"P\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/articles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"articles"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "insert",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjg2ODg5MDM0LCJpYXQiOjE2ODY4MDI2MzQsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.-OMKCWBXV0E-RRTs_IEKWP-00XJ1oZ07K9g_Id9HLYQ",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"123456789\",\r\n  \"title\": \"Sample Article\",\r\n  \"authorId\": \"987654321\",\r\n  \"name\": \"John Doe\",\r\n  \"description\": \"This is a sample article\",\r\n  \"publishedAt\": \"2023-06-15T10:00:00Z\",\r\n  \"type\": \"news\",\r\n  \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\r\n  \"tags\": [\"sample\", \"article\"],\r\n  \"status\": \"P\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/articles",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"articles"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 04:32:01 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "441"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"value\": {\n        \"id\": \"G42FWMwap\",\n        \"title\": \"Sample Article\",\n        \"authorId\": \"987654321\",\n        \"name\": \"John Doe\",\n        \"description\": \"This is a sample article\",\n        \"publishedAt\": \"2023-06-15T10:00:00Z\",\n        \"type\": \"news\",\n        \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\n        \"tags\": [\n            \"sample\",\n            \"article\"\n        ],\n        \"status\": \"P\",\n        \"createdBy\": \"00005\",\n        \"createdAt\": \"2023-06-15T11:32:01.7210613+07:00\",\n        \"updatedBy\": \"00005\",\n        \"updatedAt\": \"2023-06-15T11:32:01.7210613+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Update Sample Article\",\r\n  \"authorId\": \"987654321\",\r\n  \"name\": \"John Doe\",\r\n  \"description\": \"This is a sample article\",\r\n  \"publishedAt\": \"2023-06-15T10:00:00Z\",\r\n  \"type\": \"news\",\r\n  \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\r\n  \"tags\": [\"sample\", \"article\"],\r\n  \"status\": \"P\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/articles/1w0ncp6aM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"articles",
+								"1w0ncp6aM"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Update Sample Article\",\r\n  \"authorId\": \"987654321\",\r\n  \"name\": \"John Doe\",\r\n  \"description\": \"This is a sample article\",\r\n  \"publishedAt\": \"2023-06-15T10:00:00Z\",\r\n  \"type\": \"news\",\r\n  \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\r\n  \"tags\": [\"sample\", \"article\"],\r\n  \"status\": \"P\",\r\n  \"createdBy\": \"Jane Smith\",\r\n  \"createdAt\": \"2023-06-14T15:30:00Z\",\r\n  \"updatedBy\": \"John Smith\",\r\n  \"updatedAt\": \"2023-06-15T09:45:00Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/articles/1w0ncp6aM",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"articles",
+										"1w0ncp6aM"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 03:23:42 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "435"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"value\": {\n        \"id\": \"1w0ncp6aM\",\n        \"title\": \"Update Sample Article\",\n        \"authorId\": \"987654321\",\n        \"name\": \"John Doe\",\n        \"description\": \"This is a sample article\",\n        \"publishedAt\": \"2023-06-15T10:00:00Z\",\n        \"type\": \"news\",\n        \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\n        \"tags\": [\n            \"sample\",\n            \"article\"\n        ],\n        \"status\": \"P\",\n        \"createdBy\": \"Jane Smith\",\n        \"createdAt\": \"2023-06-14T15:30:00Z\",\n        \"updatedBy\": \"\",\n        \"updatedAt\": \"2023-06-15T10:23:42.0353525+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "patch",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhcmV0aC5iYWxlQGdtYWlsLmNvbSIsImV4cCI6MTY4Njg4OTcwNCwiaWF0IjoxNjg2ODAzMzA0LCJpcCI6Ijo6MSIsInVzZXJJZCI6IjAwMDAxIiwidXNlcm5hbWUiOiJnYXJldGguYmFsZSJ9.lh_3pylx0X6fChbv_au5_WHmM00DSBoq9kTX4l88jhg"
+							},
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Test Sample Article\",\r\n  \"description\": \"Test This is a sample article\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/articles/1w0ncp6aM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"articles",
+								"1w0ncp6aM"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "patch",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM"
+									},
+									{
+										"key": "",
+										"type": "text",
+										"value": "",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Test Sample Article\",\r\n  \"description\": \"Test This is a sample article\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/articles/1w0ncp6aM",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"articles",
+										"1w0ncp6aM"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 03:24:28 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "163"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"value\": {\n        \"description\": \"Test This is a sample article\",\n        \"id\": \"1w0ncp6aM\",\n        \"title\": \"Test Sample Article\",\n        \"updatedAt\": \"2023-06-15T10:24:28.035226+07:00\"\n    }\n}"
+						},
+						{
+							"name": "patch2",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhcmV0aC5iYWxlQGdtYWlsLmNvbSIsImV4cCI6MTY4Njg4OTcwNCwiaWF0IjoxNjg2ODAzMzA0LCJpcCI6Ijo6MSIsInVzZXJJZCI6IjAwMDAxIiwidXNlcm5hbWUiOiJnYXJldGguYmFsZSJ9.lh_3pylx0X6fChbv_au5_WHmM00DSBoq9kTX4l88jhg"
+									},
+									{
+										"key": "",
+										"type": "text",
+										"value": "",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Test Sample Article\",\r\n  \"description\": \"Test This is a sample article\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/articles/1w0ncp6aM",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"articles",
+										"1w0ncp6aM"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 04:28:52 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "184"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"value\": {\n        \"description\": \"Test This is a sample article\",\n        \"id\": \"1w0ncp6aM\",\n        \"title\": \"Test Sample Article\",\n        \"updatedAt\": \"2023-06-15T11:28:52.1387758+07:00\",\n        \"updatedBy\": \"00001\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxNTUzODk4MCwiaWF0IjoxNjE1NDUyNTgwLCJpcCI6Ijo6MSIsInJvbGVJZCI6Iml0X3N1cHBvcnQiLCJ1c2VySWQiOiJLVE0wMDE5MCIsInVzZXJuYW1lIjoia2hhbmgubiJ9.wEN5cR4ROPbqQwX5KX7lH_lUZioq3XR4q1fZyBhlGIc",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/questions/pJxL71VtM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"questions",
+								"pJxL71VtM"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "terms",
+			"item": [
+				{
+					"name": "search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODM3MjU4OCwiaWF0IjoxNjE4Mjg2MTg4LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.o3Pw1hzNsNnqA9lrAcIjyudNGGlHxb0_IQAkwvK72h8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"limit\": 5,\r\n    \"page\": 1,\r\n    \"sort\": \"id\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/terms/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"terms",
+								"search"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "search",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODM3MjU4OCwiaWF0IjoxNjE4Mjg2MTg4LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.o3Pw1hzNsNnqA9lrAcIjyudNGGlHxb0_IQAkwvK72h8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"limit\": 5,\r\n    \"page\": 1,\r\n    \"sort\": \"id\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/terms/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"terms",
+										"search"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 03:25:04 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "419"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"list\": [\n        {\n            \"id\": \"5FN7cpwap\",\n            \"title\": \"Sample Term\",\n            \"description\": \"This is a sample term\",\n            \"effectiveDate\": \"2023-06-15T00:00:00Z\",\n            \"publishedAt\": \"2023-06-15T10:00:00Z\",\n            \"type\": \"definition\",\n            \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\n            \"tags\": [\n                \"sample\",\n                \"term\"\n            ],\n            \"status\": \"active\",\n            \"createdBy\": \"\",\n            \"createdAt\": \"2023-06-15T10:24:53.586356Z\",\n            \"updatedBy\": \"\",\n            \"updatedAt\": \"2023-06-15T10:24:53.586356Z\"\n        }\n    ],\n    \"total\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "search questions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYyMzIyMTkyOSwiaWF0IjoxNjIzMTM1NTI5LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.-siElJ-vYYb0J-sbnvVBcryb2ryJAN1ZxzSWpeYkf8s",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/terms/search?pageSize=3&pageIndex=1&sort=-id&fields=id,title",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"terms",
+								"search"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "3"
+								},
+								{
+									"key": "pageIndex",
+									"value": "1"
+								},
+								{
+									"key": "sort",
+									"value": "-id"
+								},
+								{
+									"key": "fields",
+									"value": "id,title"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "search questions",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYyMzIyMTkyOSwiaWF0IjoxNjIzMTM1NTI5LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.-siElJ-vYYb0J-sbnvVBcryb2ryJAN1ZxzSWpeYkf8s",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/terms/search?pageSize=3&pageIndex=1&sort=-id&fields=id,title",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"terms",
+										"search"
+									],
+									"query": [
+										{
+											"key": "pageSize",
+											"value": "3"
+										},
+										{
+											"key": "pageIndex",
+											"value": "1"
+										},
+										{
+											"key": "sort",
+											"value": "-id"
+										},
+										{
+											"key": "fields",
+											"value": "id,title"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 03:26:11 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
+								}
+							],
+							"cookie": [],
+							"body": "\"1,\\n5FN7cpwap,Sample Term\""
+						}
+					]
+				},
+				{
+					"name": "get by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMDA1IiwidXNlcm5hbWUiOiJrYWthIiwiZW1haWwiOiJrYWthQGdtYWlsLmNvbSIsImlhdCI6MTY0MDgwMDg4OSwiZXhwIjoxNzI3MjAwODg5fQ.pw1SkhzYs7bE8UzJcVyrMeRJTvxzIoM-2dCOiBBvFE8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/terms/5FN7cpwap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"terms",
+								"5FN7cpwap"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMDA1IiwidXNlcm5hbWUiOiJrYWthIiwiZW1haWwiOiJrYWthQGdtYWlsLmNvbSIsImlhdCI6MTY0MDgwMDg4OSwiZXhwIjoxNzI3MjAwODg5fQ.pw1SkhzYs7bE8UzJcVyrMeRJTvxzIoM-2dCOiBBvFE8",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/terms/5FN7cpwap",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"terms",
+										"5FN7cpwap"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 03:26:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "398"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"5FN7cpwap\",\n    \"title\": \"Sample Term\",\n    \"description\": \"This is a sample term\",\n    \"effectiveDate\": \"2023-06-15T00:00:00Z\",\n    \"publishedAt\": \"2023-06-15T10:00:00Z\",\n    \"type\": \"definition\",\n    \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\n    \"tags\": [\n        \"sample\",\n        \"term\"\n    ],\n    \"status\": \"active\",\n    \"createdBy\": \"\",\n    \"createdAt\": \"2023-06-15T10:24:53.586356Z\",\n    \"updatedBy\": \"\",\n    \"updatedAt\": \"2023-06-15T10:24:53.586356Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhcmV0aC5iYWxlQGdtYWlsLmNvbSIsImV4cCI6MTY4Njg4OTcwNCwiaWF0IjoxNjg2ODAzMzA0LCJpcCI6Ijo6MSIsInVzZXJJZCI6IjAwMDAxIiwidXNlcm5hbWUiOiJnYXJldGguYmFsZSJ9.lh_3pylx0X6fChbv_au5_WHmM00DSBoq9kTX4l88jhg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"123456789\",\r\n  \"title\": \"Sample Term\",\r\n  \"description\": \"This is a sample term\",\r\n  \"effectiveDate\": \"2023-06-15T00:00:00Z\",\r\n  \"publishedAt\": \"2023-06-15T10:00:00Z\",\r\n  \"type\": \"definition\",\r\n  \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\r\n  \"tags\": [\"sample\", \"term\"],\r\n  \"status\": \"active\",\r\n  \"createdBy\": \"Jane Smith\",\r\n  \"createdAt\": \"2023-06-14T15:30:00Z\",\r\n  \"updatedBy\": \"John Smith\",\r\n  \"updatedAt\": \"2023-06-15T09:45:00Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/terms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"terms"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "insert",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhcmV0aC5iYWxlQGdtYWlsLmNvbSIsImV4cCI6MTY4Njg4OTcwNCwiaWF0IjoxNjg2ODAzMzA0LCJpcCI6Ijo6MSIsInVzZXJJZCI6IjAwMDAxIiwidXNlcm5hbWUiOiJnYXJldGguYmFsZSJ9.lh_3pylx0X6fChbv_au5_WHmM00DSBoq9kTX4l88jhg",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"123456789\",\r\n  \"title\": \"Sample Term\",\r\n  \"description\": \"This is a sample term\",\r\n  \"effectiveDate\": \"2023-06-15T00:00:00Z\",\r\n  \"publishedAt\": \"2023-06-15T10:00:00Z\",\r\n  \"type\": \"definition\",\r\n  \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\r\n  \"tags\": [\"sample\", \"term\"],\r\n  \"status\": \"active\",\r\n  \"createdBy\": \"Jane Smith\",\r\n  \"createdAt\": \"2023-06-14T15:30:00Z\",\r\n  \"updatedBy\": \"John Smith\",\r\n  \"updatedAt\": \"2023-06-15T09:45:00Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/terms",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"terms"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 04:36:58 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "441"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"value\": {\n        \"id\": \"Ym8AWpwaM\",\n        \"title\": \"Sample Term\",\n        \"description\": \"This is a sample term\",\n        \"effectiveDate\": \"2023-06-15T00:00:00Z\",\n        \"publishedAt\": \"2023-06-15T10:00:00Z\",\n        \"type\": \"definition\",\n        \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\n        \"tags\": [\n            \"sample\",\n            \"term\"\n        ],\n        \"status\": \"active\",\n        \"createdBy\": \"00001\",\n        \"createdAt\": \"2023-06-15T11:36:58.4366201+07:00\",\n        \"updatedBy\": \"00001\",\n        \"updatedAt\": \"2023-06-15T11:36:58.4366201+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"TEST Sample Term\",\r\n  \"description\": \"TEST This is a sample term\",\r\n  \"effectiveDate\": \"2023-06-15T00:00:00Z\",\r\n  \"publishedAt\": \"2023-06-15T10:00:00Z\",\r\n  \"type\": \"definition\",\r\n  \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\r\n  \"tags\": [\"sample\", \"term\"],\r\n  \"status\": \"active\",\r\n  \"createdBy\": \"Jane Smith\",\r\n  \"createdAt\": \"2023-06-14T15:30:00Z\",\r\n  \"updatedBy\": \"John Smith\",\r\n  \"updatedAt\": \"2023-06-15T09:45:00Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/terms/5FN7cpwap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"terms",
+								"5FN7cpwap"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"TEST Sample Term\",\r\n  \"description\": \"TEST This is a sample term\",\r\n  \"effectiveDate\": \"2023-06-15T00:00:00Z\",\r\n  \"publishedAt\": \"2023-06-15T10:00:00Z\",\r\n  \"type\": \"definition\",\r\n  \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\r\n  \"tags\": [\"sample\", \"term\"],\r\n  \"status\": \"active\",\r\n  \"createdBy\": \"Jane Smith\",\r\n  \"createdAt\": \"2023-06-14T15:30:00Z\",\r\n  \"updatedBy\": \"John Smith\",\r\n  \"updatedAt\": \"2023-06-15T09:45:00Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/terms/5FN7cpwap",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"terms",
+										"5FN7cpwap"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 03:27:34 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "437"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"value\": {\n        \"id\": \"5FN7cpwap\",\n        \"title\": \"TEST Sample Term\",\n        \"description\": \"TEST This is a sample term\",\n        \"effectiveDate\": \"2023-06-15T00:00:00Z\",\n        \"publishedAt\": \"2023-06-15T10:00:00Z\",\n        \"type\": \"definition\",\n        \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\n        \"tags\": [\n            \"sample\",\n            \"term\"\n        ],\n        \"status\": \"active\",\n        \"createdBy\": \"Jane Smith\",\n        \"createdAt\": \"2023-06-14T15:30:00Z\",\n        \"updatedBy\": \"\",\n        \"updatedAt\": \"2023-06-15T10:27:34.301153+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "patch",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM"
+							},
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"TEST patch Sample Term\",\r\n  \"description\": \"TEST patch This is a sample term\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/terms/5FN7cpwap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"terms",
+								"5FN7cpwap"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxNTUzODk4MCwiaWF0IjoxNjE1NDUyNTgwLCJpcCI6Ijo6MSIsInJvbGVJZCI6Iml0X3N1cHBvcnQiLCJ1c2VySWQiOiJLVE0wMDE5MCIsInVzZXJuYW1lIjoia2hhbmgubiJ9.wEN5cR4ROPbqQwX5KX7lH_lUZioq3XR4q1fZyBhlGIc",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/terms/pJxL71VtM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"terms",
+								"pJxL71VtM"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tests",
+			"item": [
+				{
+					"name": "search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODM3MjU4OCwiaWF0IjoxNjE4Mjg2MTg4LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.o3Pw1hzNsNnqA9lrAcIjyudNGGlHxb0_IQAkwvK72h8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"limit\": 5,\r\n    \"page\": 1,\r\n    \"sort\": \"id\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tests/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tests",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMDA1IiwidXNlcm5hbWUiOiJrYWthIiwiZW1haWwiOiJrYWthQGdtYWlsLmNvbSIsImlhdCI6MTY0MDgwMDg4OSwiZXhwIjoxNzI3MjAwODg5fQ.pw1SkhzYs7bE8UzJcVyrMeRJTvxzIoM-2dCOiBBvFE8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tests/2E1cy1_tp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tests",
+								"2E1cy1_tp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODkwNDI4NiwiaWF0IjoxNjE4ODE3ODg2LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.F1TBbfmLJMk8rWTb5UjyxUz0SMQuslan0He8YYtXrUc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Q1\",\r\n    \"questions\": [\"aZOHd1Vtp\"],\r\n    \"effectiveDate\" : \"2023-06-04T00:00:00.000Z\",\r\n    \"categoryId\": \"FA_01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tests",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Q1\",\r\n    \"questions\": [\"aZOHd1Vtp\"],\r\n    \"effectiveDate\" : \"2023-06-04T00:00:00.000Z\",\r\n    \"categoryId\": \"FA_01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tests/-51dLQVtp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tests",
+								"-51dLQVtp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM"
+							},
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Q1\",\r\n    \"questions\": [\"aZOHd1Vtp\"],\r\n    \"effectiveDate\" : \"2023-06-04T00:00:00.000Z\",\r\n    \"categoryId\": \"FA_01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tests/-51dLQVtp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tests",
+								"-51dLQVtp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxNTUzODk4MCwiaWF0IjoxNjE1NDUyNTgwLCJpcCI6Ijo6MSIsInJvbGVJZCI6Iml0X3N1cHBvcnQiLCJ1c2VySWQiOiJLVE0wMDE5MCIsInVzZXJuYW1lIjoia2hhbmgubiJ9.wEN5cR4ROPbqQwX5KX7lH_lUZioq3XR4q1fZyBhlGIc",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tests/tin1R1_aM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tests",
+								"tin1R1_aM"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ticket",
+			"item": [
+				{
+					"name": "search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODM3MjU4OCwiaWF0IjoxNjE4Mjg2MTg4LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.o3Pw1hzNsNnqA9lrAcIjyudNGGlHxb0_IQAkwvK72h8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"limit\": 5,\r\n    \"page\": 1,\r\n    \"sort\": \"id\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tickets/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tickets",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMDA1IiwidXNlcm5hbWUiOiJrYWthIiwiZW1haWwiOiJrYWthQGdtYWlsLmNvbSIsImlhdCI6MTY0MDgwMDg4OSwiZXhwIjoxNzI3MjAwODg5fQ.pw1SkhzYs7bE8UzJcVyrMeRJTvxzIoM-2dCOiBBvFE8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tickets/iTJWdm_aM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tickets",
+								"iTJWdm_aM"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjg2ODg3MzM1LCJpYXQiOjE2ODY4MDA5MzUsImlwIjoiOjoxIiwidXNlcm5hbWUiOiJrYWthIn0.BJ8yC6WbaV3EbWyZ-guoZ0lHW8vZqcH6-qSDOPiZCpc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Sample Ticket\",\r\n    \"body\": \"This is a sample ticket description.\",\r\n    \"categoryId\": \"category456\",\r\n    \"requestor\": \"john\",\r\n    \"requestedAt\": \"2023-06-14T10:30:00Z\",\r\n    \"approver\": \"approver123\",\r\n    \"approvedAt\": \"2023-06-14T11:00:00Z\",\r\n    \"assignee\": \"assignee456\",\r\n    \"completedAt\": \"2023-06-14T12:00:00Z\",\r\n    \"status\": \"S\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tickets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tickets"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "insert",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjg2ODg3MzM1LCJpYXQiOjE2ODY4MDA5MzUsImlwIjoiOjoxIiwidXNlcm5hbWUiOiJrYWthIn0.BJ8yC6WbaV3EbWyZ-guoZ0lHW8vZqcH6-qSDOPiZCpc",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Sample Ticket\",\r\n    \"body\": \"This is a sample ticket description.\",\r\n    \"categoryId\": \"category456\",\r\n    \"requestor\": \"john\",\r\n    \"requestedAt\": \"2023-06-14T10:30:00Z\",\r\n    \"approver\": \"approver123\",\r\n    \"approvedAt\": \"2023-06-14T11:00:00Z\",\r\n    \"assignee\": \"assignee456\",\r\n    \"completedAt\": \"2023-06-14T12:00:00Z\",\r\n    \"status\": \"S\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/tickets",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"tickets"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 04:02:35 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "329"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": "{\n    \"status\": 1,\n    \"value\": {\n        \"id\": \"gjuIgMwtp\",\n        \"title\": \"Sample Ticket\",\n        \"body\": \"This is a sample ticket description.\",\n        \"categoryId\": \"category456\",\n        \"requestor\": \"john\",\n        \"requestedAt\": \"2023-06-14T10:30:00Z\",\n        \"approver\": \"approver123\",\n        \"approvedAt\": \"2023-06-14T11:00:00Z\",\n        \"assignee\": \"assignee456\",\n        \"completedAt\": \"2023-06-14T12:00:00Z\",\n        \"status\": \"S\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Sample Ticket\",\r\n    \"body\": \"This is a sample ticket description.\",\r\n    \"categoryId\": \"category456\",\r\n    \"requestor\": \"john\",\r\n    \"requestedAt\": \"2023-06-14T10:30:00Z\",\r\n    \"approver\": \"approver123\",\r\n    \"approvedAt\": \"2023-06-14T11:00:00Z\",\r\n    \"assignee\": \"assignee456\",\r\n    \"completedAt\": \"2023-06-14T12:00:00Z\",\r\n    \"status\": \"S\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tickets/iTJWdm_aM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tickets",
+								"iTJWdm_aM"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM"
+							},
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Sample Ticket\",\r\n    \"body\": \"This is a sample ticket description.\",\r\n    \"categoryId\": \"category456\",\r\n    \"requestor\": \"john\",\r\n    \"requestedAt\": \"2023-06-14T10:30:00Z\",\r\n    \"approver\": \"approver123\",\r\n    \"approvedAt\": \"2023-06-14T11:00:00Z\",\r\n    \"assignee\": \"assignee456\",\r\n    \"completedAt\": \"2023-06-14T12:00:00Z\",\r\n    \"status\": \"S\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tickets/ticket123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tickets",
+								"ticket123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxNTUzODk4MCwiaWF0IjoxNjE1NDUyNTgwLCJpcCI6Ijo6MSIsInJvbGVJZCI6Iml0X3N1cHBvcnQiLCJ1c2VySWQiOiJLVE0wMDE5MCIsInVzZXJuYW1lIjoia2hhbmgubiJ9.wEN5cR4ROPbqQwX5KX7lH_lUZioq3XR4q1fZyBhlGIc",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tickets/x9Iudm_aM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tickets",
+								"x9Iudm_aM"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODM3MjU4OCwiaWF0IjoxNjE4Mjg2MTg4LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.o3Pw1hzNsNnqA9lrAcIjyudNGGlHxb0_IQAkwvK72h8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"limit\": 5,\r\n    \"page\": 1,\r\n    \"sort\": \"id\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"search"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "search",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODM3MjU4OCwiaWF0IjoxNjE4Mjg2MTg4LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.o3Pw1hzNsNnqA9lrAcIjyudNGGlHxb0_IQAkwvK72h8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"limit\": 5,\r\n    \"page\": 1,\r\n    \"sort\": \"id\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/products/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"products",
+										"search"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 03:41:30 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "460"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"list\": [\n        {\n            \"productId\": \"e6gbZMwtM\",\n            \"productName\": \"Sample Product\",\n            \"title\": \"Sample Title\",\n            \"description\": \"This is a sample product\",\n            \"effectiveDate\": \"2023-06-15T00:00:00Z\",\n            \"publishedAt\": \"2023-06-15T10:00:00Z\",\n            \"type\": \"sample\",\n            \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\n            \"tags\": [\n                \"sample\",\n                \"product\"\n            ],\n            \"status\": \"active\",\n            \"createdBy\": \"\",\n            \"createdAt\": \"2023-06-15T10:40:36.087348Z\",\n            \"updatedBy\": \"\",\n            \"updatedAt\": \"2023-06-15T10:40:36.087348Z\"\n        }\n    ],\n    \"total\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "get by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMDA1IiwidXNlcm5hbWUiOiJrYWthIiwiZW1haWwiOiJrYWthQGdtYWlsLmNvbSIsImlhdCI6MTY0MDgwMDg4OSwiZXhwIjoxNzI3MjAwODg5fQ.pw1SkhzYs7bE8UzJcVyrMeRJTvxzIoM-2dCOiBBvFE8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/e6gbZMwtM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"e6gbZMwtM"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMDA1IiwidXNlcm5hbWUiOiJrYWthIiwiZW1haWwiOiJrYWthQGdtYWlsLmNvbSIsImlhdCI6MTY0MDgwMDg4OSwiZXhwIjoxNzI3MjAwODg5fQ.pw1SkhzYs7bE8UzJcVyrMeRJTvxzIoM-2dCOiBBvFE8",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/products/e6gbZMwtM",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"products",
+										"e6gbZMwtM"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 03:43:35 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "439"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"productId\": \"e6gbZMwtM\",\n    \"productName\": \"Sample Product\",\n    \"title\": \"Sample Title\",\n    \"description\": \"This is a sample product\",\n    \"effectiveDate\": \"2023-06-15T00:00:00Z\",\n    \"publishedAt\": \"2023-06-15T10:00:00Z\",\n    \"type\": \"sample\",\n    \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\n    \"tags\": [\n        \"sample\",\n        \"product\"\n    ],\n    \"status\": \"active\",\n    \"createdBy\": \"\",\n    \"createdAt\": \"2023-06-15T10:40:36.087348Z\",\n    \"updatedBy\": \"\",\n    \"updatedAt\": \"2023-06-15T10:40:36.087348Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjg2ODg5MDM0LCJpYXQiOjE2ODY4MDI2MzQsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.-OMKCWBXV0E-RRTs_IEKWP-00XJ1oZ07K9g_Id9HLYQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"productId\": \"1234567890\",\r\n  \"productName\": \"Sample Product\",\r\n  \"title\": \"Sample Title\",\r\n  \"description\": \"This is a sample product\",\r\n  \"effectiveDate\": \"2023-06-15T00:00:00Z\",\r\n  \"publishedAt\": \"2023-06-15T10:00:00Z\",\r\n  \"type\": \"sample\",\r\n  \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\r\n  \"tags\": [\"sample\", \"product\"],\r\n  \"status\": \"active\",\r\n  \"createdBy\": \"John Doe\",\r\n  \"createdAt\": \"2023-06-14T15:30:00Z\",\r\n  \"updatedBy\": \"Jane Smith\",\r\n  \"updatedAt\": \"2023-06-15T09:45:00Z\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "insert",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxODkwNDI4NiwiaWF0IjoxNjE4ODE3ODg2LCJpcCI6Ijo6MSIsInVzZXJJZCI6IktUTTAwMTkwIiwidXNlcm5hbWUiOiJraGFuaC5uIn0.F1TBbfmLJMk8rWTb5UjyxUz0SMQuslan0He8YYtXrUc",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"productId\": \"1234567890\",\r\n  \"productName\": \"Sample Product\",\r\n  \"title\": \"Sample Title\",\r\n  \"description\": \"This is a sample product\",\r\n  \"effectiveDate\": \"2023-06-15T00:00:00Z\",\r\n  \"publishedAt\": \"2023-06-15T10:00:00Z\",\r\n  \"type\": \"sample\",\r\n  \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\r\n  \"tags\": [\"sample\", \"product\"],\r\n  \"status\": \"active\",\r\n  \"createdBy\": \"John Doe\",\r\n  \"createdAt\": \"2023-06-14T15:30:00Z\",\r\n  \"updatedBy\": \"Jane Smith\",\r\n  \"updatedAt\": \"2023-06-15T09:45:00Z\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"products"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 03:40:36 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "472"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"value\": {\n        \"productId\": \"e6gbZMwtM\",\n        \"productName\": \"Sample Product\",\n        \"title\": \"Sample Title\",\n        \"description\": \"This is a sample product\",\n        \"effectiveDate\": \"2023-06-15T00:00:00Z\",\n        \"publishedAt\": \"2023-06-15T10:00:00Z\",\n        \"type\": \"sample\",\n        \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\n        \"tags\": [\n            \"sample\",\n            \"product\"\n        ],\n        \"status\": \"active\",\n        \"createdBy\": \"\",\n        \"createdAt\": \"2023-06-15T10:40:36.0873483+07:00\",\n        \"updatedBy\": \"\",\n        \"updatedAt\": \"2023-06-15T10:40:36.0873483+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n  \"productName\": \"update Sample Product\",\r\n  \"title\": \"uupdate Sample Title\",\r\n  \"description\": \"This is a sample product\",\r\n  \"effectiveDate\": \"2023-06-15T00:00:00Z\",\r\n  \"publishedAt\": \"2023-06-15T10:00:00Z\",\r\n  \"type\": \"sample\",\r\n  \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\r\n  \"tags\": [\"sample\", \"product\"],\r\n  \"status\": \"active\",\r\n  \"createdBy\": \"John Doe\",\r\n  \"createdAt\": \"2023-06-14T15:30:00Z\",\r\n  \"updatedBy\": \"Jane Smith\",\r\n  \"updatedAt\": \"2023-06-15T09:45:00Z\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/e6gbZMwtM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"e6gbZMwtM"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n{\r\n  \"productName\": \"update Sample Product\",\r\n  \"title\": \"uupdate Sample Title\",\r\n  \"description\": \"This is a sample product\",\r\n  \"effectiveDate\": \"2023-06-15T00:00:00Z\",\r\n  \"publishedAt\": \"2023-06-15T10:00:00Z\",\r\n  \"type\": \"sample\",\r\n  \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\r\n  \"tags\": [\"sample\", \"product\"],\r\n  \"status\": \"active\",\r\n  \"createdBy\": \"John Doe\",\r\n  \"createdAt\": \"2023-06-14T15:30:00Z\",\r\n  \"updatedBy\": \"Jane Smith\",\r\n  \"updatedAt\": \"2023-06-15T09:45:00Z\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/products/e6gbZMwtM",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"products",
+										"e6gbZMwtM"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 03:46:11 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "482"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"value\": {\n        \"productId\": \"e6gbZMwtM\",\n        \"productName\": \"update Sample Product\",\n        \"title\": \"uupdate Sample Title\",\n        \"description\": \"This is a sample product\",\n        \"effectiveDate\": \"2023-06-15T00:00:00Z\",\n        \"publishedAt\": \"2023-06-15T10:00:00Z\",\n        \"type\": \"sample\",\n        \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\n        \"tags\": [\n            \"sample\",\n            \"product\"\n        ],\n        \"status\": \"active\",\n        \"createdBy\": \"John Doe\",\n        \"createdAt\": \"2023-06-14T15:30:00Z\",\n        \"updatedBy\": \"\",\n        \"updatedAt\": \"2023-06-15T10:46:11.4044392+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "patch",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM"
+							},
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productName\": \"TEST update Sample Product\",\r\n    \"title\": \"TEST update Sample Title\",\r\n    \"effectiveDate\": \"2023-06-16T00:00:00Z\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/e6gbZMwtM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"e6gbZMwtM"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "patch",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtha2FAZ21haWwuY29tIiwiZXhwIjoxNjM1NzM1NDQxLCJpYXQiOjE2MzU2NDkwNDEsImlwIjoiOjoxIiwidXNlcklkIjoiMDAwMDUiLCJ1c2VybmFtZSI6Imtha2EifQ.MhDOzF4XNYPb4-Ke_N1Jzs_pCSChHKIoDriDC_6lTBM"
+									},
+									{
+										"key": "",
+										"type": "text",
+										"value": "",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productName\": \"TEST update Sample Product\",\r\n    \"title\": \"TEST update Sample Title\",\r\n    \"effectiveDate\": \"2023-06-16T00:00:00Z\"\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/products/e6gbZMwtM",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"products",
+										"e6gbZMwtM"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 03:46:17 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "212"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"value\": {\n        \"effectiveDate\": \"2023-06-16T00:00:00Z\",\n        \"productId\": \"e6gbZMwtM\",\n        \"productName\": \"TEST update Sample Product\",\n        \"title\": \"TEST update Sample Title\",\n        \"updatedAt\": \"2023-06-15T10:46:17.2218899+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxNTUzODk4MCwiaWF0IjoxNjE1NDUyNTgwLCJpcCI6Ijo6MSIsInJvbGVJZCI6Iml0X3N1cHBvcnQiLCJ1c2VySWQiOiJLVE0wMDE5MCIsInVzZXJuYW1lIjoia2hhbmgubiJ9.wEN5cR4ROPbqQwX5KX7lH_lUZioq3XR4q1fZyBhlGIc",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/zLh6ZpwaM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"zLh6ZpwaM"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "delete",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im54a2hhbmhAdG1hLmNvbS52biIsImV4cCI6MTYxNTUzODk4MCwiaWF0IjoxNjE1NDUyNTgwLCJpcCI6Ijo6MSIsInJvbGVJZCI6Iml0X3N1cHBvcnQiLCJ1c2VySWQiOiJLVE0wMDE5MCIsInVzZXJuYW1lIjoia2hhbmgubiJ9.wEN5cR4ROPbqQwX5KX7lH_lUZioq3XR4q1fZyBhlGIc",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/products/zLh6ZpwaM",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"products",
+										"zLh6ZpwaM"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 03:47:08 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "1"
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "assign",
 			"item": [
 				{
@@ -2110,6 +5544,217 @@
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "upload file ticket",
+			"item": [
+				{
+					"name": "delete file",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": "/Users/o_phu_thanh.hu/Downloads/nice_beach.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/tickets/iTJWdm_aM/upload?url=https:/storage.googleapis.com/go-firestore-rest-api.appspot.com/sub/28Sgsu6tp_nice_beach.jpg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tickets",
+								"iTJWdm_aM",
+								"upload"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "https:/storage.googleapis.com/go-firestore-rest-api.appspot.com/sub/28Sgsu6tp_nice_beach.jpg"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "files",
+											"type": "file",
+											"src": "/Users/o_phu_thanh.hu/Downloads/nice_beach.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/tickets/iTJWdm_aM/upload?url=https:/storage.googleapis.com/go-firestore-rest-api.appspot.com/sub/28Sgsu6tp_nice_beach.jpg",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"tickets",
+										"iTJWdm_aM",
+										"upload"
+									],
+									"query": [
+										{
+											"key": "url",
+											"value": "https:/storage.googleapis.com/go-firestore-rest-api.appspot.com/sub/28Sgsu6tp_nice_beach.jpg"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Jun 2023 15:41:13 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1"
+								}
+							],
+							"cookie": [],
+							"body": "1"
+						}
+					]
+				},
+				{
+					"name": "upload file",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/o_phu_thanh.hu/Downloads/nice_beach.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/tickets/iTJWdm_aM/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tickets",
+								"iTJWdm_aM",
+								"upload"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/Users/o_phu_thanh.hu/Downloads/nice_beach.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/tickets/iTJWdm_aM/upload",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"tickets",
+										"iTJWdm_aM",
+										"upload"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Jun 2023 14:28:17 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "206"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"attachment\": {\n        \"originalFileName\": \"nice_beach.jpg\",\n        \"fileName\": \"28Sgsu6tp_nice_beach.jpg\",\n        \"url\": \"https:/storage.googleapis.com/go-firestore-rest-api.appspot.com/sub/28Sgsu6tp_nice_beach.jpg\",\n        \"type\": \"image\"\n    }\n}"
+						}
+					]
 				}
 			]
 		}

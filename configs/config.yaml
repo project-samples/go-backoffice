@@ -52,7 +52,7 @@ auth:
     error: 4
   payload:
     ip: ip
-    user_id: userId
+    id: userId
     username: username
     email: email
     user_type: roleId

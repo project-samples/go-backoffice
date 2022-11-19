@@ -2,8 +2,6 @@ package app
 
 import (
 	"context"
-	sv "github.com/core-go/core"
-	"github.com/lib/pq"
 	"reflect"
 
 	"github.com/core-go/auth"
@@ -11,6 +9,7 @@ import (
 	. "github.com/core-go/auth/mock"
 	as "github.com/core-go/auth/sql"
 	"github.com/core-go/code"
+	sv "github.com/core-go/core"
 	"github.com/core-go/core/authorization"
 	"github.com/core-go/core/shortid"
 	"github.com/core-go/core/unique"
@@ -24,37 +23,42 @@ import (
 	. "github.com/core-go/security/jwt"
 	. "github.com/core-go/security/sql"
 	q "github.com/core-go/sql"
+	"github.com/lib/pq"
 
 	a "go-service/internal/article"
 	"go-service/internal/audit-log"
 	c "go-service/internal/company"
 	e "go-service/internal/entity"
+	p "go-service/internal/product"
 	qu "go-service/internal/question"
 	r "go-service/internal/role"
+	tm "go-service/internal/term"
 	t "go-service/internal/test"
 	tk "go-service/internal/ticket"
 	u "go-service/internal/user"
 )
 
 type ApplicationContext struct {
-	SkipSecurity         bool
-	Health               *Handler
-	Authorization        *authorization.Handler
-	AuthorizationChecker *AuthorizationChecker
-	Authorizer           *Authorizer
-	Authentication       *ah.AuthenticationHandler
-	Privileges           *ah.PrivilegesHandler
-	Code                 *code.Handler
-	Roles                *code.Handler
-	Role                 r.RoleTransport
-	User                 u.UserTransport
-	Entity               e.EntityTransport
-	Company              c.CompanyTransport
-	Article              a.ArticleTransport
-	Question             qu.QuestionTransport
-	Test                 t.TestTransport
-	Ticket               tk.TicketTransport
-	AuditLog             *audit.AuditLogHandler
+	SkipSecurity                bool
+	Health                      *Handler
+	Authorization               *authorization.Handler
+	AuthorizationChecker        *AuthorizationChecker
+	Authorizer                  *Authorizer
+	Authentication              *ah.AuthenticationHandler
+	Privileges                  *ah.PrivilegesHandler
+	Code                        *code.Handler
+	Roles                       *code.Handler
+	Role                        r.RoleTransport
+	User                        u.UserTransport
+	Entity                      e.EntityTransport
+	Company                     c.CompanyTransport
+	Product                     p.ProductTransport
+	Article                     a.ArticleTransport
+	Term                        tm.TermTransport
+	Question                    qu.QuestionTransport
+	Test                        t.TestTransport
+	Ticket                      tk.TicketTransport
+	AuditLog                    *audit.AuditLogHandler
 }
 
 func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
@@ -130,7 +134,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	roleType := reflect.TypeOf(r.Role{})
 	queryRole, err := template.UseQuery(conf.Template, query.UseQuery(db, "roles", roleType, buildParam), "role", templates, &roleType, convert.ToMap, buildParam)
 	roleSearchBuilder, err := q.NewSearchBuilder(db, roleType, queryRole)
-	// roleValidator := user.NewRoleValidator(db, conf.Sql.Role.Duplicate, validator.Validate)
+	// roleValidator := user.NewRoleValidator(db, conf.Sql.Role.Duplicate, validator.validateFileName)
 	roleValidator := unique.NewUniqueFieldValidator(db, "roles", "rolename", reflect.TypeOf(r.Role{}), validator.Validate)
 	roleRepository, er6 := r.NewRoleAdapter(db, conf.Sql.Role.Check)
 	if er6 != nil {
@@ -149,7 +153,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if err != nil {
 		return nil, err
 	}
-	// userValidator := user.NewUserValidator(db, conf.Sql.User, validator.Validate)
+	// userValidator := user.NewUserValidator(db, conf.Sql.User, validator.validateFileName)
 	userValidator := unique.NewUniqueFieldValidator(db, "users", "username", reflect.TypeOf(u.User{}), validator.Validate)
 	userRepository, er7 := u.NewUserRepository(db)
 	if er7 != nil {
@@ -200,43 +204,84 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if err != nil {
 		return nil, err
 	}
-	articleSearchBuilder, err := q.NewSearchBuilder(db, articleType, queryArticle)
+	articleSearchBuilder, err := q.NewSearchBuilderWithArray(db, articleType, queryArticle, pq.Array)
 	if err != nil {
 		return nil, err
 	}
-	articlesRepository, err := q.NewRepositoryWithArray(db, "article", articleType, pq.Array)
-	articleService := a.NewArticleService(articlesRepository)
-	generateArticleId := shortid.Func(conf.AutoCompanyId)
+	articlesRepository := a.NewArticleRepository(db, pq.Array)
+	articleService := a.NewArticleService(articlesRepository, generateId)
+	generateArticleId := shortid.Func(conf.AutoArticleId)
 	articleHandler := a.NewArticleHandler(articleSearchBuilder.Search, articleService, generateArticleId, modelStatus, logError, validator.Validate, conf.Tracking, &action, writeLog)
+
+	termType := reflect.TypeOf(tm.Term{})
+	queryTerm, err := template.UseQuery(conf.Template, query.UseQuery(db, "term", companyType, buildParam), "term", templates, &termType, convert.ToMap, buildParam)
+	if err != nil {
+		return nil, err
+	}
+	termSearchBuilder, err := q.NewSearchBuilderWithArray(db, termType, queryTerm, pq.Array)
+	if err != nil {
+		return nil, err
+	}
+	termsRepository, err := tm.NewTermRepository(db, pq.Array)
+	if err != nil {
+		return nil, err
+	}
+	termService := tm.NewTermService(termsRepository, generateId)
+	termHandler := tm.NewTermHandler(termSearchBuilder.Search, termService, nil, modelStatus, logError, validator.Validate, conf.Tracking, &action, writeLog)
+
+	productType := reflect.TypeOf(p.Product{})
+	queryProduct, err := template.UseQuery(conf.Template, query.UseQuery(db, "product", companyType, buildParam), "product", templates, &productType, convert.ToMap, buildParam)
+	if err != nil {
+		return nil, err
+	}
+	productSearchBuilder, err := q.NewSearchBuilderWithArray(db, productType, queryProduct, pq.Array)
+	if err != nil {
+		return nil, err
+	}
+	productsRepository, err := p.NewProductRepository(db, pq.Array)
+	if err != nil {
+		return nil, err
+	}
+	productService := p.NewProductService(productsRepository, generateId)
+	productHandler := p.NewProductHandler(productSearchBuilder.Search, productService, nil, modelStatus, logError, validator.Validate, conf.Tracking, &action, writeLog)
 
 	questionType := reflect.TypeOf(qu.Question{})
 	questionQuery := query.UseQuery(db, "questions", questionType)
-	questionSearchBuilder, err := q.NewSearchBuilder(db, questionType, questionQuery)
+	questionSearchBuilder, err := q.NewSearchBuilderWithArray(db, questionType, questionQuery, pq.Array)
 	if err != nil {
 		return nil, err
 	}
-	questionRepository := qu.NewQuestionRepository(db)
-	questionService := qu.NewQuestionService(questionRepository)
+	questionRepository, err := qu.NewQuestionRepository(db, pq.Array)
+	if err != nil {
+		return nil, err
+	}
+	questionService := qu.NewQuestionService(questionRepository, generateId)
 	questionHandler := qu.NewQuestionHandler(questionSearchBuilder.Search, questionService, modelStatus, logError, validator.Validate, &action)
 
 	testType := reflect.TypeOf(t.Test{})
 	testQuery := query.UseQuery(db, "tests", testType)
-	testSearchBuilder, err := q.NewSearchBuilder(db, testType, testQuery)
+	testSearchBuilder, err := q.NewSearchBuilderWithArray(db, testType, testQuery, pq.Array)
 	if err != nil {
 		return nil, err
 	}
-	testRepository := t.NewTestRepository(db)
-	testService := t.NewTestService(testRepository)
+	testRepository, err := t.NewTestRepository(db, pq.Array)
+	if err != nil {
+		return nil, err
+	}
+	testService := t.NewTestService(testRepository, generateId)
 	testHandler := t.NewTestHandler(testSearchBuilder.Search, testService, modelStatus, logError, validator.Validate, &action)
 
 	ticketType := reflect.TypeOf(tk.Ticket{})
 	ticketQuery := query.UseQuery(db, "tickets", ticketType)
-	ticketSearchBuilder, err := q.NewSearchBuilder(db, ticketType, ticketQuery)
+	ticketSearchBuilder, err := q.NewSearchBuilderWithArray(db, ticketType, ticketQuery, pq.Array)
 	if err != nil {
 		return nil, err
 	}
-	ticketRepository := tk.NewTicketRepository(db)
-	ticketService := tk.NewTicketService(ticketRepository)
+	ticketRepository, err := tk.NewTicketRepository(db, pq.Array)
+	if err != nil {
+		return nil, err
+	}
+	ticketService := tk.NewTicketService(ticketRepository, generateId)
 	ticketHandler := tk.NewTicketHandler(ticketSearchBuilder.Search, ticketService, modelStatus, logError, validator.Validate, &action)
 
 	reportDB, er8 := q.Open(conf.AuditLog.DB)
@@ -250,24 +295,26 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	auditLogHandler := audit.NewAuditLogHandler(auditLogQuery, logError, writeLog)
 
 	app := &ApplicationContext{
-		Health:               healthHandler,
-		SkipSecurity:         conf.SecuritySkip,
-		Authorization:        authorizationHandler,
-		AuthorizationChecker: authorizationChecker,
-		Authorizer:           authorizer,
-		Authentication:       authenticationHandler,
-		Privileges:           privilegeHandler,
-		Code:                 codeHandler,
-		Roles:                rolesHandler,
-		Role:                 roleHandler,
-		User:                 userHandler,
-		Entity:               entityHandler,
-		Company:              companyHandler,
-		Article:              articleHandler,
-		Question:             questionHandler,
-		Test:                 testHandler,
-		Ticket:               ticketHandler,
-		AuditLog:             auditLogHandler,
+		Health:                      healthHandler,
+		SkipSecurity:                conf.SecuritySkip,
+		Authorization:               authorizationHandler,
+		AuthorizationChecker:        authorizationChecker,
+		Authorizer:                  authorizer,
+		Authentication:              authenticationHandler,
+		Privileges:                  privilegeHandler,
+		Code:                        codeHandler,
+		Roles:                       rolesHandler,
+		Role:                        roleHandler,
+		User:                        userHandler,
+		Entity:                      entityHandler,
+		Company:                     companyHandler,
+		Product:                     productHandler,
+		Article:                     articleHandler,
+		Term:                        termHandler,
+		Question:                    questionHandler,
+		Test:                        testHandler,
+		Ticket:                      ticketHandler,
+		AuditLog:                    auditLogHandler,
 	}
 	return app, nil
 }

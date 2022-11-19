@@ -11,6 +11,7 @@ import (
 type QuestionTransport interface {
 	Search(w http.ResponseWriter, r *http.Request)
 	Load(w http.ResponseWriter, r *http.Request)
+	GetByIds(w http.ResponseWriter, r *http.Request)
 	Create(w http.ResponseWriter, r *http.Request)
 	Update(w http.ResponseWriter, r *http.Request)
 	Patch(w http.ResponseWriter, r *http.Request)
@@ -37,6 +38,16 @@ func (h *QuestionHandler) Load(w http.ResponseWriter, r *http.Request) {
 		res, err := h.service.Load(r.Context(), id)
 		sv.RespondModel(w, r, res, err, h.Error, nil)
 	}
+}
+func (h *QuestionHandler) GetByIds(w http.ResponseWriter, r *http.Request) {
+	var req QuestionListRequest
+	er1 := sv.Decode(w, r, &req)
+	if er1 != nil {
+		return
+	}
+	res, err := h.service.GetQuestions(r.Context(), req.IDs)
+	sv.RespondModel(w, r, res, err, h.Error, nil)
+
 }
 func (h *QuestionHandler) Create(w http.ResponseWriter, r *http.Request) {
 	var question Question
@@ -73,7 +84,7 @@ func (h *QuestionHandler) Patch(w http.ResponseWriter, r *http.Request) {
 }
 func (h *QuestionHandler) Delete(w http.ResponseWriter, r *http.Request) {
 	id := sv.GetRequiredParam(w, r)
-    if len(id) > 0 {
+	if len(id) > 0 {
 		res, err := h.service.Delete(r.Context(), id)
 		sv.HandleDelete(w, r, res, err, h.Error, h.Log, h.Resource, h.Action.Delete)
 	}

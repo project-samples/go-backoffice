@@ -13,7 +13,9 @@ const (
 	user      = "user"
 	entity    = "entity"
 	company   = "company"
+	product   = "product"
 	article   = "article"
+	term      = "term"
 	question  = "question"
 	test      = "test"
 	ticket    = "ticket"
@@ -71,6 +73,15 @@ func Route(r *mux.Router, ctx context.Context, conf Config) error {
 	HandleWithSecurity(sec, companies, "/{companyId}", app.Company.Patch, company, ActionWrite, PATCH)
 	HandleWithSecurity(sec, companies, "/{companyId}", app.Company.Delete, company, ActionWrite, DELETE)
 
+	products := r.PathPrefix("/products").Subrouter()
+	HandleWithSecurity(sec, products, "", app.Product.Search, product, ActionRead, GET)
+	HandleWithSecurity(sec, products, "/search", app.Product.Search, product, ActionRead, GET, POST)
+	HandleWithSecurity(sec, products, "/{id}", app.Product.Load, product, ActionRead, GET)
+	HandleWithSecurity(sec, products, "", app.Product.Create, product, ActionWrite, POST)
+	HandleWithSecurity(sec, products, "/{id}", app.Product.Update, product, ActionWrite, PUT)
+	HandleWithSecurity(sec, products, "/{id}", app.Product.Patch, product, ActionWrite, PATCH)
+	HandleWithSecurity(sec, products, "/{id}", app.Product.Delete, product, ActionWrite, DELETE)
+
 	articles := r.PathPrefix("/articles").Subrouter()
 	HandleWithSecurity(sec, articles, "", app.Article.Search, article, ActionRead, GET)
 	HandleWithSecurity(sec, articles, "/search", app.Article.Search, article, ActionRead, GET, POST)
@@ -80,8 +91,18 @@ func Route(r *mux.Router, ctx context.Context, conf Config) error {
 	HandleWithSecurity(sec, articles, "/{id}", app.Article.Patch, article, ActionWrite, PATCH)
 	HandleWithSecurity(sec, articles, "/{id}", app.Article.Delete, article, ActionWrite, DELETE)
 
+	terms := r.PathPrefix("/terms").Subrouter()
+	HandleWithSecurity(sec, terms, "", app.Term.Search, term, ActionRead, GET)
+	HandleWithSecurity(sec, terms, "/search", app.Term.Search, term, ActionRead, GET, POST)
+	HandleWithSecurity(sec, terms, "/{id}", app.Term.Load, term, ActionRead, GET)
+	HandleWithSecurity(sec, terms, "", app.Term.Create, term, ActionWrite, POST)
+	HandleWithSecurity(sec, terms, "/{id}", app.Term.Update, term, ActionWrite, PUT)
+	HandleWithSecurity(sec, terms, "/{id}", app.Term.Patch, term, ActionWrite, PATCH)
+	HandleWithSecurity(sec, terms, "/{id}", app.Term.Delete, term, ActionWrite, DELETE)
+
 	questions := r.PathPrefix("/questions").Subrouter()
 	HandleWithSecurity(sec, questions, "", app.Question.Search, question, ActionRead, GET)
+	HandleWithSecurity(sec, questions, "/list", app.Question.GetByIds, question, ActionRead, POST)
 	HandleWithSecurity(sec, questions, "/search", app.Question.Search, question, ActionRead, GET, POST)
 	HandleWithSecurity(sec, questions, "/{id}", app.Question.Load, question, ActionRead, GET)
 	HandleWithSecurity(sec, questions, "", app.Question.Create, question, ActionWrite, POST)

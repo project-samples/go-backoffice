@@ -1,8 +1,6 @@
 package ticket
 
-import (
-	"context"
-)
+import "context"
 
 type TicketService interface {
 	Load(ctx context.Context, id string) (*Ticket, error)
@@ -12,18 +10,24 @@ type TicketService interface {
 	Delete(ctx context.Context, id string) (int64, error)
 }
 
-func NewTicketService(repository TicketRepository) TicketService {
-	return &TicketUseCase{repository: repository}
+func NewTicketService(repository TicketRepository, generateId func(ctx context.Context) (string, error)) TicketService {
+	return &TicketUseCase{repository: repository, generateId: generateId}
 }
 
 type TicketUseCase struct {
 	repository TicketRepository
+	generateId func(ctx context.Context) (string, error)
 }
 
 func (s *TicketUseCase) Load(ctx context.Context, id string) (*Ticket, error) {
 	return s.repository.Load(ctx, id)
 }
 func (s *TicketUseCase) Create(ctx context.Context, ticket *Ticket) (int64, error) {
+	id, err := s.generateId(ctx)
+	if err != nil {
+		return 0, err
+	}
+	ticket.Id = id
 	return s.repository.Create(ctx, ticket)
 }
 func (s *TicketUseCase) Update(ctx context.Context, ticket *Ticket) (int64, error) {
