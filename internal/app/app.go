@@ -36,29 +36,30 @@ import (
 	t "go-service/internal/test"
 	tk "go-service/internal/ticket"
 	u "go-service/internal/user"
+	"go-service/pkg/text"
 )
 
 type ApplicationContext struct {
-	SkipSecurity                bool
-	Health                      *Handler
-	Authorization               *authorization.Handler
-	AuthorizationChecker        *AuthorizationChecker
-	Authorizer                  *Authorizer
-	Authentication              *ah.AuthenticationHandler
-	Privileges                  *ah.PrivilegesHandler
-	Code                        *code.Handler
-	Roles                       *code.Handler
-	Role                        r.RoleTransport
-	User                        u.UserTransport
-	Entity                      e.EntityTransport
-	Company                     c.CompanyTransport
-	Product                     p.ProductTransport
-	Article                     a.ArticleTransport
-	Term                        tm.TermTransport
-	Question                    qu.QuestionTransport
-	Test                        t.TestTransport
-	Ticket                      tk.TicketTransport
-	AuditLog                    *audit.AuditLogHandler
+	SkipSecurity         bool
+	Health               *Handler
+	Authorization        *authorization.Handler
+	AuthorizationChecker *AuthorizationChecker
+	Authorizer           *Authorizer
+	Authentication       *ah.AuthenticationHandler
+	Privileges           *ah.PrivilegesHandler
+	Code                 *code.Handler
+	Roles                *code.Handler
+	Role                 r.RoleTransport
+	User                 u.UserTransport
+	Entity               e.EntityTransport
+	Company              c.CompanyTransport
+	Product              p.ProductTransport
+	Article              a.ArticleTransport
+	Term                 tm.TermTransport
+	Question             qu.QuestionTransport
+	Test                 t.TestTransport
+	Ticket               tk.TicketTransport
+	AuditLog             *audit.AuditLogHandler
 }
 
 func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
@@ -78,7 +79,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 		if er1 != nil {
 			return nil, er1
 		}
-		logWriter := q.NewActionLogWriter(auditLogDB, "auditLog", conf.AuditLog.Config, conf.AuditLog.Schema, generateId)
+		logWriter := q.NewActionLogWriter(auditLogDB, "auditlog", conf.AuditLog.Config, conf.AuditLog.Schema, generateId)
 		writeLog = logWriter.Write
 		auditLogHealthChecker := q.NewSqlHealthChecker(auditLogDB, "audit_log")
 		healthHandler = NewHandler(sqlHealthChecker, auditLogHealthChecker)
@@ -288,33 +289,38 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if er8 != nil {
 		return nil, er8
 	}
-	auditLogQuery, er9 := audit.NewAuditLogQuery(reportDB, templates)
+	userQuery, er := text.NewTextAdapter(db, "users", "userid", "email")
+	if er != nil {
+		return nil, er
+	}
+
+	auditLogQuery, er9 := audit.NewAuditLogQuery(reportDB, templates, userQuery.Load)
 	if er9 != nil {
 		return nil, er9
 	}
 	auditLogHandler := audit.NewAuditLogHandler(auditLogQuery, logError)
 
 	app := &ApplicationContext{
-		Health:                      healthHandler,
-		SkipSecurity:                conf.SecuritySkip,
-		Authorization:               authorizationHandler,
-		AuthorizationChecker:        authorizationChecker,
-		Authorizer:                  authorizer,
-		Authentication:              authenticationHandler,
-		Privileges:                  privilegeHandler,
-		Code:                        codeHandler,
-		Roles:                       rolesHandler,
-		Role:                        roleHandler,
-		User:                        userHandler,
-		Entity:                      entityHandler,
-		Company:                     companyHandler,
-		Product:                     productHandler,
-		Article:                     articleHandler,
-		Term:                        termHandler,
-		Question:                    questionHandler,
-		Test:                        testHandler,
-		Ticket:                      ticketHandler,
-		AuditLog:                    auditLogHandler,
+		Health:               healthHandler,
+		SkipSecurity:         conf.SecuritySkip,
+		Authorization:        authorizationHandler,
+		AuthorizationChecker: authorizationChecker,
+		Authorizer:           authorizer,
+		Authentication:       authenticationHandler,
+		Privileges:           privilegeHandler,
+		Code:                 codeHandler,
+		Roles:                rolesHandler,
+		Role:                 roleHandler,
+		User:                 userHandler,
+		Entity:               entityHandler,
+		Company:              companyHandler,
+		Product:              productHandler,
+		Article:              articleHandler,
+		Term:                 termHandler,
+		Question:             questionHandler,
+		Test:                 testHandler,
+		Ticket:               ticketHandler,
+		AuditLog:             auditLogHandler,
 	}
 	return app, nil
 }

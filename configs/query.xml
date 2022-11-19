@@ -53,11 +53,20 @@
     <if test="time.max != null">
       time <= #{time.max} and
     </if>
+    <if test="users != null">
+      userId in (#{users}) and
+    </if>
     <if test="userId != null">
       userId = #{userId} and
     </if>
+    <if test="resources != null">
+      resource in (#{resources}) and
+    </if>
     <if test="resource != null">
       resource = #{resource} and
+    </if>
+    <if test="actions != null">
+      action in (#{actions}) and
     </if>
     <if test="action != null">
       action = #{action} and
@@ -177,6 +186,37 @@
     </if>
     <if test="q != null">
       (title like #{q} or content like #{q}) and
+    </if>
+    1 = 1
+    <if test="sort != null">
+      order by {sort}
+    </if>
+  </select>
+
+  <select id="audit_log">
+    select *
+    from auditlog
+    where
+    <if test="time.min != null">
+      time >= #{time.min} and
+    </if>
+    <if test="time.max != null">
+      time <= #{time.max} and
+    </if>
+    <if test="userId != null">
+      userId = #{userId} and
+    </if>
+    <if test="resource != null">
+      resource = #{resource} and
+    </if>
+    <if test="action != null">
+      action = #{action} and
+    </if>
+    <if test="ip != null">
+      ip = #{ip} and
+    </if>
+    <if test="status != null">
+      status in (#{status}) and
     </if>
     1 = 1
     <if test="sort != null">
