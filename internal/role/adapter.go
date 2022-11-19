@@ -250,7 +250,7 @@ func buildPatchRoleStatements(json map[string]interface{}, buildParam func(int) 
 		t, _ := a.([]string)
 		for i := 0; i < len(t); i++ {
 			splitPermission := strings.Fields(t[i])
-			insertModules := fmt.Sprintf("insert into rolemodules values ('%s','%s','%s');", buildParam(1), buildParam(2), buildParam(3))
+			insertModules := fmt.Sprintf("insert into rolemodules values (%s,%s,%s);", buildParam(1), buildParam(2), buildParam(3))
 			sts.Add(insertModules, []interface{}{json["roleId"], splitPermission[0], splitPermission[1]})
 		}
 	}
