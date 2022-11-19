@@ -37,7 +37,7 @@ type ProductAdapter struct {
 
 func (r *ProductAdapter) Load(ctx context.Context, id string) (*Product, error) {
 	var products []Product
-	query := fmt.Sprintf("select * from products where id = %s limit 1", r.BuildParam(1))
+	query := fmt.Sprintf("select * from products where productId = %s limit 1", r.BuildParam(1))
 	err := q.QueryWithArray(ctx, r.DB, nil, &products, r.toArray, query, id)
 	if err != nil {
 		return nil, err
@@ -52,7 +52,7 @@ func (r *ProductAdapter) Create(ctx context.Context, product *Product) (int64, e
 	query, args := q.BuildToInsertWithArray("products", product, r.BuildParam, true, r.toArray, r.Schema)
 	res, err := r.DB.ExecContext(ctx, query, args...)
 	if err != nil {
-		return -1, nil
+		return -1, err
 	}
 	return res.RowsAffected()
 }
@@ -61,7 +61,7 @@ func (r *ProductAdapter) Update(ctx context.Context, product *Product) (int64, e
 	query, args := q.BuildToUpdateWithArray("products", product, r.BuildParam, false, r.toArray, r.Schema)
 	res, err := r.DB.ExecContext(ctx, query, args...)
 	if err != nil {
-		return -1, nil
+		return -1, err
 	}
 	return res.RowsAffected()
 }
@@ -77,10 +77,10 @@ func (r *ProductAdapter) Patch(ctx context.Context, product map[string]interface
 }
 
 func (r *ProductAdapter) Delete(ctx context.Context, id string) (int64, error) {
-	query := "delete from products where id = $1"
+	query := "delete from products where productId = $1"
 	stmt, err := r.DB.Prepare(query)
 	if err != nil {
-		return -1, nil
+		return -1, err
 	}
 	res, err := stmt.ExecContext(ctx, id)
 	if err != nil {

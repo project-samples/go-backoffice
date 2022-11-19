@@ -52,7 +52,7 @@ func (r *TermAdapter) Create(ctx context.Context, term *Term) (int64, error) {
 	query, args := q.BuildToInsertWithArray("terms", term, r.BuildParam, true, r.toArray, r.Schema)
 	res, err := r.DB.ExecContext(ctx, query, args...)
 	if err != nil {
-		return -1, nil
+		return -1, err
 	}
 	return res.RowsAffected()
 }
@@ -61,7 +61,7 @@ func (r *TermAdapter) Update(ctx context.Context, term *Term) (int64, error) {
 	query, args := q.BuildToUpdateWithArray("terms", term, r.BuildParam, false, r.toArray, r.Schema)
 	res, err := r.DB.ExecContext(ctx, query, args...)
 	if err != nil {
-		return -1, nil
+		return -1, err
 	}
 	return res.RowsAffected()
 }

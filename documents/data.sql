@@ -8,9 +8,9 @@ create table modules (
   sequence int not null,
   parent varchar(40),
   createdby varchar(40),
-  createdat timestamp,
+  createdat timestamptz,
   updatedby varchar(40),
-  updatedat timestamp
+  updatedat timestamptz
 );
 
 create table entities (
@@ -22,10 +22,9 @@ create table entities (
   phone varchar(20),
   imageurl varchar(500),
   createdby varchar(40),
-  createdat timestamp,
+  createdat timestamptz,
   updatedby varchar(40),
-  updatedat timestamp,
-  lastlogin timestamp
+  updatedat timestamptz
 );
 
 create table users (
@@ -40,10 +39,10 @@ create table users (
   position varchar(40),
   imageurl varchar(500),
   createdby varchar(40),
-  createdat timestamp,
+  createdat timestamptz,
   updatedby varchar(40),
-  updatedat timestamp,
-  lastlogin timestamp
+  updatedat timestamptz,
+  lastlogin timestamptz
 );
 
 create table roles (
@@ -52,9 +51,9 @@ create table roles (
   status char(1) not null,
   remark varchar(255),
   createdby varchar(40),
-  createdat timestamp,
+  createdat timestamptz,
   updatedby varchar(40),
-  updatedat timestamp
+  updatedat timestamptz
 );
 
 create table entityusers (
@@ -82,7 +81,7 @@ create table auditlog (
   userid varchar(255),
   ip varchar(255),
   action varchar(255),
-  time timestamp,
+  time timestamptz,
   status varchar(255),
   remark varchar(255)
 );
@@ -189,15 +188,14 @@ create table companies (
   companyid varchar(40) primary key,
   companyname varchar(255) not null,
   email varchar(255) not null,
-  displayname varchar(255) not null,
   status char(1) not null,
   phone varchar(20),
   imageurl varchar(500),
   createdby varchar(40),
-  createdat timestamp,
+  createdat timestamptz,
   updatedby varchar(40),
   updatedat timestamp,
-  lastlogin timestamp
+  lastlogin timestamptz
 );
 create table companyusers (
   companyid varchar(40) not null,
@@ -226,7 +224,7 @@ insert into companyusers(companyid, userid) values ('00005','00010');
 -- Table structure for questions
 -- ----------------------------
 CREATE TABLE questions (
-   id varchar(50) NULL,
+   id varchar(50) PRIMARY KEY,
    title varchar(255) NULL,
    body varchar(2000) NULL,
    mixed bool NULL,
@@ -277,7 +275,7 @@ INSERT INTO "questions" VALUES ('csVonL_tp', '', 'Which of the following is an e
 -- Table structure for tests
 -- ----------------------------
 CREATE TABLE "tests" (
-  "testid" varchar ,
+  "testid" varchar PRIMARY KEY ,
   "title" varchar ,
   "effectivedate" timestamp(6),
   "questions" _varchar ,
@@ -296,16 +294,16 @@ INSERT INTO "tests" VALUES ('vEMky1_tp', 'Q2', '2023-06-04 00:00:00', '{S6J0KQVa
 -- ----------------------------
 DROP TABLE IF EXISTS "tickets";
 CREATE TABLE "tickets" (
-   "id" varchar(40) ,
+   "id" varchar(40) PRIMARY KEY ,
    "title" varchar(100) ,
    "body" text ,
    "categoryid" varchar(40) ,
    "requestor" varchar(20) ,
-   "requested_at" timestamp(6),
+   "requestedat" timestamp(6),
    "approver" varchar(20) ,
-   "approved_at" timestamp(6),
+   "approvedat" timestamp(6),
    "assignee" varchar(40) ,
-   "completed_at" timestamp(6),
+   "completedat" timestamp(6),
    "status" varchar(1) 
 );
 -- ----------------------------
@@ -314,6 +312,57 @@ CREATE TABLE "tickets" (
 INSERT INTO "tickets" VALUES ('s319KmVtM', 'Sample Title', 'Sample body text.', 'sampleCategoryId', 'sampleRequestor', '2023-06-14 10:30:00', 'sampleApprover', '2023-06-14 11:00:00', 'sampleAssignee', '2023-06-14 12:00:00', 'S');
 INSERT INTO "tickets" VALUES ('iTJWdm_aM', 'Sample Ticket', 'This is a sample ticket description.', 'category456', 'john', '2023-06-14 10:30:00', 'approver123', '2023-06-14 11:00:00', 'assignee456', '2023-06-14 12:00:00', 'S');
 
+
+CREATE TABLE articles (
+   id VARCHAR(255) PRIMARY KEY,
+   title VARCHAR(255),
+   authorid VARCHAR(255),
+   name VARCHAR(255),
+   description TEXT,
+   publishedat timestamptz,
+   type VARCHAR(255) NOT NULL,
+   body TEXT NOT NULL,
+   tags _varchar,
+   status VARCHAR(10),
+   createdBy VARCHAR(20),
+   createdAt timestamptz ,
+   updatedBy VARCHAR(20),
+   updatedAt timestamptz
+);
+
+
+CREATE TABLE terms (
+  id VARCHAR(50) PRIMARY KEY,
+  title VARCHAR(255),
+  description VARCHAR(255),
+  effectivedate timestamptz  NOT NULL,
+  publishedat timestamptz ,
+  type VARCHAR(10) NOT NULL,
+  body TEXT NOT NULL,
+  tags _varchar,
+  status VARCHAR(10),
+  createdby VARCHAR(50),
+  createdat timestamptz ,
+  updatedby VARCHAR(50),
+  updatedat timestamptz
+);
+
+CREATE TABLE products (
+  productid VARCHAR(50) PRIMARY KEY,
+  productname VARCHAR(50) NOT NULL,
+  title VARCHAR(255),
+  description VARCHAR(255),
+  effectivedate timestamptz NOT NULL,
+  publishedat timestamptz,
+  type VARCHAR(10) NOT NULL,
+  body TEXT NOT NULL,
+  tags _varchar,
+  status VARCHAR(10),
+  createdby VARCHAR(50),
+  createdat timestamptz ,
+  updatedby VARCHAR(50),
+  updatedat timestamptz
+);
 /*
 alter table userroles add foreign key (userid) references users (userid);
 alter table userroles add foreign key (roleid) references roles (roleid);

@@ -53,7 +53,7 @@ func (r *TestAdapter) Create(ctx context.Context, test *Test) (int64, error) {
 	query, args := q.BuildToInsertWithArray("tests", test, r.BuildParam, false, r.toArray, r.Schema)
 	res, err := r.DB.ExecContext(ctx, query, args...)
 	if err != nil {
-		return -1, nil
+		return -1, err
 	}
 	return res.RowsAffected()
 }
@@ -62,7 +62,7 @@ func (r *TestAdapter) Update(ctx context.Context, test *Test) (int64, error) {
 	query, args := q.BuildToUpdateWithArray("tests", test, r.BuildParam, false, r.toArray, r.Schema)
 	res, err := r.DB.ExecContext(ctx, query, args...)
 	if err != nil {
-		return -1, nil
+		return -1, err
 	}
 	return res.RowsAffected()
 }
@@ -81,7 +81,7 @@ func (r *TestAdapter) Delete(ctx context.Context, id string) (int64, error) {
 	query := "delete from tests where testid = " + r.BuildParam(1)
 	stmt, err := r.DB.Prepare(query)
 	if err != nil {
-		return -1, nil
+		return -1, err
 	}
 	res, err := stmt.ExecContext(ctx, id)
 	if err != nil {

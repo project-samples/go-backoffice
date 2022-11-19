@@ -52,7 +52,7 @@ func (r *ArticleAdapter) Create(ctx context.Context, article *Article) (int64, e
 	query, args := q.BuildToInsertWithArray("articles", article, r.BuildParam, true, r.toArray, r.Schema)
 	res, err := r.DB.ExecContext(ctx, query, args...)
 	if err != nil {
-		return -1, nil
+		return -1, err
 	}
 	return res.RowsAffected()
 }
@@ -61,7 +61,7 @@ func (r *ArticleAdapter) Update(ctx context.Context, article *Article) (int64, e
 	query, args := q.BuildToUpdateWithArray("articles", article, r.BuildParam, false, r.toArray, r.Schema)
 	res, err := r.DB.ExecContext(ctx, query, args...)
 	if err != nil {
-		return -1, nil
+		return -1, err
 	}
 	return res.RowsAffected()
 }
@@ -80,7 +80,7 @@ func (r *ArticleAdapter) Delete(ctx context.Context, id string) (int64, error) {
 	query := "delete from articles where id = $1"
 	stmt, err := r.DB.Prepare(query)
 	if err != nil {
-		return -1, nil
+		return -1, err
 	}
 	res, err := stmt.ExecContext(ctx, id)
 	if err != nil {

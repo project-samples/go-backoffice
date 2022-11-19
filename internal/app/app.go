@@ -204,7 +204,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if err != nil {
 		return nil, err
 	}
-	articleSearchBuilder, err := q.NewSearchBuilder(db, articleType, queryArticle)
+	articleSearchBuilder, err := q.NewSearchBuilderWithArray(db, articleType, queryArticle, pq.Array)
 	if err != nil {
 		return nil, err
 	}
@@ -218,7 +218,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if err != nil {
 		return nil, err
 	}
-	termSearchBuilder, err := q.NewSearchBuilder(db, termType, queryTerm)
+	termSearchBuilder, err := q.NewSearchBuilderWithArray(db, termType, queryTerm, pq.Array)
 	if err != nil {
 		return nil, err
 	}
@@ -231,7 +231,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if err != nil {
 		return nil, err
 	}
-	productSearchBuilder, err := q.NewSearchBuilder(db, productType, queryProduct)
+	productSearchBuilder, err := q.NewSearchBuilderWithArray(db, productType, queryProduct, pq.Array)
 	if err != nil {
 		return nil, err
 	}
