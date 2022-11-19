@@ -32,6 +32,7 @@ import (
 	qu "go-service/internal/question"
 	r "go-service/internal/role"
 	t "go-service/internal/test"
+	tk "go-service/internal/ticket"
 	u "go-service/internal/user"
 )
 
@@ -52,6 +53,7 @@ type ApplicationContext struct {
 	Article              a.ArticleTransport
 	Question             qu.QuestionTransport
 	Test                 t.TestTransport
+	Ticket               tk.TicketTransport
 	AuditLog             *audit.AuditLogHandler
 }
 
@@ -171,7 +173,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if er7 != nil {
 		return nil, er7
 	}
-	entityService := e.Newentitieservice(entityRepository)
+	entityService := e.NewentitieService(entityRepository)
 	generateEntityId := shortid.Func(conf.AutoEntityId)
 	entityHandler := e.NewEntityHandler(entitySearchBuilder.Search, entityService, conf.Writer, logError, generateEntityId, entityValidator.Validate, conf.Tracking, writeLog)
 
@@ -233,6 +235,19 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	testService := t.NewTestService(testRepository)
 	testHandler := t.NewTestHandler(testSearchBuilder.Search, testService, modelStatus, logError, validator.Validate, &action)
 
+	ticketType := reflect.TypeOf(tk.Ticket{})
+	ticketQuery := query.UseQuery(db, "tickets", ticketType)
+	ticketSearchBuilder, err := q.NewSearchBuilder(db, ticketType, ticketQuery)
+	if err != nil {
+		return nil, err
+	}
+	ticketRepository, err := q.NewRepository(db, "tickets", ticketType)
+	if err != nil {
+		return nil, err
+	}
+	ticketService := tk.NewTicketService(ticketRepository)
+	ticketHandler := tk.NewTicketHandler(ticketSearchBuilder.Search, ticketService, modelStatus, logError, validator.Validate, &action)
+
 	reportDB, er8 := q.Open(conf.AuditLog.DB)
 	if er8 != nil {
 		return nil, er8
@@ -260,6 +275,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 		Article:              articleHandler,
 		Question:             questionHandler,
 		Test:                 testHandler,
+		Ticket:               ticketHandler,
 		AuditLog:             auditLogHandler,
 	}
 	return app, nil

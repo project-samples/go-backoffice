@@ -10,7 +10,7 @@ type entitieservice interface {
 	Delete(ctx context.Context, id string) (int64, error)
 }
 
-func Newentitieservice(repository EntityRepository) entitieservice {
+func NewentitieService(repository EntityRepository) entitieservice {
 	return &EntityUseCase{repository: repository}
 }
 

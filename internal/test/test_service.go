@@ -14,14 +14,14 @@ type TestService interface {
 }
 
 func NewTestService(repository sv.Repository) TestService {
-	return &testService{repository: repository}
+	return &TestUseCase{repository: repository}
 }
 
-type testService struct {
+type TestUseCase struct {
 	repository sv.Repository
 }
 
-func (s *testService) Load(ctx context.Context, id string) (*Test, error) {
+func (s *TestUseCase) Load(ctx context.Context, id string) (*Test, error) {
 	var test Test
 	ok, err := s.repository.LoadAndDecode(ctx, id, &test)
 	if !ok {
@@ -30,15 +30,15 @@ func (s *testService) Load(ctx context.Context, id string) (*Test, error) {
 		return &test, err
 	}
 }
-func (s *testService) Create(ctx context.Context, test *Test) (int64, error) {
+func (s *TestUseCase) Create(ctx context.Context, test *Test) (int64, error) {
 	return s.repository.Insert(ctx, test)
 }
-func (s *testService) Update(ctx context.Context, test *Test) (int64, error) {
+func (s *TestUseCase) Update(ctx context.Context, test *Test) (int64, error) {
 	return s.repository.Update(ctx, test)
 }
-func (s *testService) Patch(ctx context.Context, test map[string]interface{}) (int64, error) {
+func (s *TestUseCase) Patch(ctx context.Context, test map[string]interface{}) (int64, error) {
 	return s.repository.Patch(ctx, test)
 }
-func (s *testService) Delete(ctx context.Context, id string) (int64, error) {
+func (s *TestUseCase) Delete(ctx context.Context, id string) (int64, error) {
 	return s.repository.Delete(ctx, id)
 }
