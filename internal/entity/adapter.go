@@ -21,6 +21,7 @@ type EntityAdapter struct {
 	BuildParam       func(int) string
 	CheckDelete      string
 	Map              map[string]int
+	FieldIndex       map[string]int
 	modelType        reflect.Type
 	entitySchema     *q.Schema
 	entityRoleSchema *q.Schema
@@ -35,16 +36,20 @@ func NewEntityRepository(db *sql.DB) (*EntityAdapter, error) {
 	if err != nil {
 		return nil, err
 	}
+	m2, err := q.GetColumnIndexes(modelType)
+	if err != nil {
+		return nil, err
+	}
 	entitySchema := q.CreateSchema(modelType)
 	entityRoleSchema := q.CreateSchema(subType)
 	driver := q.GetDriver(db)
-	return &EntityAdapter{db: db, driver: driver, BuildParam: buildParam, modelType: modelType, Map: m, entitySchema: entitySchema, entityRoleSchema: entityRoleSchema}, nil
+	return &EntityAdapter{db: db, driver: driver, BuildParam: buildParam, modelType: modelType, Map: m, FieldIndex: m2, entitySchema: entitySchema, entityRoleSchema: entityRoleSchema}, nil
 }
 
 func (s *EntityAdapter) Load(ctx context.Context, id string) (*Entity, error) {
 	var entities []Entity
 	sql := fmt.Sprintf("select * from entities where entityId = %s", s.BuildParam(1))
-	er1 := q.Query(ctx, s.db, s.Map, &entities, sql, id)
+	er1 := q.Query(ctx, s.db, s.FieldIndex, &entities, sql, id)
 	if er1 != nil {
 		return nil, er1
 	}

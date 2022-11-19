@@ -6,7 +6,7 @@ type Entity struct {
 	EntityId    string     `json:"entityId,omitempty" gorm:"column:entityId;primary_key" bson:"_id,omitempty" validate:"required,max=20,code"`
 	Entityname  string     `json:"entityname,omitempty" gorm:"column:entityname" bson:"entityname,omitempty" dynamodbav:"entityname,omitempty" firestore:"entityname,omitempty" validate:"required,max=80"`
 	Email       string     `json:"email,omitempty" gorm:"column:email" bson:"email,omitempty" dynamodbav:"email,omitempty" firestore:"email,omitempty" validate:"email,max=100"`
-	DisplayName *string    `json:"displayName,omitempty" gorm:"column:displayname" bson:"displayName,omitempty" dynamodbav:"displayName,omitempty" firestore:"displayName,omitempty" validate:"max=255"`
+	DisplayName *string    `json:"displayName,omitempty" gorm:"column:displayname" bson:"displayName,omitempty" dynamodbav:"displayName,omitempty" firestore:"displayName,omitempty" validate:"omitempty,max=255"`
 	ImageURL    string     `json:"imageURL,omitempty" gorm:"column:imageurl" bson:"imageURL,omitempty" dynamodbav:"imageURL,omitempty" firestore:"imageURL,omitempty" match:"equal"`
 	Status      string     `json:"status,omitempty" gorm:"column:status" bson:"status,omitempty" dynamodbav:"status,omitempty" firestore:"status,omitempty" match:"equal" validate:"required,max=1,code"`
 	Phone       string     `json:"phone,omitempty" gorm:"column:phone" bson:"phone,omitempty" dynamodbav:"phone,omitempty" firestore:"phone,omitempty" match:"equal" validate:"phone,max=16"`

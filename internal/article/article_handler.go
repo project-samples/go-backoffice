@@ -18,7 +18,10 @@ type ArticleTransport interface {
 	Delete(w http.ResponseWriter, r *http.Request)
 }
 
-func NewArticleHandler(find func(context.Context, interface{}, interface{}, int64, ...int64) (int64, string, error), service ArticleService, generateId func(context.Context) (string, error), status sv.StatusConfig, logError func(context.Context, string, ...map[string]interface{}), validate func(ctx context.Context, model interface{}) ([]sv.ErrorMessage, error), tracking builder.TrackingConfig, action *sv.ActionConfig, writeLog func(context.Context, string, string, bool, string) error) ArticleTransport {
+func NewArticleHandler(find func(context.Context, interface{}, interface{}, int64, ...int64) (int64, string, error), service ArticleService,
+	generateId func(context.Context) (string, error), status sv.StatusConfig, logError func(context.Context, string, ...map[string]interface{}),
+	validate func(ctx context.Context, model interface{}) ([]sv.ErrorMessage, error),
+	tracking builder.TrackingConfig, action *sv.ActionConfig, writeLog func(context.Context, string, string, bool, string) error) ArticleTransport {
 	searchModelType := reflect.TypeOf(ArticleFilter{})
 	modelType := reflect.TypeOf(Article{})
 	builder := builder.NewBuilderWithIdAndConfig(generateId, modelType, tracking)

@@ -2,6 +2,8 @@ package app
 
 import (
 	"context"
+	sv "github.com/core-go/core"
+	"github.com/lib/pq"
 	"reflect"
 
 	"github.com/core-go/auth"
@@ -23,6 +25,7 @@ import (
 	. "github.com/core-go/security/sql"
 	q "github.com/core-go/sql"
 
+	a "go-service/internal/article"
 	"go-service/internal/audit-log"
 	c "go-service/internal/company"
 	e "go-service/internal/entity"
@@ -44,6 +47,7 @@ type ApplicationContext struct {
 	User                 u.UserTransport
 	Entity               e.EntityTransport
 	Company              c.CompanyTransport
+	Article              a.ArticleTransport
 	AuditLog             *audit.AuditLogHandler
 }
 
@@ -71,6 +75,8 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	} else {
 		healthHandler = NewHandler(sqlHealthChecker)
 	}
+	modelStatus := sv.InitializeStatus(conf.ModelStatus)
+	action := sv.InitializeAction(conf.Action)
 	buildParam := q.GetBuild(db)
 	validator := v10.NewValidator()
 	sqlPrivilegeLoader := NewPrivilegeLoader(db, conf.Sql.PermissionsByUser)
@@ -183,6 +189,20 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	generateCompanyId := shortid.Func(conf.AutoCompanyId)
 	companyHandler := c.NewCompanyHandler(companySearchBuilder.Search, companyService, conf.Writer, logError, generateCompanyId, companyValidator.Validate, conf.Tracking, writeLog)
 
+	articleType := reflect.TypeOf(a.Article{})
+	queryArticle, err := template.UseQuery(conf.Template, query.UseQuery(db, "article", companyType, buildParam), "article", templates, &articleType, convert.ToMap, buildParam)
+	if err != nil {
+		return nil, err
+	}
+	articleSearchBuilder, err := q.NewSearchBuilder(db, articleType, queryArticle)
+	if err != nil {
+		return nil, err
+	}
+	articlesRepository, err := q.NewRepositoryWithArray(db, "article", articleType, pq.Array)
+	articleService := a.NewArticleService(articlesRepository)
+	generateArticleId := shortid.Func(conf.AutoCompanyId)
+	articleHandler := a.NewArticleHandler(articleSearchBuilder.Search, articleService, generateArticleId, modelStatus, logError, validator.Validate, conf.Tracking, &action, writeLog)
+
 	reportDB, er8 := q.Open(conf.AuditLog.DB)
 	if er8 != nil {
 		return nil, er8
@@ -207,6 +227,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 		User:                 userHandler,
 		Entity:               entityHandler,
 		Company:              companyHandler,
+		Article:              articleHandler,
 		AuditLog:             auditLogHandler,
 	}
 	return app, nil
