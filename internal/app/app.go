@@ -29,6 +29,7 @@ import (
 	"go-service/internal/audit-log"
 	c "go-service/internal/company"
 	e "go-service/internal/entity"
+	p "go-service/internal/product"
 	qu "go-service/internal/question"
 	r "go-service/internal/role"
 	tm "go-service/internal/term"
@@ -51,6 +52,7 @@ type ApplicationContext struct {
 	User                 u.UserTransport
 	Entity               e.EntityTransport
 	Company              c.CompanyTransport
+	Product              p.ProductTransport
 	Article              a.ArticleTransport
 	Term                 tm.TermTransport
 	Question             qu.QuestionTransport
@@ -224,6 +226,19 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	termService := tm.NewTermService(termsRepository, generateId)
 	termHandler := tm.NewTermHandler(termSearchBuilder.Search, termService, nil, modelStatus, logError, validator.Validate, conf.Tracking, &action, writeLog)
 
+	productType := reflect.TypeOf(p.Product{})
+	queryProduct, err := template.UseQuery(conf.Template, query.UseQuery(db, "product", companyType, buildParam), "product", templates, &productType, convert.ToMap, buildParam)
+	if err != nil {
+		return nil, err
+	}
+	productSearchBuilder, err := q.NewSearchBuilder(db, productType, queryProduct)
+	if err != nil {
+		return nil, err
+	}
+	productsRepository := p.NewProductRepository(db, pq.Array)
+	productService := p.NewProductService(productsRepository, generateId)
+	productHandler := p.NewProductHandler(productSearchBuilder.Search, productService, nil, modelStatus, logError, validator.Validate, conf.Tracking, &action, writeLog)
+
 	questionType := reflect.TypeOf(qu.Question{})
 	questionQuery := query.UseQuery(db, "questions", questionType)
 	questionSearchBuilder, err := q.NewSearchBuilderWithArray(db, questionType, questionQuery, pq.Array)
@@ -278,6 +293,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 		User:                 userHandler,
 		Entity:               entityHandler,
 		Company:              companyHandler,
+		Product:              productHandler,
 		Article:              articleHandler,
 		Term:                 termHandler,
 		Question:             questionHandler,
