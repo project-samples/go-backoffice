@@ -1,6 +1,9 @@
 package ticket
 
-import "context"
+import (
+	"context"
+	"time"
+)
 
 type TicketService interface {
 	Load(ctx context.Context, id string) (*Ticket, error)
@@ -28,6 +31,8 @@ func (s *TicketUseCase) Create(ctx context.Context, ticket *Ticket) (int64, erro
 		return 0, err
 	}
 	ticket.Id = id
+	t := time.Now()
+	ticket.RequestedAt = &t
 	return s.repository.Create(ctx, ticket)
 }
 func (s *TicketUseCase) Update(ctx context.Context, ticket *Ticket) (int64, error) {
