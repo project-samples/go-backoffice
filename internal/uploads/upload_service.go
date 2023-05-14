@@ -36,29 +36,27 @@ func NewUploadService(
 }
 
 func (u *UploadService) Upload(ctx context.Context, id string, req Request) (*Attachment, error) {
-	e, err := u.repository.Load(ctx, id)
+	attachments, err := u.repository.Load(ctx, id)
 	if err != nil {
 		return nil, err
 	}
-	if e == nil {
-		return nil, nil
-	}
-	if e.Attachments == nil {
-		e.Attachments = make([]Attachment, 0)
+	if attachments == nil {
+		attachments = make([]Attachment, 0)
 	}
 
-	url, err := u.uploadFileOnServer(ctx, req.Filename, req.Type, req.Data)
+	url, err := u.uploadFileOnServer(ctx, req.Filename, req.Type, req.Size, req.Data)
 	if err != nil {
 		return nil, err
 	}
 	attachment := Attachment{
 		OriginalFileName: req.OriginalFileName,
 		FileName:         req.Filename,
-		Type:             strings.Split(req.Type, "/")[0],
+		Type:             req.Type,
+		Size:             req.Size,
 		Url:              url,
 	}
-	e.Attachments = append(e.Attachments, attachment)
-	rows, err := u.repository.Update(ctx, id, e.Attachments)
+	attachments = append(attachments, attachment)
+	rows, err := u.repository.Update(ctx, id, attachments)
 	if err != nil {
 		return nil, err
 	}
@@ -69,14 +67,13 @@ func (u *UploadService) Upload(ctx context.Context, id string, req Request) (*At
 }
 
 func (u *UploadService) Delete(ctx context.Context, id string, url string) (int64, error) {
-	rs, err := u.repository.Load(ctx, id)
+	attachments, err := u.repository.Load(ctx, id)
 	if err != nil {
 		return 0, err
 	}
-	if rs == nil {
-		return -1, nil
+	if attachments == nil || len(attachments) == 0 {
+		return -1, errors.New("list file is empty")
 	}
-	attachments := rs.Attachments
 	exist := false
 	for index, item := range attachments {
 		if item.Url == url {
@@ -98,12 +95,11 @@ func (u *UploadService) Delete(ctx context.Context, id string, url string) (int6
 	return 1, nil
 }
 
-func (u *UploadService) uploadFileOnServer(ctx context.Context, fileName string, contentType string, data []byte) (rs string, errorRespone error) {
+func (u *UploadService) uploadFileOnServer(ctx context.Context, fileName string, contentType string, size int64, data []byte) (rs string, errorRespone error) {
 	directory := u.Directory
 	rs, err2 := u.Service.Upload(ctx, directory, fileName, data, contentType)
 	if err2 != nil {
-		errorRespone = err2
-		return
+		return rs, err2
 	}
 	return
 }
@@ -122,8 +118,4 @@ func getExt(file string) string {
 		return ext
 	}
 	return ext
-}
-
-func removeExt(file string) string {
-	return file[:len(file)-len(filepath.Ext(file))]
 }

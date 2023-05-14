@@ -1,4 +1,4 @@
-package upload
+package uploads
 
 import (
 	"context"
@@ -24,8 +24,6 @@ type UploadService struct {
 	GeneralDirectory string
 	Directory        string
 	KeyFile          string
-	SizesImage       []int
-	SizesCover       []int
 }
 
 func NewUploadService(
@@ -43,21 +41,20 @@ func (u *UploadService) Upload(ctx context.Context, id string, req Request) (*At
 		return nil, err
 	}
 	if e == nil {
-		return nil, nil
+		return nil, errors.New("not found item")
 	}
-
-	url, err := u.uploadFileOnServer(ctx, req.Filename, req.Type, req.Data)
+	url, err := u.uploadFileOnServer(ctx, req.Filename, req.Type, req.Size, req.Data)
 	if err != nil {
 		return nil, err
 	}
 	attachment := Attachment{
 		OriginalFileName: req.OriginalFileName,
 		FileName:         req.Filename,
-		Type:             strings.Split(req.Type, "/")[0],
+		Type:             req.Type,
+		Size:             req.Size,
 		Url:              url,
 	}
-	e.Attachment = attachment
-	rows, err := u.repository.Update(ctx, id, e.Attachment)
+	rows, err := u.repository.Update(ctx, id, attachment)
 	if err != nil {
 		return nil, err
 	}
@@ -68,16 +65,15 @@ func (u *UploadService) Upload(ctx context.Context, id string, req Request) (*At
 }
 
 func (u *UploadService) Delete(ctx context.Context, id string, url string) (int64, error) {
-	rs, err := u.repository.Load(ctx, id)
+	attachment, err := u.repository.Load(ctx, id)
 	if err != nil {
 		return 0, err
 	}
-	if rs == nil {
-		return -1, nil
+	if attachment == nil {
+		return -1, errors.New("not found item")
 	}
-	attachments := rs.Attachment
 	exist := false
-	if rs.Attachment.Url == url {
+	if attachment.Url == url {
 		_, err2 := u.deleteFile(url, ctx)
 		if err2 != nil {
 			return 0, err2
@@ -87,19 +83,18 @@ func (u *UploadService) Delete(ctx context.Context, id string, url string) (int6
 	if exist == false {
 		return -1, errors.New("no exist file " + url)
 	}
-	_, err2 := u.repository.Update(ctx, id, attachments)
+	_, err2 := u.repository.Update(ctx, id, *attachment)
 	if err2 != nil {
 		return 0, err2
 	}
 	return 1, nil
 }
 
-func (u *UploadService) uploadFileOnServer(ctx context.Context, fileName string, contentType string, data []byte) (rs string, errorRespone error) {
+func (u *UploadService) uploadFileOnServer(ctx context.Context, fileName string, contentType string, size int64, data []byte) (rs string, errorRespone error) {
 	directory := u.Directory
 	rs, err2 := u.Service.Upload(ctx, directory, fileName, data, contentType)
 	if err2 != nil {
-		errorRespone = err2
-		return
+		return rs, err2
 	}
 	return
 }
@@ -118,8 +113,4 @@ func getExt(file string) string {
 		return ext
 	}
 	return ext
-}
-
-func removeExt(file string) string {
-	return file[:len(file)-len(filepath.Ext(file))]
 }

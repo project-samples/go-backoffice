@@ -9,7 +9,7 @@ require (
 	github.com/core-go/core v0.3.3
 	github.com/core-go/health v0.4.8
 	github.com/core-go/log v0.1.3
-	github.com/core-go/reaction v0.0.10
+	github.com/core-go/reaction v0.0.11
 	github.com/core-go/search v0.2.8
 	github.com/core-go/security v0.1.1
 	github.com/core-go/sql v0.3.6

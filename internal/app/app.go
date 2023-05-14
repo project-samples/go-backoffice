@@ -85,7 +85,6 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	}
 	sqlHealthChecker := q.NewHealthChecker(db)
 	var healthHandler *Handler
-
 	logError := log.LogError
 	generateId := shortid.Generate
 	cloudService, _ := CreateCloudService(ctx, conf)
@@ -322,13 +321,13 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 		"ticketreplycomment", "commentid", "commentthreadid",
 		"ticketcommentthreadinfo", "commentid",
 		"ticketreplycommentinfo", "commentid",
-		"ticketcommentthreadreaction", "commentid",
-		"ticketreplycommentreaction", "commentId")
+		"", "",
+		"", "")
 	ticketCommentHandler := muxcommentthread.NewCommentThreadHandler(commentThreadService, shortid.Generate, "commentId", "author", "id")
 
 	tkUserInforeply := commentthreadreply.NewQueryInfo(db, "users", "imageURL", "userid", "username", "displayname", pq.Array)
 	locationCommentThreadReplyService := commentthreadreply.NewCommentService(db, "ticketreplycomment", "commentId", "author", "id", "updatedat", "comment", "userId", "time", "histories", "commentthreadId", "reaction",
-		"ticketreplycommentreaction", "commentId", "users", "id", "username", "imageurl", "ticketcommentthreadinfo", "usefulcount",
+		"", "", "users", "id", "username", "imageurl", "ticketcommentthreadinfo", "usefulcount",
 		"commentId", "ticketcommentthreadinfo", "commentId",
 		"replycount", "usefulcount", tkUserInforeply.Load, pq.Array)
 	ticketCommentReplyHandler := muxcomment.NewCommentHandler(locationCommentThreadReplyService, "commentThreadId", "userId", "author", "id", "commentId", generateId)
@@ -337,7 +336,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 
 	ticketUploadService := uploads.NewUploadService(uploadTicketRepository, cloudService, conf.Provider, conf.GeneralDirectory, conf.KeyFile, conf.Storage.Directory)
 
-	ticketUploadHandler := uploads.NewHandler(ticketUploadService, logError, conf.KeyFile, generateId, conf.AllowedExtensions)
+	ticketUploadHandler := uploads.NewHandler(ticketUploadService, logError, conf.KeyFile, generateId, uploads.FileConfig{})
 
 	reportDB, er8 := q.Open(conf.AuditLog.DB)
 	if er8 != nil {
