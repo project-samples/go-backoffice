@@ -9,9 +9,11 @@ require (
 	github.com/core-go/core v0.3.3
 	github.com/core-go/health v0.4.8
 	github.com/core-go/log v0.1.3
+	github.com/core-go/reaction v0.0.10
 	github.com/core-go/search v0.2.8
 	github.com/core-go/security v0.1.1
 	github.com/core-go/sql v0.3.6
+	github.com/core-go/storage v0.0.11
 	github.com/go-playground/validator/v10 v10.11.1 // indirect
 	github.com/golang-jwt/jwt v3.2.1+incompatible // indirect
 	github.com/gorilla/mux v1.8.0

@@ -2,6 +2,7 @@ package app
 
 import (
 	"context"
+	"go-service/internal/middwares/chain"
 	"net/http"
 
 	. "github.com/core-go/security"
@@ -29,6 +30,7 @@ func Route(r *mux.Router, ctx context.Context, conf Config) error {
 	}
 	r.Use(app.Authorization.HandleAuthorization)
 	sec := &SecurityConfig{SecuritySkip: conf.SecuritySkip, Check: app.AuthorizationChecker.Check, Authorize: app.Authorizer.Authorize}
+	rcMiddleware := chain.New(app.AuthorizationChecker.Check, app.AuthorizationCommentChecker.AuthorizationReactionChecker)
 
 	Handle(r, "/health", app.Health.Check, GET)
 	Handle(r, "/authenticate", app.Authentication.Authenticate, POST)
@@ -102,6 +104,7 @@ func Route(r *mux.Router, ctx context.Context, conf Config) error {
 
 	questions := r.PathPrefix("/questions").Subrouter()
 	HandleWithSecurity(sec, questions, "", app.Question.Search, question, ActionRead, GET)
+	HandleWithSecurity(sec, questions, "/list", app.Question.GetByIds, question, ActionRead, POST)
 	HandleWithSecurity(sec, questions, "/search", app.Question.Search, question, ActionRead, GET, POST)
 	HandleWithSecurity(sec, questions, "/{id}", app.Question.Load, question, ActionRead, GET)
 	HandleWithSecurity(sec, questions, "", app.Question.Create, question, ActionWrite, POST)
@@ -130,6 +133,18 @@ func Route(r *mux.Router, ctx context.Context, conf Config) error {
 	HandleWithSecurity(sec, r, "/audit-logs", app.AuditLog.Search, audit_log, ActionRead, GET, POST)
 	HandleWithSecurity(sec, r, "/audit-logs/search", app.AuditLog.Search, audit_log, ActionRead, GET, POST)
 
+	ticketComment := "/tickets/comment"
+	r.HandleFunc(ticketComment+"/search", app.SearchTicketCommentThread.Search).Methods(GET, POST)
+	r.HandleFunc(ticketComment+"/{commentThreadId}/reply", app.TicketCommentReply.GetReplyComments).Methods(POST)
+	r.HandleFunc(ticketComment+"/{id}/{author}/reply/{commentThreadId}", rcMiddleware.ThenFn(app.TicketCommentReply.Reply)).Methods(POST)
+	r.HandleFunc(ticketComment+"/reply/{commentId}/{author}", rcMiddleware.ThenFn(app.TicketCommentReply.UpdateReply)).Methods(PATCH)
+	r.HandleFunc(ticketComment+"/{commentThreadId}/reply/{commentId}/{author}", rcMiddleware.ThenFn(app.TicketCommentReply.Delete)).Methods(DELETE)
+	r.HandleFunc(ticketComment+"/{id}/{author}", rcMiddleware.ThenFn(app.TicketComment.Comment)).Methods(POST)
+	r.HandleFunc(ticketComment+"/{commentId}/{author}", rcMiddleware.ThenFn(app.TicketComment.Update)).Methods(PATCH)
+	r.HandleFunc(ticketComment+"/{commentId}/{author}", rcMiddleware.ThenFn(app.TicketComment.Delete)).Methods(DELETE)
+
+	r.HandleFunc("/tickets/{id}/upload", app.TicketUploadHandler.UploadFile).Methods(POST)
+	r.HandleFunc("/tickets/{id}/upload", app.TicketUploadHandler.DeleteFile).Methods(DELETE)
 	return nil
 }
 

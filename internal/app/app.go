@@ -3,7 +3,11 @@ package app
 import (
 	"context"
 	sv "github.com/core-go/core"
+	"github.com/core-go/reaction/commentthread"
+	"github.com/core-go/search"
+	"github.com/core-go/storage"
 	"github.com/lib/pq"
+	"go-service/internal/uploads"
 	"reflect"
 
 	"github.com/core-go/auth"
@@ -36,29 +40,42 @@ import (
 	t "go-service/internal/test"
 	tk "go-service/internal/ticket"
 	u "go-service/internal/user"
+
+	commentthreadreply "github.com/core-go/reaction/commentthread/comment"
+	muxcomment "github.com/core-go/reaction/commentthread/comment/mux"
+	muxcommentthread "github.com/core-go/reaction/commentthread/mux"
+	commentthreadsearch "github.com/core-go/reaction/commentthread/search"
+
+	"github.com/core-go/storage/google"
+	authComment "go-service/internal/middwares/authorization"
 )
 
 type ApplicationContext struct {
-	SkipSecurity         bool
-	Health               *Handler
-	Authorization        *authorization.Handler
-	AuthorizationChecker *AuthorizationChecker
-	Authorizer           *Authorizer
-	Authentication       *ah.AuthenticationHandler
-	Privileges           *ah.PrivilegesHandler
-	Code                 *code.Handler
-	Roles                *code.Handler
-	Role                 r.RoleTransport
-	User                 u.UserTransport
-	Entity               e.EntityTransport
-	Company              c.CompanyTransport
-	Product              p.ProductTransport
-	Article              a.ArticleTransport
-	Term                 tm.TermTransport
-	Question             qu.QuestionTransport
-	Test                 t.TestTransport
-	Ticket               tk.TicketTransport
-	AuditLog             *audit.AuditLogHandler
+	SkipSecurity                bool
+	Health                      *Handler
+	Authorization               *authorization.Handler
+	AuthorizationChecker        *AuthorizationChecker
+	AuthorizationCommentChecker *authComment.AuthorizationChecker
+	Authorizer                  *Authorizer
+	Authentication              *ah.AuthenticationHandler
+	Privileges                  *ah.PrivilegesHandler
+	Code                        *code.Handler
+	Roles                       *code.Handler
+	Role                        r.RoleTransport
+	User                        u.UserTransport
+	Entity                      e.EntityTransport
+	Company                     c.CompanyTransport
+	Product                     p.ProductTransport
+	Article                     a.ArticleTransport
+	Term                        tm.TermTransport
+	Question                    qu.QuestionTransport
+	Test                        t.TestTransport
+	Ticket                      tk.TicketTransport
+	SearchTicketCommentThread   *commentthreadsearch.CommentThreadSearchHandler
+	TicketCommentReply          muxcomment.CommentHandler
+	TicketComment               muxcommentthread.CommentThreadHandler
+	TicketUploadHandler         *uploads.Handler
+	AuditLog                    *audit.AuditLogHandler
 }
 
 func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
@@ -71,6 +88,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 
 	logError := log.LogError
 	generateId := shortid.Generate
+	cloudService, _ := CreateCloudService(ctx, conf)
 	var writeLog func(ctx context.Context, resource string, action string, success bool, desc string) error
 
 	if conf.AuditLog.Log {
@@ -112,6 +130,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	}
 	authenticator := auth.NewBasicAuthenticator(authStatus, ldapAuthenticator.Authenticate, userInfoService, tokenService.GenerateToken, conf.Auth.Token, conf.Auth.Payload, privilegeLoader.Load)
 	authenticationHandler := ah.NewAuthenticationHandler(authenticator.Authenticate, authStatus.Error, authStatus.Timeout, logError, writeLog)
+	authorizationCommentHandler := authComment.NewDefaultAuthorizationChecker(tokenService.GetAndVerifyToken, conf.Auth.Token.Secret, conf.Auth.Payload.Id, "author", "userId", "Authorization")
 
 	privilegeReader, er5 := as.NewPrivilegesReader(db, conf.Sql.Privileges)
 	if er5 != nil {
@@ -134,7 +153,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	roleType := reflect.TypeOf(r.Role{})
 	queryRole, err := template.UseQuery(conf.Template, query.UseQuery(db, "roles", roleType, buildParam), "role", templates, &roleType, convert.ToMap, buildParam)
 	roleSearchBuilder, err := q.NewSearchBuilder(db, roleType, queryRole)
-	// roleValidator := user.NewRoleValidator(db, conf.Sql.Role.Duplicate, validator.Validate)
+	// roleValidator := user.NewRoleValidator(db, conf.Sql.Role.Duplicate, validator.validateFileName)
 	roleValidator := unique.NewUniqueFieldValidator(db, "roles", "rolename", reflect.TypeOf(r.Role{}), validator.Validate)
 	roleRepository, er6 := r.NewRoleAdapter(db, conf.Sql.Role.Check)
 	if er6 != nil {
@@ -153,7 +172,7 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if err != nil {
 		return nil, err
 	}
-	// userValidator := user.NewUserValidator(db, conf.Sql.User, validator.Validate)
+	// userValidator := user.NewUserValidator(db, conf.Sql.User, validator.validateFileName)
 	userValidator := unique.NewUniqueFieldValidator(db, "users", "username", reflect.TypeOf(u.User{}), validator.Validate)
 	userRepository, er7 := u.NewUserRepository(db)
 	if er7 != nil {
@@ -222,7 +241,10 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if err != nil {
 		return nil, err
 	}
-	termsRepository := tm.NewTermRepository(db, pq.Array)
+	termsRepository, err := tm.NewTermRepository(db, pq.Array)
+	if err != nil {
+		return nil, err
+	}
 	termService := tm.NewTermService(termsRepository, generateId)
 	termHandler := tm.NewTermHandler(termSearchBuilder.Search, termService, nil, modelStatus, logError, validator.Validate, conf.Tracking, &action, writeLog)
 
@@ -235,7 +257,10 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if err != nil {
 		return nil, err
 	}
-	productsRepository := p.NewProductRepository(db, pq.Array)
+	productsRepository, err := p.NewProductRepository(db, pq.Array)
+	if err != nil {
+		return nil, err
+	}
 	productService := p.NewProductService(productsRepository, generateId)
 	productHandler := p.NewProductHandler(productSearchBuilder.Search, productService, nil, modelStatus, logError, validator.Validate, conf.Tracking, &action, writeLog)
 
@@ -245,29 +270,74 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	if err != nil {
 		return nil, err
 	}
-	questionRepository := qu.NewQuestionRepository(db, pq.Array)
+	questionRepository, err := qu.NewQuestionRepository(db, pq.Array)
+	if err != nil {
+		return nil, err
+	}
 	questionService := qu.NewQuestionService(questionRepository, generateId)
 	questionHandler := qu.NewQuestionHandler(questionSearchBuilder.Search, questionService, modelStatus, logError, validator.Validate, &action)
 
 	testType := reflect.TypeOf(t.Test{})
 	testQuery := query.UseQuery(db, "tests", testType)
-	testSearchBuilder, err := q.NewSearchBuilder(db, testType, testQuery)
+	testSearchBuilder, err := q.NewSearchBuilderWithArray(db, testType, testQuery, pq.Array)
 	if err != nil {
 		return nil, err
 	}
-	testRepository := t.NewTestRepository(db, pq.Array)
+	testRepository, err := t.NewTestRepository(db, pq.Array)
+	if err != nil {
+		return nil, err
+	}
 	testService := t.NewTestService(testRepository, generateId)
 	testHandler := t.NewTestHandler(testSearchBuilder.Search, testService, modelStatus, logError, validator.Validate, &action)
 
 	ticketType := reflect.TypeOf(tk.Ticket{})
 	ticketQuery := query.UseQuery(db, "tickets", ticketType)
-	ticketSearchBuilder, err := q.NewSearchBuilder(db, ticketType, ticketQuery)
+	ticketSearchBuilder, err := q.NewSearchBuilderWithArray(db, ticketType, ticketQuery, pq.Array)
 	if err != nil {
 		return nil, err
 	}
-	ticketRepository := tk.NewTicketRepository(db, pq.Array)
+	ticketRepository, err := tk.NewTicketRepository(db, pq.Array)
+	if err != nil {
+		return nil, err
+	}
 	ticketService := tk.NewTicketService(ticketRepository, generateId)
 	ticketHandler := tk.NewTicketHandler(ticketSearchBuilder.Search, ticketService, modelStatus, logError, validator.Validate, &action)
+
+	ticketCommentThreadType := reflect.TypeOf(commentthread.CommentThread{})
+	ticketCommentQuery, err := template.UseQueryWithArray(conf.Template, nil, "ticket_comment", templates, &ticketCommentThreadType, convert.ToMap, buildParam)
+	if err != nil {
+		return nil, err
+	}
+
+	queryUserInfo := commentthreadsearch.NewQueryInfo(db, "users", "imageURL", "userid", "username", "displayname", pq.Array)
+	ticketCommentBuilder, err := commentthreadsearch.NewCommentThreadSearchService(db, ticketCommentQuery, pq.Array, queryUserInfo.Load, q.BuildFromQuery, search.GetOffset)
+	if err != nil {
+		return nil, err
+	}
+
+	ticketCommentSearchHandler := commentthreadsearch.NewSearchCommentThreadHandler(ticketCommentBuilder)
+	commentThreadService := commentthread.NewCommentThreadService(db, pq.Array,
+		"ticketcommentthread", "commentId", "id", "author",
+		"histories", "comment", "time", "updatedat",
+		"ticketreplycomment", "commentid", "commentthreadid",
+		"ticketcommentthreadinfo", "commentid",
+		"ticketreplycommentinfo", "commentid",
+		"ticketcommentthreadreaction", "commentid",
+		"ticketreplycommentreaction", "commentId")
+	ticketCommentHandler := muxcommentthread.NewCommentThreadHandler(commentThreadService, shortid.Generate, "commentId", "author", "id")
+
+	tkUserInforeply := commentthreadreply.NewQueryInfo(db, "users", "imageURL", "userid", "username", "displayname", pq.Array)
+	locationCommentThreadReplyService := commentthreadreply.NewCommentService(db, "ticketreplycomment", "commentId", "author", "id", "updatedat", "comment", "userId", "time", "histories", "commentthreadId", "reaction",
+		"ticketreplycommentreaction", "commentId", "users", "id", "username", "imageurl", "ticketcommentthreadinfo", "usefulcount",
+		"commentId", "ticketcommentthreadinfo", "commentId",
+		"replycount", "usefulcount", tkUserInforeply.Load, pq.Array)
+	ticketCommentReplyHandler := muxcomment.NewCommentHandler(locationCommentThreadReplyService, "commentThreadId", "userId", "author", "id", "commentId", generateId)
+
+	uploadTicketRepository := uploads.NewRepository(db, "tickets", uploads.FieldColumn{Id: "id", File: "attachments"}, pq.Array)
+
+	ticketUploadService := uploads.NewUploadService(uploadTicketRepository, cloudService, conf.Provider, conf.GeneralDirectory, conf.KeyFile, conf.Storage.Directory)
+
+	ticketUploadHandler := uploads.NewHandler(ticketUploadService, logError, conf.KeyFile, generateId, conf.AllowedExtensions)
 
 	reportDB, er8 := q.Open(conf.AuditLog.DB)
 	if er8 != nil {
@@ -280,26 +350,35 @@ func NewApp(ctx context.Context, conf Config) (*ApplicationContext, error) {
 	auditLogHandler := audit.NewAuditLogHandler(auditLogQuery, logError, writeLog)
 
 	app := &ApplicationContext{
-		Health:               healthHandler,
-		SkipSecurity:         conf.SecuritySkip,
-		Authorization:        authorizationHandler,
-		AuthorizationChecker: authorizationChecker,
-		Authorizer:           authorizer,
-		Authentication:       authenticationHandler,
-		Privileges:           privilegeHandler,
-		Code:                 codeHandler,
-		Roles:                rolesHandler,
-		Role:                 roleHandler,
-		User:                 userHandler,
-		Entity:               entityHandler,
-		Company:              companyHandler,
-		Product:              productHandler,
-		Article:              articleHandler,
-		Term:                 termHandler,
-		Question:             questionHandler,
-		Test:                 testHandler,
-		Ticket:               ticketHandler,
-		AuditLog:             auditLogHandler,
+		Health:                      healthHandler,
+		SkipSecurity:                conf.SecuritySkip,
+		Authorization:               authorizationHandler,
+		AuthorizationChecker:        authorizationChecker,
+		AuthorizationCommentChecker: authorizationCommentHandler,
+		Authorizer:                  authorizer,
+		Authentication:              authenticationHandler,
+		Privileges:                  privilegeHandler,
+		Code:                        codeHandler,
+		Roles:                       rolesHandler,
+		Role:                        roleHandler,
+		User:                        userHandler,
+		Entity:                      entityHandler,
+		Company:                     companyHandler,
+		Product:                     productHandler,
+		Article:                     articleHandler,
+		Term:                        termHandler,
+		Question:                    questionHandler,
+		Test:                        testHandler,
+		Ticket:                      ticketHandler,
+		SearchTicketCommentThread:   ticketCommentSearchHandler,
+		TicketComment:               ticketCommentHandler,
+		TicketCommentReply:          ticketCommentReplyHandler,
+		TicketUploadHandler:         ticketUploadHandler,
+		AuditLog:                    auditLogHandler,
 	}
 	return app, nil
+}
+
+func CreateCloudService(ctx context.Context, config Config) (storage.StorageService, error) {
+	return google.NewGoogleStorageServiceWithCredentials(ctx, []byte(config.GoogleCredentials), config.Storage)
 }

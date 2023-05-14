@@ -12,19 +12,24 @@ import (
 func NewProductRepository(db *sql.DB, toArray func(interface{}) interface {
 	driver.Valuer
 	sql.Scanner
-}) *ProductAdapter {
+}) (*ProductAdapter, error) {
 	modelType := reflect.TypeOf(Product{})
+	fieldsIndex, err := q.GetColumnIndexes(modelType)
+	if err != nil {
+		return nil, err
+	}
 	jsonColumnMap := q.MakeJsonColumnMap(modelType)
 	keys, _ := q.FindPrimaryKeys(modelType)
 	schema := q.CreateSchema(modelType)
 	buildParam := q.GetBuild(db)
-	return &ProductAdapter{DB: db, ModelType: modelType, Keys: keys, Schema: schema, JsonColumnMap: jsonColumnMap,
-		BuildParam: buildParam, toArray: toArray}
+	return &ProductAdapter{DB: db, ModelType: modelType, FieldsIndex: fieldsIndex, Keys: keys, Schema: schema, JsonColumnMap: jsonColumnMap,
+		BuildParam: buildParam, toArray: toArray}, nil
 }
 
 type ProductAdapter struct {
 	DB            *sql.DB
 	ModelType     reflect.Type
+	FieldsIndex   map[string]int
 	Keys          []string
 	Schema        *q.Schema
 	JsonColumnMap map[string]string
@@ -38,7 +43,7 @@ type ProductAdapter struct {
 func (r *ProductAdapter) Load(ctx context.Context, id string) (*Product, error) {
 	var products []Product
 	query := fmt.Sprintf("select * from products where productId = %s limit 1", r.BuildParam(1))
-	err := q.QueryWithArray(ctx, r.DB, nil, &products, r.toArray, query, id)
+	err := q.QueryWithArray(ctx, r.DB, r.FieldsIndex, &products, r.toArray, query, id)
 	if err != nil {
 		return nil, err
 	}

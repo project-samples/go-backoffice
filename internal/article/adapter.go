@@ -25,6 +25,7 @@ func NewArticleRepository(db *sql.DB, toArray func(interface{}) interface {
 type ArticleAdapter struct {
 	DB            *sql.DB
 	ModelType     reflect.Type
+	FieldsIndex   map[string]int
 	Keys          []string
 	Schema        *q.Schema
 	JsonColumnMap map[string]string
@@ -38,7 +39,7 @@ type ArticleAdapter struct {
 func (r *ArticleAdapter) Load(ctx context.Context, id string) (*Article, error) {
 	var articles []Article
 	query := fmt.Sprintf("select * from articles where id = %s limit 1", r.BuildParam(1))
-	err := q.QueryWithArray(ctx, r.DB, nil, &articles, r.toArray, query, id)
+	err := q.QueryWithArray(ctx, r.DB, r.FieldsIndex, &articles, r.toArray, query, id)
 	if err != nil {
 		return nil, err
 	}

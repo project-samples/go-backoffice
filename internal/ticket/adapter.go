@@ -13,20 +13,25 @@ func NewTicketRepository(db *sql.DB,
 	toArray func(interface{}) interface {
 		driver.Valuer
 		sql.Scanner
-	}) *TicketAdapter {
+	}) (*TicketAdapter, error) {
 	modelType := reflect.TypeOf(Ticket{})
+	fieldsIndex, err := q.GetColumnIndexes(modelType)
+	if err != nil {
+		return nil, err
+	}
 	jsonColumnMap := q.MakeJsonColumnMap(modelType)
 	keys, _ := q.FindPrimaryKeys(modelType)
 	schema := q.CreateSchema(modelType)
 	buildParam := q.GetBuild(db)
-	return &TicketAdapter{DB: db, ModelType: modelType, Keys: keys, Schema: schema, JsonColumnMap: jsonColumnMap,
+	return &TicketAdapter{DB: db, ModelType: modelType, FieldsIndex: fieldsIndex, Keys: keys, Schema: schema, JsonColumnMap: jsonColumnMap,
 		BuildParam: buildParam,
-		toArray:    toArray}
+		toArray:    toArray}, nil
 }
 
 type TicketAdapter struct {
 	DB            *sql.DB
 	ModelType     reflect.Type
+	FieldsIndex   map[string]int
 	Keys          []string
 	Schema        *q.Schema
 	JsonColumnMap map[string]string
@@ -40,7 +45,7 @@ type TicketAdapter struct {
 func (r *TicketAdapter) Load(ctx context.Context, id string) (*Ticket, error) {
 	var tickets []Ticket
 	query := fmt.Sprintf("select * from tickets where id = %s limit 1", r.BuildParam(1))
-	err := q.Query(ctx, r.DB, nil, &tickets, query, id)
+	err := q.QueryWithArray(ctx, r.DB, r.FieldsIndex, &tickets, r.toArray, query, id)
 	if err != nil {
 		return nil, err
 	}

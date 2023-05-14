@@ -12,19 +12,24 @@ import (
 func NewQuestionRepository(db *sql.DB, toArray func(interface{}) interface {
 	driver.Valuer
 	sql.Scanner
-}) *QuestionAdapter {
+}) (*QuestionAdapter, error) {
 	modelType := reflect.TypeOf(Question{})
+	fieldsIndex, err := q.GetColumnIndexes(modelType)
+	if err != nil {
+		return nil, err
+	}
 	jsonColumnMap := q.MakeJsonColumnMap(modelType)
 	keys, _ := q.FindPrimaryKeys(modelType)
 	schema := q.CreateSchema(modelType)
 	buildParam := q.GetBuild(db)
-	return &QuestionAdapter{DB: db, ModelType: modelType, Keys: keys, Schema: schema, JsonColumnMap: jsonColumnMap,
-		BuildParam: buildParam, toArray: toArray}
+	return &QuestionAdapter{DB: db, ModelType: modelType, FieldsIndex: fieldsIndex, Keys: keys, Schema: schema, JsonColumnMap: jsonColumnMap,
+		BuildParam: buildParam, toArray: toArray}, nil
 }
 
 type QuestionAdapter struct {
 	DB            *sql.DB
 	ModelType     reflect.Type
+	FieldsIndex   map[string]int
 	Keys          []string
 	Schema        *q.Schema
 	JsonColumnMap map[string]string
@@ -38,7 +43,7 @@ type QuestionAdapter struct {
 func (r *QuestionAdapter) Load(ctx context.Context, id string) (*Question, error) {
 	var questions []Question
 	query := fmt.Sprintf("select * from questions where id = %s limit 1", r.BuildParam(1))
-	err := q.QueryWithArray(ctx, r.DB, nil, &questions, r.toArray, query, id)
+	err := q.QueryWithArray(ctx, r.DB, r.FieldsIndex, &questions, r.toArray, query, id)
 	if err != nil {
 		return nil, err
 	}
@@ -46,6 +51,16 @@ func (r *QuestionAdapter) Load(ctx context.Context, id string) (*Question, error
 		return &questions[0], nil
 	}
 	return nil, nil
+}
+
+func (r *QuestionAdapter) GetQuestions(ctx context.Context, ids []string) ([]Question, error) {
+	var questions []Question
+	query := fmt.Sprintf("select * from questions where id = ANY(%s)", r.BuildParam(1))
+	err := q.QueryWithArray(ctx, r.DB, nil, &questions, r.toArray, query, r.toArray(ids))
+	if err != nil {
+		return nil, err
+	}
+	return questions, nil
 }
 
 func (r *QuestionAdapter) Create(ctx context.Context, question *Question) (int64, error) {

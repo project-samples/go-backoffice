@@ -12,19 +12,24 @@ import (
 func NewTermRepository(db *sql.DB, toArray func(interface{}) interface {
 	driver.Valuer
 	sql.Scanner
-}) *TermAdapter {
+}) (*TermAdapter, error) {
 	modelType := reflect.TypeOf(Term{})
+	fieldsIndex, err := q.GetColumnIndexes(modelType)
+	if err != nil {
+		return nil, err
+	}
 	jsonColumnMap := q.MakeJsonColumnMap(modelType)
 	keys, _ := q.FindPrimaryKeys(modelType)
 	schema := q.CreateSchema(modelType)
 	buildParam := q.GetBuild(db)
-	return &TermAdapter{DB: db, ModelType: modelType, Keys: keys, Schema: schema, JsonColumnMap: jsonColumnMap,
-		BuildParam: buildParam, toArray: toArray}
+	return &TermAdapter{DB: db, ModelType: modelType, FieldsIndex: fieldsIndex, Keys: keys, Schema: schema, JsonColumnMap: jsonColumnMap,
+		BuildParam: buildParam, toArray: toArray}, nil
 }
 
 type TermAdapter struct {
 	DB            *sql.DB
 	ModelType     reflect.Type
+	FieldsIndex   map[string]int
 	Keys          []string
 	Schema        *q.Schema
 	JsonColumnMap map[string]string
@@ -38,7 +43,7 @@ type TermAdapter struct {
 func (r *TermAdapter) Load(ctx context.Context, id string) (*Term, error) {
 	var terms []Term
 	query := fmt.Sprintf("select * from terms where id = %s limit 1", r.BuildParam(1))
-	err := q.QueryWithArray(ctx, r.DB, nil, &terms, r.toArray, query, id)
+	err := q.QueryWithArray(ctx, r.DB, r.FieldsIndex, &terms, r.toArray, query, id)
 	if err != nil {
 		return nil, err
 	}
